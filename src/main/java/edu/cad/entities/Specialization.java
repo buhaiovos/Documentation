@@ -1,5 +1,7 @@
 package edu.cad.entities;
 
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.*;
 
 @Entity
@@ -13,6 +15,9 @@ public class Specialization {
 
     @Column(name = "denotation")
     private String denotation;
+    
+    @OneToMany(fetch = FetchType.LAZY)
+    private Set<AcademicGroup> academicGroups = new HashSet<>(0);
 
     public Specialization() {
     }

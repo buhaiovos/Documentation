@@ -43,8 +43,14 @@ public class AcademicGroup {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_specialization")
     private Specialization specialization;
-    private int idQualification;
-    private int idEducationForm;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_qualification")
+    private Qualification qualification;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_education_form")
+    private EducationForm educationForm;
 
     public AcademicGroup() {
     }

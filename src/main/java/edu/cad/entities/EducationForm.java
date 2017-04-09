@@ -16,8 +16,8 @@ import javax.persistence.Table;
  * @author Олександр
  */
 @Entity
-@Table(name = "qualification")
-public class Qualification {
+@Table(name = "form_of_education")
+public class EducationForm {
     
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -25,18 +25,18 @@ public class Qualification {
     private int id;
     
     @Column(name = "denotation")
-    String denotation;
+    private String denotation;
     
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "qualification")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "educationform")
     private Set<AcademicGroup> academicGroups = new HashSet<>(0);
 
-    public Qualification() {
+    public EducationForm() {
     }
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 97 * hash + this.id;
+        int hash = 3;
+        hash = 37 * hash + this.id;
         return hash;
     }
 
@@ -51,12 +51,10 @@ public class Qualification {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Qualification other = (Qualification) obj;
+        final EducationForm other = (EducationForm) obj;
         if (this.id != other.id) {
             return false;
         }
         return true;
     }
-    
-       
 }
