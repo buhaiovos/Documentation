@@ -22,41 +22,6 @@ public class Cycle {
     public Cycle() {
     }
 
-    public Cycle(int id, String denotation) {
-        this.id = id;
-        this.denotation = denotation;
-    }
-    
-    public Cycle(int id, String denotation, Set<Section> sections) {
-        this.id = id;
-        this.denotation = denotation;
-        this.sections = sections;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getDenotation() {
-        return denotation;
-    }
-
-    public void setDenotation(String denotation) {
-        this.denotation = denotation;
-    }
-
-    public Set<Section> getSections() {
-        return sections;
-    }
-
-    public void setSections(Set<Section> sections) {
-        this.sections = sections;
-    }
-
     @Override
     public int hashCode() {
         int hash = 3;
