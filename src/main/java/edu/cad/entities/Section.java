@@ -1,5 +1,7 @@
 package edu.cad.entities;
 
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.*;
 import org.hibernate.annotations.Type;
 
@@ -22,6 +24,14 @@ public class Section {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_cycle")
     private Cycle cycle;
+    
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "section")
+    @JoinColumn(name = "id_section_curriculum")
+    private Set<SubjectDictionary> curriculumSubjects = new HashSet<>();
+    
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "section")
+    @JoinColumn(name = "id_section_workplan")
+    private Set<SubjectDictionary> workplanSubjects = new HashSet<>();
 
     public Section() {
     }
