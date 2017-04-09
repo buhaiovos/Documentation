@@ -40,6 +40,13 @@ public class Subject {
     
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "subject")
     private Set<Control> controls = new HashSet<>();
+    
+    /*@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "curriculum_subject", joinColumns = {
+        @JoinColumn(name = "id_subject")},
+            inverseJoinColumns = { @JoinColumn(name = "id_curriculum")                 
+    })
+    private Set<Curriculum> curriculums = new HashSet<>();*/
 
     public Subject() {
     }
