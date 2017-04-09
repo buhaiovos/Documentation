@@ -1,5 +1,7 @@
 package edu.cad.entities;
 
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.*;
 
 @Entity
@@ -35,6 +37,9 @@ public class Subject {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_subject")
     private SubjectDictionary subject;
+    
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "subject")
+    private Set<Control> controls = new HashSet<>();
 
     public Subject() {
     }
