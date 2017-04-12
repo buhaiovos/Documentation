@@ -26,6 +26,14 @@ public class Control implements IDatabaseEntity{
     public Control() {
     }
 
+    public Control(int id, int semester, ControlDictionary type, 
+            Subject subject) {
+        this.id = id;
+        this.semester = semester;
+        this.type = type;
+        this.subject = subject;
+    }
+    
     public int getId() {
         return id;
     }

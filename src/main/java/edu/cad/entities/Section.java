@@ -37,6 +37,13 @@ public class Section implements IDatabaseEntity{
     public Section() {
     }
 
+    public Section(int id, String denotation, boolean isOptional, Cycle cycle) {
+        this.id = id;
+        this.denotation = denotation;
+        this.isOptional = isOptional;
+        this.cycle = cycle;
+    }
+
     public int getId() {
         return id;
     }

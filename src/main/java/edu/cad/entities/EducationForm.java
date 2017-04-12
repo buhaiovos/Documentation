@@ -34,6 +34,11 @@ public class EducationForm implements IDatabaseEntity{
     public EducationForm() {
     }
 
+    public EducationForm(int id, String denotation) {
+        this.id = id;
+        this.denotation = denotation;
+    }
+
     public int getId() {
         return id;
     }

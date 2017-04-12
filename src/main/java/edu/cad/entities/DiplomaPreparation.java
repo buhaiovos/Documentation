@@ -28,6 +28,15 @@ public class DiplomaPreparation implements IDatabaseEntity{
     public DiplomaPreparation() {
     }
 
+    public DiplomaPreparation(int id, int course, float norm, String denotation, 
+            Department department) {
+        this.id = id;
+        this.course = course;
+        this.norm = norm;
+        this.denotation = denotation;
+        this.department = department;
+    }
+
     public int getId() {
         return id;
     }

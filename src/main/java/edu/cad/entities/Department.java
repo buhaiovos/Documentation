@@ -18,6 +18,11 @@ public class Department implements IDatabaseEntity{
     public Department() {
     }
 
+    public Department(int id, String denotation) {
+        this.id = id;
+        this.denotation = denotation;
+    }
+
     public int getId() {
         return id;
     }

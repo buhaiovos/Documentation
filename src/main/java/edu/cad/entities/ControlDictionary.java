@@ -18,6 +18,11 @@ public class ControlDictionary implements IDatabaseEntity{
     public ControlDictionary() {
     }
 
+    public ControlDictionary(int id, String denotation) {
+        this.id = id;
+        this.denotation = denotation;
+    }
+
     public int getId() {
         return id;
     }

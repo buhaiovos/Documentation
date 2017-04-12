@@ -56,6 +56,19 @@ public class AcademicGroup implements IDatabaseEntity{
     public AcademicGroup() {
     }
 
+    public AcademicGroup(int id, String cipher, int budgetaryStudents, 
+            int contractStudents, int startYear, Specialization specialization, 
+            Qualification qualification, EducationForm educationForm) {
+        this.id = id;
+        this.cipher = cipher;
+        this.budgetaryStudents = budgetaryStudents;
+        this.contractStudents = contractStudents;
+        this.startYear = startYear;
+        this.specialization = specialization;
+        this.qualification = qualification;
+        this.educationForm = educationForm;
+    }
+    
     public int getId() {
         return id;
     }

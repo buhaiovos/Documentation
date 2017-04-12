@@ -34,6 +34,11 @@ public class Qualification implements IDatabaseEntity{
     public Qualification() {
     }
 
+    public Qualification(int id, String denotation) {
+        this.id = id;
+        this.denotation = denotation;
+    }
+    
     public int getId() {
         return id;
     }

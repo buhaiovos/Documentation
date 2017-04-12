@@ -44,6 +44,21 @@ public class Curriculum implements IDatabaseEntity{
     })
     private Set<Subject> subjects = new HashSet<>();
 
+    public Curriculum() {
+    }
+
+    public Curriculum(int id, int year, Specialization specialization, 
+            Practice practice, StateCertification stateCertification, 
+            EducationForm educationForm, Qualification qualification) {
+        this.id = id;
+        this.year = year;
+        this.specialization = specialization;
+        this.practice = practice;
+        this.stateCertification = stateCertification;
+        this.educationForm = educationForm;
+        this.qualification = qualification;
+    }
+
     public int getId() {
         return id;
     }

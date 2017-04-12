@@ -31,6 +31,16 @@ public class Practice implements IDatabaseEntity{
     public Practice() {
     }
 
+    public Practice(int id, int semester, int weeks, String denotation, 
+            Date start, Date finish) {
+        this.id = id;
+        this.semester = semester;
+        this.weeks = weeks;
+        this.denotation = denotation;
+        this.start = start;
+        this.finish = finish;
+    }
+
     public int getId() {
         return id;
     }
