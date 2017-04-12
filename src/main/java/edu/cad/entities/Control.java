@@ -26,6 +26,38 @@ public class Control implements IDatabaseEntity{
     public Control() {
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getSemester() {
+        return semester;
+    }
+
+    public void setSemester(int semester) {
+        this.semester = semester;
+    }
+
+    public ControlDictionary getType() {
+        return type;
+    }
+
+    public void setType(ControlDictionary type) {
+        this.type = type;
+    }
+
+    public Subject getSubject() {
+        return subject;
+    }
+
+    public void setSubject(Subject subject) {
+        this.subject = subject;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 7;
@@ -49,7 +81,5 @@ public class Control implements IDatabaseEntity{
             return false;
         }
         return true;
-    }
-    
-    
+    }   
 }

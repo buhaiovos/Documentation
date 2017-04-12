@@ -23,6 +23,30 @@ public class Cycle implements IDatabaseEntity{
     public Cycle() {
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getDenotation() {
+        return denotation;
+    }
+
+    public void setDenotation(String denotation) {
+        this.denotation = denotation;
+    }
+
+    public Set<Section> getSections() {
+        return sections;
+    }
+
+    public void setSections(Set<Section> sections) {
+        this.sections = sections;
+    }
+
     @Override
     public int hashCode() {
         int hash = 3;
@@ -46,7 +70,5 @@ public class Cycle implements IDatabaseEntity{
             return false;
         }
         return true;
-    }
-    
-    
+    }   
 }

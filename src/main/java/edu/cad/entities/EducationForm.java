@@ -34,6 +34,30 @@ public class EducationForm implements IDatabaseEntity{
     public EducationForm() {
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getDenotation() {
+        return denotation;
+    }
+
+    public void setDenotation(String denotation) {
+        this.denotation = denotation;
+    }
+
+    public Set<AcademicGroup> getAcademicGroups() {
+        return academicGroups;
+    }
+
+    public void setAcademicGroups(Set<AcademicGroup> academicGroups) {
+        this.academicGroups = academicGroups;
+    }
+
     @Override
     public int hashCode() {
         int hash = 3;

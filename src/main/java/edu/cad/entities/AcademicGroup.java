@@ -56,6 +56,70 @@ public class AcademicGroup implements IDatabaseEntity{
     public AcademicGroup() {
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getCipher() {
+        return cipher;
+    }
+
+    public void setCipher(String cipher) {
+        this.cipher = cipher;
+    }
+
+    public int getBudgetaryStudents() {
+        return budgetaryStudents;
+    }
+
+    public void setBudgetaryStudents(int budgetaryStudents) {
+        this.budgetaryStudents = budgetaryStudents;
+    }
+
+    public int getContractStudents() {
+        return contractStudents;
+    }
+
+    public void setContractStudents(int contractStudents) {
+        this.contractStudents = contractStudents;
+    }
+
+    public int getStartYear() {
+        return startYear;
+    }
+
+    public void setStartYear(int startYear) {
+        this.startYear = startYear;
+    }
+
+    public Specialization getSpecialization() {
+        return specialization;
+    }
+
+    public void setSpecialization(Specialization specialization) {
+        this.specialization = specialization;
+    }
+
+    public Qualification getQualification() {
+        return qualification;
+    }
+
+    public void setQualification(Qualification qualification) {
+        this.qualification = qualification;
+    }
+
+    public EducationForm getEducationForm() {
+        return educationForm;
+    }
+
+    public void setEducationForm(EducationForm educationForm) {
+        this.educationForm = educationForm;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 7;
