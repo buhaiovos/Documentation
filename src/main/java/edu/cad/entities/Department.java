@@ -18,6 +18,22 @@ public class Department implements IDatabaseEntity{
     public Department() {
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getDenotation() {
+        return denotation;
+    }
+
+    public void setDenotation(String denotation) {
+        this.denotation = denotation;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 3;
@@ -41,7 +57,5 @@ public class Department implements IDatabaseEntity{
             return false;
         }
         return true;
-    }
-    
-    
+    }  
 }

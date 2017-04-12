@@ -28,6 +28,46 @@ public class DiplomaPreparation implements IDatabaseEntity{
     public DiplomaPreparation() {
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getCourse() {
+        return course;
+    }
+
+    public void setCourse(int course) {
+        this.course = course;
+    }
+
+    public float getNorm() {
+        return norm;
+    }
+
+    public void setNorm(float norm) {
+        this.norm = norm;
+    }
+
+    public String getDenotation() {
+        return denotation;
+    }
+
+    public void setDenotation(String denotation) {
+        this.denotation = denotation;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;
