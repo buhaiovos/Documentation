@@ -46,6 +46,20 @@ public class SubjectDictionary implements IDatabaseEntity{
     public SubjectDictionary() {
     }
 
+    public SubjectDictionary(int id, String denotation, 
+                    SubjectDictionary superSubject, Section curriculumSection, 
+                    Section workplanSection, SubjectType type, 
+                    Department department, Subject academicSubject) {
+        this.id = id;
+        this.denotation = denotation;
+        this.superSubject = superSubject;
+        this.curriculumSection = curriculumSection;
+        this.workplanSection = workplanSection;
+        this.type = type;
+        this.department = department;
+        this.academicSubject = academicSubject;
+    }
+    
     public int getId() {
         return id;
     }

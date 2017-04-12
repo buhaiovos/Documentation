@@ -30,6 +30,11 @@ public class SubjectType implements IDatabaseEntity{
     public SubjectType() {
     }
 
+    public SubjectType(int id, String denotation) {
+        this.id = id;
+        this.denotation = denotation;
+    }
+
     public int getId() {
         return id;
     }
