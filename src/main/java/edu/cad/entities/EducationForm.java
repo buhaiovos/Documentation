@@ -1,5 +1,6 @@
 package edu.cad.entities;
 
+import edu.cad.entities.interfaces.IDatabaseEntity;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
@@ -17,7 +18,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "form_of_education")
-public class EducationForm {
+public class EducationForm implements IDatabaseEntity{
     
     @Id
     @GeneratedValue(strategy = IDENTITY)

@@ -1,10 +1,11 @@
 package edu.cad.entities;
 
+import edu.cad.entities.interfaces.IDatabaseEntity;
 import javax.persistence.*;
 
 @Entity
 @Table(name = "diploma_preparation")
-public class DiplomaPreparation {
+public class DiplomaPreparation implements IDatabaseEntity{
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

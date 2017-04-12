@@ -1,12 +1,13 @@
 package edu.cad.entities;
 
+import edu.cad.entities.interfaces.IDatabaseEntity;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
 
 @Entity
 @Table(name = "cycle")
-public class Cycle {
+public class Cycle implements IDatabaseEntity{
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,0 +1,107 @@
+package edu.cad.daos;
+
+import edu.cad.entities.interfaces.IDatabaseEntity;
+import java.util.List;
+
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
+
+@SuppressWarnings("unchecked")
+public class HibernateDAO<T extends IDatabaseEntity> implements IDAO<T>{	
+    private final Class<T> typeParameterClass;
+    private final ServiceRegistry serviceRegistry;
+    private final SessionFactory factory;
+    
+    public HibernateDAO(Class<T> typeParameterClass){
+        this.typeParameterClass = typeParameterClass;
+    	Configuration configuration = new Configuration();  
+        configuration.configure("hibernate.cfg.xml");  
+        serviceRegistry = new StandardServiceRegistryBuilder()
+                .applySettings(configuration.getProperties()).build();
+        factory = configuration.buildSessionFactory(serviceRegistry); 
+    }
+
+    @Override
+    public List<T> getAll() {
+	Session session = factory.openSession(); 
+	Query query = session.createQuery("from " + 
+                typeParameterClass.getSimpleName()); 
+        List<T> list = query.list();
+        session.close();
+        
+        return list;
+    }
+
+    @Override
+    public T get(int id) {
+        Session session = factory.openSession(); 
+	T instance = (T) session.get(typeParameterClass, id);
+	session.close();
+		
+	return instance;
+    }
+
+    @Override
+    public T update(T instance) {
+        Session session = factory.openSession();  
+        Transaction transaction = session.beginTransaction();  
+        
+        try {
+            session.update(instance); 
+            transaction.commit();
+        } catch(RuntimeException e) {
+            transaction.rollback();
+        } finally {
+            session.flush();
+            session.close();
+        }
+        
+        return instance;
+    }
+
+    @Override
+    public boolean create(T instance) {
+	Session session = factory.openSession();  
+        Transaction transaction = session.beginTransaction();  
+
+        try {
+            session.save(instance); 
+            transaction.commit();
+        } catch(RuntimeException e) {
+            transaction.rollback();
+            return false;
+        } finally {
+            session.flush();
+            session.close();
+        }
+        
+        return true;
+    }
+
+    @Override
+    public boolean delete(int id) {
+	Session session = factory.openSession(); 
+        Transaction transaction = session.beginTransaction(); 
+        
+        try {
+            T instance = (T) session.load(typeParameterClass, id);
+            session.delete(instance);
+            transaction.commit();
+        } catch(RuntimeException e) {
+            transaction.rollback();
+            return false;
+        } finally {
+            session.flush();
+            session.close();
+        }
+			
+	return true;
+    }
+
+	
+}

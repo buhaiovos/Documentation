@@ -1,12 +1,13 @@
 package edu.cad.entities;
 
+import edu.cad.entities.interfaces.IDatabaseEntity;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
 
 @Entity
 @Table(name = "dict_subjects")
-public class SubjectDictionary {
+public class SubjectDictionary implements IDatabaseEntity{
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

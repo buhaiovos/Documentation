@@ -1,5 +1,6 @@
 package edu.cad.entities;
 
+import edu.cad.entities.interfaces.IDatabaseEntity;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
@@ -7,7 +8,7 @@ import org.hibernate.annotations.Type;
 
 @Entity
 @Table(name = "cycle")
-public class Section {
+public class Section implements IDatabaseEntity{
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

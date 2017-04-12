@@ -1,12 +1,13 @@
 package edu.cad.entities;
 
+import edu.cad.entities.interfaces.IDatabaseEntity;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
 
 @Entity
 @Table(name = "curriculum")
-public class Curriculum {
+public class Curriculum implements IDatabaseEntity{
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

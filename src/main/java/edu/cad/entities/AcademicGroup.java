@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import edu.cad.entities.interfaces.IDatabaseEntity;
 
 /**
  *
@@ -21,7 +22,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "academic_group")
-public class AcademicGroup {
+public class AcademicGroup implements IDatabaseEntity{
     
     @Id
     @GeneratedValue(strategy = IDENTITY)
