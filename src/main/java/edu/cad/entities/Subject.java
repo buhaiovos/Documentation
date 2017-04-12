@@ -52,13 +52,20 @@ public class Subject implements IDatabaseEntity{
     public Subject() {
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 11 * hash + this.id;
-        return hash;
+    public Subject(int id, int semester, int semestersDuration, int lections, 
+                int labs, int practices, float ects, String cipher, 
+                SubjectDictionary subject) {
+        this.id = id;
+        this.semester = semester;
+        this.semestersDuration = semestersDuration;
+        this.lections = lections;
+        this.labs = labs;
+        this.practices = practices;
+        this.ects = ects;
+        this.cipher = cipher;
+        this.subject = subject;
     }
-
+    
     public int getId() {
         return id;
     }
@@ -139,7 +146,13 @@ public class Subject implements IDatabaseEntity{
         this.controls = controls;
     }
     
-    
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 11 * hash + this.id;
+        return hash;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {

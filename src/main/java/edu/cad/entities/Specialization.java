@@ -23,6 +23,11 @@ public class Specialization implements IDatabaseEntity{
     public Specialization() {
     }
 
+    public Specialization(int id, String denotation) {
+        this.id = id;
+        this.denotation = denotation;
+    }
+    
     public int getId() {
         return id;
     }

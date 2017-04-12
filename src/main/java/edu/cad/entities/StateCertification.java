@@ -31,6 +31,15 @@ public class StateCertification implements IDatabaseEntity{
     public StateCertification() {
     }
 
+    public StateCertification(int id, int semester, String denotation, String form, Date start, Date finish) {
+        this.id = id;
+        this.semester = semester;
+        this.denotation = denotation;
+        this.form = form;
+        this.start = start;
+        this.finish = finish;
+    }
+    
     public int getId() {
         return id;
     }
