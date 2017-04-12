@@ -37,6 +37,54 @@ public class Section implements IDatabaseEntity{
     public Section() {
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getDenotation() {
+        return denotation;
+    }
+
+    public void setDenotation(String denotation) {
+        this.denotation = denotation;
+    }
+
+    public boolean isIsOptional() {
+        return isOptional;
+    }
+
+    public void setIsOptional(boolean isOptional) {
+        this.isOptional = isOptional;
+    }
+
+    public Cycle getCycle() {
+        return cycle;
+    }
+
+    public void setCycle(Cycle cycle) {
+        this.cycle = cycle;
+    }
+
+    public Set<SubjectDictionary> getCurriculumSubjects() {
+        return curriculumSubjects;
+    }
+
+    public void setCurriculumSubjects(Set<SubjectDictionary> curriculumSubjects) {
+        this.curriculumSubjects = curriculumSubjects;
+    }
+
+    public Set<SubjectDictionary> getWorkplanSubjects() {
+        return workplanSubjects;
+    }
+
+    public void setWorkplanSubjects(Set<SubjectDictionary> workplanSubjects) {
+        this.workplanSubjects = workplanSubjects;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 7;

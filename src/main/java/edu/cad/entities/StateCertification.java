@@ -31,6 +31,54 @@ public class StateCertification implements IDatabaseEntity{
     public StateCertification() {
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getSemester() {
+        return semester;
+    }
+
+    public void setSemester(int semester) {
+        this.semester = semester;
+    }
+
+    public String getDenotation() {
+        return denotation;
+    }
+
+    public void setDenotation(String denotation) {
+        this.denotation = denotation;
+    }
+
+    public String getForm() {
+        return form;
+    }
+
+    public void setForm(String form) {
+        this.form = form;
+    }
+
+    public Date getStart() {
+        return start;
+    }
+
+    public void setStart(Date start) {
+        this.start = start;
+    }
+
+    public Date getFinish() {
+        return finish;
+    }
+
+    public void setFinish(Date finish) {
+        this.finish = finish;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 5;

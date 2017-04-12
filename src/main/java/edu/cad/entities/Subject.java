@@ -59,6 +59,87 @@ public class Subject implements IDatabaseEntity{
         return hash;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getSemester() {
+        return semester;
+    }
+
+    public void setSemester(int semester) {
+        this.semester = semester;
+    }
+
+    public int getSemestersDuration() {
+        return semestersDuration;
+    }
+
+    public void setSemestersDuration(int semestersDuration) {
+        this.semestersDuration = semestersDuration;
+    }
+
+    public int getLections() {
+        return lections;
+    }
+
+    public void setLections(int lections) {
+        this.lections = lections;
+    }
+
+    public int getLabs() {
+        return labs;
+    }
+
+    public void setLabs(int labs) {
+        this.labs = labs;
+    }
+
+    public int getPractices() {
+        return practices;
+    }
+
+    public void setPractices(int practices) {
+        this.practices = practices;
+    }
+
+    public float getEcts() {
+        return ects;
+    }
+
+    public void setEcts(float ects) {
+        this.ects = ects;
+    }
+
+    public String getCipher() {
+        return cipher;
+    }
+
+    public void setCipher(String cipher) {
+        this.cipher = cipher;
+    }
+
+    public SubjectDictionary getSubject() {
+        return subject;
+    }
+
+    public void setSubject(SubjectDictionary subject) {
+        this.subject = subject;
+    }
+
+    public Set<Control> getControls() {
+        return controls;
+    }
+
+    public void setControls(Set<Control> controls) {
+        this.controls = controls;
+    }
+    
+    
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {

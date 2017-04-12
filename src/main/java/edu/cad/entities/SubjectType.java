@@ -30,6 +30,30 @@ public class SubjectType implements IDatabaseEntity{
     public SubjectType() {
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getDenotation() {
+        return denotation;
+    }
+
+    public void setDenotation(String denotation) {
+        this.denotation = denotation;
+    }
+
+    public Set<SubjectDictionary> getSubjects() {
+        return subjects;
+    }
+
+    public void setSubjects(Set<SubjectDictionary> subjects) {
+        this.subjects = subjects;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 7;
@@ -53,7 +77,5 @@ public class SubjectType implements IDatabaseEntity{
             return false;
         }
         return true;
-    }
-    
-    
+    }  
 }

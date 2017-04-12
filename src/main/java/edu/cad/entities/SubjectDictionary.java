@@ -46,6 +46,79 @@ public class SubjectDictionary implements IDatabaseEntity{
     public SubjectDictionary() {
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getDenotation() {
+        return denotation;
+    }
+
+    public void setDenotation(String denotation) {
+        this.denotation = denotation;
+    }
+
+    public SubjectDictionary getSuperSubject() {
+        return superSubject;
+    }
+
+    public void setSuperSubject(SubjectDictionary superSubject) {
+        this.superSubject = superSubject;
+    }
+
+    public Set<SubjectDictionary> getSubSubjects() {
+        return subSubjects;
+    }
+
+    public void setSubSubjects(Set<SubjectDictionary> subSubjects) {
+        this.subSubjects = subSubjects;
+    }
+
+    public Section getCurriculumSection() {
+        return curriculumSection;
+    }
+
+    public void setCurriculumSection(Section curriculumSection) {
+        this.curriculumSection = curriculumSection;
+    }
+
+    public Section getWorkplanSection() {
+        return workplanSection;
+    }
+
+    public void setWorkplanSection(Section workplanSection) {
+        this.workplanSection = workplanSection;
+    }
+
+    public SubjectType getType() {
+        return type;
+    }
+
+    public void setType(SubjectType type) {
+        this.type = type;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+    public Subject getAcademicSubject() {
+        return academicSubject;
+    }
+
+    public void setAcademicSubject(Subject academicSubject) {
+        this.academicSubject = academicSubject;
+    }
+    
+    
     @Override
     public int hashCode() {
         int hash = 3;
