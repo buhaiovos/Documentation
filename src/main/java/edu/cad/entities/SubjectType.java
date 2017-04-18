@@ -24,7 +24,7 @@ public class SubjectType implements IDatabaseEntity{
     @Column(name = "denotation")
     private String denotation;
     
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "subjectType")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "type")
     private Set<SubjectDictionary> subjects = new HashSet<>();
 
     public SubjectType() {

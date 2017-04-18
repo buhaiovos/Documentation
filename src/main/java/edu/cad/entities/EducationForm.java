@@ -28,7 +28,7 @@ public class EducationForm implements IDatabaseEntity{
     @Column(name = "denotation")
     private String denotation;
     
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "educationform")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "educationForm")
     private Set<AcademicGroup> academicGroups = new HashSet<>(0);
 
     public EducationForm() {

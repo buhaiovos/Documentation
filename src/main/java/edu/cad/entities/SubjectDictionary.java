@@ -21,7 +21,7 @@ public class SubjectDictionary implements IDatabaseEntity{
     @JoinColumn(name = "id_supersubject")
     private SubjectDictionary superSubject;
     
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "subjectDictionary")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "superSubject")//subjectDictionary")
     private Set<SubjectDictionary> subSubjects = new HashSet<>();
     
     @ManyToOne(fetch = FetchType.LAZY)
@@ -40,7 +40,7 @@ public class SubjectDictionary implements IDatabaseEntity{
     @JoinColumn(name = "id_department")
     private Department department;
     
-    @OneToOne(mappedBy = "subjectDictionary")
+    @OneToOne(mappedBy = "subject")//Dictionary")
     private Subject academicSubject;
 
     public SubjectDictionary() {

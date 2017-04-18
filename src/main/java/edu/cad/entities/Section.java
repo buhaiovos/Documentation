@@ -26,12 +26,12 @@ public class Section implements IDatabaseEntity{
     @JoinColumn(name = "id_cycle")
     private Cycle cycle;
     
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "section")
-    @JoinColumn(name = "id_section_curriculum")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "curriculumSection")
+    //@JoinColumn(name = "id_section_curriculum", referencedColumnName = "id")
     private Set<SubjectDictionary> curriculumSubjects = new HashSet<>();
     
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "section")
-    @JoinColumn(name = "id_section_workplan")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "workplanSection")
+    //@JoinColumn(name = "id_section_workplan", referencedColumnName = "id")
     private Set<SubjectDictionary> workplanSubjects = new HashSet<>();
 
     public Section() {

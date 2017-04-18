@@ -41,5 +41,21 @@ Contributor(s):
     <property name="hibernate.connection.url">jdbc:mysql://192.168.1.2:3306/cad_database_2016</property>
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password">1111</property>
+    <mapping class="edu.cad.entities.AcademicGroup" />
+    <mapping class="edu.cad.entities.Control" />
+    <mapping class="edu.cad.entities.ControlDictionary" />
+    <mapping class="edu.cad.entities.Curriculum" />
+    <mapping class="edu.cad.entities.Cycle" />
+    <mapping class="edu.cad.entities.Department" />  
+    <mapping class="edu.cad.entities.DiplomaPreparation" />
+    <mapping class="edu.cad.entities.EducationForm" />
+    <mapping class="edu.cad.entities.Practice" />
+    <mapping class="edu.cad.entities.Qualification" />
+    <mapping class="edu.cad.entities.Section" />
+    <mapping class="edu.cad.entities.Specialization" />  
+    <mapping class="edu.cad.entities.StateCertification" />
+    <mapping class="edu.cad.entities.Subject" />
+    <mapping class="edu.cad.entities.SubjectDictionary" />
+    <mapping class="edu.cad.entities.SubjectType" />
   </session-factory>
 </hibernate-configuration>
