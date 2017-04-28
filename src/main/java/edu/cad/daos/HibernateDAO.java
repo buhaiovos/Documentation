@@ -1,64 +1,55 @@
 package edu.cad.daos;
 
+import edu.cad.databaseutils.HibernateSession;
 import edu.cad.entities.interfaces.IDatabaseEntity;
 import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
 
 @SuppressWarnings("unchecked")
 public class HibernateDAO<T extends IDatabaseEntity> implements IDAO<T>{	
     private final Class<T> typeParameterClass;
-    private final ServiceRegistry serviceRegistry;
-    private final SessionFactory factory;
+    private final Session session = HibernateSession.getInstance();
     
     public HibernateDAO(Class<T> typeParameterClass){
         this.typeParameterClass = typeParameterClass;
-    	Configuration configuration = new Configuration();  
-        configuration.configure("hibernate.cfg.xml");  
-        serviceRegistry = new StandardServiceRegistryBuilder()
-                .applySettings(configuration.getProperties()).build();
-        factory = configuration.buildSessionFactory(serviceRegistry); 
     }
 
     @Override
     public List<T> getAll() {
-	Session session = factory.openSession(); 
+	//Session session = factory.openSession(); 
 	Query query = session.createQuery("from " + 
                 typeParameterClass.getSimpleName()); 
         List<T> list = query.list();
-        session.close();
+        //session.close();
         
         return list;
     }
 
     @Override
     public T get(int id) {
-        Session session = factory.openSession(); 
+        //Session session = factory.openSession(); 
 	T instance = (T) session.get(typeParameterClass, id);
-	session.close();
+	//session.close();
 		
 	return instance;
     }
 
     @Override
     public T update(T instance) {
-        Session session = factory.openSession();  
+        //Session session = factory.openSession();  
         Transaction transaction = session.beginTransaction();  
         
         try {
-            session.update(instance); 
+            session.merge(instance); 
             transaction.commit();
         } catch(RuntimeException e) {
             transaction.rollback();
         } finally {
             session.flush();
-            session.close();
+            //session.close();
         }
         
         return instance;
@@ -66,7 +57,7 @@ public class HibernateDAO<T extends IDatabaseEntity> implements IDAO<T>{
 
     @Override
     public boolean create(T instance) {
-	Session session = factory.openSession();  
+	//Session session = factory.openSession();  
         Transaction transaction = session.beginTransaction();  
 
         try {
@@ -77,7 +68,7 @@ public class HibernateDAO<T extends IDatabaseEntity> implements IDAO<T>{
             return false;
         } finally {
             session.flush();
-            session.close();
+            //session.close();
         }
         
         return true;
@@ -85,7 +76,7 @@ public class HibernateDAO<T extends IDatabaseEntity> implements IDAO<T>{
 
     @Override
     public boolean delete(int id) {
-	Session session = factory.openSession(); 
+	//Session session = factory.openSession(); 
         Transaction transaction = session.beginTransaction(); 
         
         try {
@@ -97,11 +88,9 @@ public class HibernateDAO<T extends IDatabaseEntity> implements IDAO<T>{
             return false;
         } finally {
             session.flush();
-            session.close();
+            //session.close();
         }
 			
 	return true;
-    }
-
-	
+    }	
 }

@@ -45,6 +45,7 @@ Contributor(s):
     <mapping class="edu.cad.entities.Control" />
     <mapping class="edu.cad.entities.ControlDictionary" />
     <mapping class="edu.cad.entities.Curriculum" />
+    <mapping class="edu.cad.entities.CurriculumSubject" />
     <mapping class="edu.cad.entities.Cycle" />
     <mapping class="edu.cad.entities.Department" />  
     <mapping class="edu.cad.entities.DiplomaPreparation" />
@@ -57,5 +58,6 @@ Contributor(s):
     <mapping class="edu.cad.entities.Subject" />
     <mapping class="edu.cad.entities.SubjectDictionary" />
     <mapping class="edu.cad.entities.SubjectType" />
+    <mapping class="edu.cad.entities.WorkType" />
   </session-factory>
 </hibernate-configuration>

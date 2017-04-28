@@ -5,15 +5,7 @@
  */
 package edu.cad.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import edu.cad.entities.interfaces.IDatabaseEntity;
 
 /**
@@ -25,7 +17,7 @@ import edu.cad.entities.interfaces.IDatabaseEntity;
 public class AcademicGroup implements IDatabaseEntity{
     
     @Id
-    @GeneratedValue(strategy = IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", unique = true, nullable = false)
     private int id;
     

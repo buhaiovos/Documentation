@@ -8,7 +8,7 @@ import javax.persistence.*;
 public class Control implements IDatabaseEntity{
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", unique = true, nullable = false)
     private int id;
     
@@ -90,4 +90,11 @@ public class Control implements IDatabaseEntity{
         }
         return true;
     }   
+
+    @Override
+    public String toString() {
+        return "Control{hash=" + hashCode() + ", semester=" + semester + ", type=" + type + '}';
+    }
+    
+    
 }

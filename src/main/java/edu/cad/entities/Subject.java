@@ -10,7 +10,7 @@ import javax.persistence.*;
 public class Subject implements IDatabaseEntity{
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", unique = true, nullable = false)
     private int id;
 
@@ -29,32 +29,21 @@ public class Subject implements IDatabaseEntity{
     @Column(name = "practices")
     private int practices;
     
-    @Column(name = "ECST")
+    @Column(name = "ECTS")
     private float ects;
     
-    @Column(name = "cipher")
-    private String cipher;
-    
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_subject")
     private SubjectDictionary subject;
     
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "subject")
     private Set<Control> controls = new HashSet<>();
-    
-    /*@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "curriculum_subject", joinColumns = {
-        @JoinColumn(name = "id_subject")},
-            inverseJoinColumns = { @JoinColumn(name = "id_curriculum")                 
-    })
-    private Set<Curriculum> curriculums = new HashSet<>();*/
 
     public Subject() {
     }
 
     public Subject(int id, int semester, int semestersDuration, int lections, 
-                int labs, int practices, float ects, String cipher, 
-                SubjectDictionary subject) {
+                int labs, int practices, float ects, SubjectDictionary subject) {
         this.id = id;
         this.semester = semester;
         this.semestersDuration = semestersDuration;
@@ -62,7 +51,6 @@ public class Subject implements IDatabaseEntity{
         this.labs = labs;
         this.practices = practices;
         this.ects = ects;
-        this.cipher = cipher;
         this.subject = subject;
     }
     
@@ -122,14 +110,6 @@ public class Subject implements IDatabaseEntity{
         this.ects = ects;
     }
 
-    public String getCipher() {
-        return cipher;
-    }
-
-    public void setCipher(String cipher) {
-        this.cipher = cipher;
-    }
-
     public SubjectDictionary getSubject() {
         return subject;
     }
@@ -169,6 +149,14 @@ public class Subject implements IDatabaseEntity{
             return false;
         }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Subject{semester=" + semester + ", semestersDuration=" 
+                + semestersDuration + ", lections=" + lections + ", labs=" 
+                + labs + ", practices=" + practices + ", ects=" + ects 
+                + ", subject=" + subject + ", controls=" + controls + '}';
     }
 
     

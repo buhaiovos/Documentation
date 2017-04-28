@@ -1,36 +1,23 @@
 package edu.cad.entities;
 
-import edu.cad.entities.interfaces.IDatabaseEntity;
-import java.util.HashSet;
-import java.util.Set;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
-@Table(name = "subject_type")
-public class SubjectType implements IDatabaseEntity{
+@Table(name = "type_of_work")
+public class WorkType {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", unique = true, nullable = false)
     private int id;
-
+    
     @Column(name = "denotation")
     private String denotation;
-    
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "type")
-    private Set<SubjectDictionary> subjects = new HashSet<>();
 
-    public SubjectType() {
+    public WorkType() {
     }
 
-    public SubjectType(int id, String denotation) {
+    public WorkType(int id, String denotation) {
         this.id = id;
         this.denotation = denotation;
     }
@@ -51,18 +38,10 @@ public class SubjectType implements IDatabaseEntity{
         this.denotation = denotation;
     }
 
-    public Set<SubjectDictionary> getSubjects() {
-        return subjects;
-    }
-
-    public void setSubjects(Set<SubjectDictionary> subjects) {
-        this.subjects = subjects;
-    }
-    
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 71 * hash + this.id;
+        hash = 37 * hash + this.id;
         return hash;
     }
 
@@ -77,10 +56,10 @@ public class SubjectType implements IDatabaseEntity{
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final SubjectType other = (SubjectType) obj;
+        final WorkType other = (WorkType) obj;
         if (this.id != other.id) {
             return false;
         }
         return true;
-    }  
+    }
 }

@@ -9,7 +9,7 @@ import javax.persistence.*;
 public class Practice implements IDatabaseEntity{
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", unique = true, nullable = false)
     private int id;
     

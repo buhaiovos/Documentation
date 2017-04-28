@@ -10,7 +10,7 @@ import javax.persistence.*;
 public class SubjectDictionary implements IDatabaseEntity{
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", unique = true, nullable = false)
     private int id;
     
@@ -40,8 +40,8 @@ public class SubjectDictionary implements IDatabaseEntity{
     @JoinColumn(name = "id_department")
     private Department department;
     
-    @OneToOne(mappedBy = "subject")//Dictionary")
-    private Subject academicSubject;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "subject")
+    private Set<Subject> academicSubjects = new HashSet<>();
 
     public SubjectDictionary() {
     }
@@ -49,7 +49,7 @@ public class SubjectDictionary implements IDatabaseEntity{
     public SubjectDictionary(int id, String denotation, 
                     SubjectDictionary superSubject, Section curriculumSection, 
                     Section workplanSection, SubjectType type, 
-                    Department department, Subject academicSubject) {
+                    Department department) {
         this.id = id;
         this.denotation = denotation;
         this.superSubject = superSubject;
@@ -57,7 +57,6 @@ public class SubjectDictionary implements IDatabaseEntity{
         this.workplanSection = workplanSection;
         this.type = type;
         this.department = department;
-        this.academicSubject = academicSubject;
     }
     
     public int getId() {
@@ -124,12 +123,12 @@ public class SubjectDictionary implements IDatabaseEntity{
         this.department = department;
     }
 
-    public Subject getAcademicSubject() {
-        return academicSubject;
+    public Set<Subject> getAcademicSubjects() {
+        return academicSubjects;
     }
 
-    public void setAcademicSubject(Subject academicSubject) {
-        this.academicSubject = academicSubject;
+    public void setAcademicSubjects(Set<Subject> academicSubjects) {
+        this.academicSubjects = academicSubjects;
     }
     
     
@@ -156,6 +155,11 @@ public class SubjectDictionary implements IDatabaseEntity{
             return false;
         }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "SubjectDictionary{denotation=" + denotation + '}';
     }
     
     

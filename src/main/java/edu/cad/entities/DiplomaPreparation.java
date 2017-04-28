@@ -8,33 +8,35 @@ import javax.persistence.*;
 public class DiplomaPreparation implements IDatabaseEntity{
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", unique = true, nullable = false)
     private int id;
-    
-    @Column(name = "course")
-    private int course;
     
     @Column(name = "norm")
     private float norm;
     
-    @Column(name = "denotation")
-    private String denotation;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_type_of_work")
+    private WorkType workType;
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_department")
     private Department department;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_curriculum")
+    private Curriculum curriculum;
 
     public DiplomaPreparation() {
     }
 
-    public DiplomaPreparation(int id, int course, float norm, String denotation, 
-            Department department) {
+    public DiplomaPreparation(int id, float norm, WorkType workType, 
+            Department department, Curriculum curriculum) {
         this.id = id;
-        this.course = course;
         this.norm = norm;
-        this.denotation = denotation;
+        this.workType = workType;
         this.department = department;
+        this.curriculum = curriculum;
     }
 
     public int getId() {
@@ -45,14 +47,6 @@ public class DiplomaPreparation implements IDatabaseEntity{
         this.id = id;
     }
 
-    public int getCourse() {
-        return course;
-    }
-
-    public void setCourse(int course) {
-        this.course = course;
-    }
-
     public float getNorm() {
         return norm;
     }
@@ -61,14 +55,14 @@ public class DiplomaPreparation implements IDatabaseEntity{
         this.norm = norm;
     }
 
-    public String getDenotation() {
-        return denotation;
+    public WorkType getWorkType() {
+        return workType;
     }
 
-    public void setDenotation(String denotation) {
-        this.denotation = denotation;
+    public void setWorkType(WorkType workType) {
+        this.workType = workType;
     }
-
+    
     public Department getDepartment() {
         return department;
     }
@@ -77,6 +71,14 @@ public class DiplomaPreparation implements IDatabaseEntity{
         this.department = department;
     }
 
+    public Curriculum getCurriculum() {
+        return curriculum;
+    }
+
+    public void setCurriculum(Curriculum curriculum) {
+        this.curriculum = curriculum;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 7;

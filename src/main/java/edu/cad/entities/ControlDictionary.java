@@ -8,7 +8,7 @@ import javax.persistence.*;
 public class ControlDictionary implements IDatabaseEntity{
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", unique = true, nullable = false)
     private int id;
     
@@ -62,5 +62,12 @@ public class ControlDictionary implements IDatabaseEntity{
             return false;
         }
         return true;
-    }   
+    } 
+
+    @Override
+    public String toString() {
+        return "ControlDictionary{denotation=" + denotation + '}';
+    }
+    
+    
 }
