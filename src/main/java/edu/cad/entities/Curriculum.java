@@ -4,10 +4,12 @@ import edu.cad.entities.interfaces.IDatabaseEntity;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
-import org.hibernate.annotations.Type;
 
 @Entity
 @Table(name = "curriculum")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorValue(value = "curriculum")
 public class Curriculum implements IDatabaseEntity{
     
     @Id
@@ -15,54 +17,17 @@ public class Curriculum implements IDatabaseEntity{
     @Column(name = "id", unique = true, nullable = false)
     private int id;
     
-    @Column(name = "year")
-    private int year;
-    
-    @Column(name = "is_workplan", columnDefinition = "TINYINT")
-    @Type(type = "org.hibernate.type.NumericBooleanType")
-    private boolean isWorkplan;
-    
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_specialization")
-    private Specialization specialization;
-    
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_practice")
-    private Practice practice;
-    
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_state_certification")
-    private StateCertification stateCertification;
-    
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_education_form")
-    private EducationForm educationForm;
-    
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_qualification")
-    private Qualification qualification;
-    
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.curriculum", cascade = CascadeType.ALL)
     private Set<CurriculumSubject> curriculumSubjects = new HashSet<>();
     
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "curriculum")
-    private Set<DiplomaPreparation> diplomaPreparations = new HashSet<>();
+    private Set<Workplan> workplans = new HashSet<>();
 
     public Curriculum() {
     }
 
-    public Curriculum(int id, int year, boolean isWorkplan, 
-            Specialization specialization, Practice practice, 
-            StateCertification stateCertification, EducationForm educationForm, 
-            Qualification qualification) {
+    public Curriculum(int id) {
         this.id = id;
-        this.year = year;
-        this.isWorkplan = isWorkplan;
-        this.specialization = specialization;
-        this.practice = practice;
-        this.stateCertification = stateCertification;
-        this.educationForm = educationForm;
-        this.qualification = qualification;
     }
 
     public int getId() {
@@ -73,62 +38,6 @@ public class Curriculum implements IDatabaseEntity{
         this.id = id;
     }
 
-    public int getYear() {
-        return year;
-    }
-
-    public void setYear(int year) {
-        this.year = year;
-    }
-
-    public boolean isIsWorkplan() {
-        return isWorkplan;
-    }
-
-    public void setIsWorkplan(boolean isWorkplan) {
-        this.isWorkplan = isWorkplan;
-    }
-
-    public Specialization getSpecialization() {
-        return specialization;
-    }
-
-    public void setSpecialization(Specialization specialization) {
-        this.specialization = specialization;
-    }
-
-    public Practice getPractice() {
-        return practice;
-    }
-
-    public void setPractice(Practice practice) {
-        this.practice = practice;
-    }
-
-    public StateCertification getStateCertification() {
-        return stateCertification;
-    }
-
-    public void setStateCertification(StateCertification stateCertification) {
-        this.stateCertification = stateCertification;
-    }
-
-    public EducationForm getEducationForm() {
-        return educationForm;
-    }
-
-    public void setEducationForm(EducationForm educationForm) {
-        this.educationForm = educationForm;
-    }
-
-    public Qualification getQualification() {
-        return qualification;
-    }
-
-    public void setQualification(Qualification qualification) {
-        this.qualification = qualification;
-    }
-
     public Set<CurriculumSubject> getCurriculumSubjects() {
         return curriculumSubjects;
     }
@@ -137,12 +46,12 @@ public class Curriculum implements IDatabaseEntity{
         this.curriculumSubjects = curriculumSubjects;
     }
 
-    public Set<DiplomaPreparation> getDiplomaPreparations() {
-        return diplomaPreparations;
+    public Set<Workplan> getWorkplans() {
+        return workplans;
     }
 
-    public void setDiplomaPreparations(Set<DiplomaPreparation> diplomaPreparations) {
-        this.diplomaPreparations = diplomaPreparations;
+    public void setWorkplans(Set<Workplan> workplans) {
+        this.workplans = workplans;
     }
 
     @Override

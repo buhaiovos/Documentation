@@ -44,13 +44,18 @@ public class AcademicGroup implements IDatabaseEntity{
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_education_form")
     private EducationForm educationForm;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_workplan")
+    private Curriculum workplan;
 
     public AcademicGroup() {
     }
 
     public AcademicGroup(int id, String cipher, int budgetaryStudents, 
             int contractStudents, int startYear, Specialization specialization, 
-            Qualification qualification, EducationForm educationForm) {
+            Qualification qualification, EducationForm educationForm,
+            Curriculum workplan) {
         this.id = id;
         this.cipher = cipher;
         this.budgetaryStudents = budgetaryStudents;
@@ -59,6 +64,7 @@ public class AcademicGroup implements IDatabaseEntity{
         this.specialization = specialization;
         this.qualification = qualification;
         this.educationForm = educationForm;
+        this.workplan = workplan;
     }
     
     public int getId() {
@@ -124,7 +130,15 @@ public class AcademicGroup implements IDatabaseEntity{
     public void setEducationForm(EducationForm educationForm) {
         this.educationForm = educationForm;
     }
-    
+
+    public Curriculum getWorkplan() {
+        return workplan;
+    }
+
+    public void setWorkplan(Curriculum workplan) {
+        this.workplan = workplan;
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;
