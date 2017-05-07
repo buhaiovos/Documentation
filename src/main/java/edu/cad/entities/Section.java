@@ -107,11 +107,11 @@ public class Section implements IDatabaseEntity{
         if (obj == null) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
+        /*if (getClass() != obj.getClass()) {
             return false;
-        }
+        }*/
         final Section other = (Section) obj;
-        if (this.id != other.id) {
+        if (this.id != other.getId()) {
             return false;
         }
         return true;

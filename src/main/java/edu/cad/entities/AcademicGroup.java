@@ -1,17 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package edu.cad.entities;
 
 import javax.persistence.*;
 import edu.cad.entities.interfaces.IDatabaseEntity;
 
-/**
- *
- * @author Олександр
- */
 @Entity
 @Table(name = "academic_group")
 public class AcademicGroup implements IDatabaseEntity{
@@ -154,11 +145,11 @@ public class AcademicGroup implements IDatabaseEntity{
         if (obj == null) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
+        /*if (getClass() != obj.getClass()) {
             return false;
-        }
+        }*/
         final AcademicGroup other = (AcademicGroup) obj;
-        if (this.id != other.id) {
+        if (this.id != other.getId()) {
             return false;
         }
         return true;

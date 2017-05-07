@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Entity
 @DiscriminatorValue("workplan")
-public class Workplan extends Curriculum{
+public class Workplan extends Curriculum {
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_practice")
@@ -28,6 +28,11 @@ public class Workplan extends Curriculum{
     
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "workplan")
     private Set<AcademicGroup> groups = new HashSet<>();
+    
+    @Override
+    public Qualification getQualification() {
+        return groups.iterator().next().getQualification();
+    }
 
     public Workplan() {
     }
@@ -78,6 +83,16 @@ public class Workplan extends Curriculum{
 
     public void setGroups(Set<AcademicGroup> groups) {
         this.groups = groups;
+    }
+
+    @Override
+    public Set<CurriculumSubject> getCurriculumSubjects() {
+        return curriculumSubjects;
+    }
+
+    @Override
+    public void setCurriculumSubjects(Set<CurriculumSubject> curriculumSubjects) {
+        this.curriculumSubjects = curriculumSubjects;
     }
 }
 

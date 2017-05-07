@@ -1,6 +1,7 @@
 package edu.cad.entities;
 
 import edu.cad.entities.interfaces.IDatabaseEntity;
+import edu.cad.uils.Utils;
 import java.util.Objects;
 import javax.persistence.*;
 
@@ -11,7 +12,7 @@ import javax.persistence.*;
 	joinColumns = @JoinColumn(name = "id_curriculum")),
     @AssociationOverride(name = "pk.subject",
 	joinColumns = @JoinColumn(name = "id_subject")) })
-public class CurriculumSubject implements IDatabaseEntity{
+public class CurriculumSubject implements IDatabaseEntity, Comparable<CurriculumSubject>{
     
     @EmbeddedId
     private CurriculumSubjectId pk = new CurriculumSubjectId();
@@ -75,13 +76,24 @@ public class CurriculumSubject implements IDatabaseEntity{
         if (obj == null) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
+        /*if (getClass() != obj.getClass()) {
             return false;
-        }
+        }*/
         final CurriculumSubject other = (CurriculumSubject) obj;
-        if (!Objects.equals(this.pk, other.pk)) {
+        if (this.pk != other.getPk()) {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public int compareTo(CurriculumSubject other) {
+        if(pk.getCurriculum() instanceof Workplan){
+            if(Utils.isParseable(cipher) && Utils.isParseable(other.getCipher())){
+                return Integer.parseInt(cipher) - Integer.parseInt(other.getCipher());
+            }
+        }
+        
+        return cipher.compareTo(other.getCipher());
     }
 }

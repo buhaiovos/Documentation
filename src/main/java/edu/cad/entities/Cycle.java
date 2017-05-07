@@ -67,11 +67,11 @@ public class Cycle implements IDatabaseEntity{
         if (obj == null) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
+        /*if (getClass() != obj.getClass()) {
             return false;
-        }
+        }*/
         final Cycle other = (Cycle) obj;
-        if (this.id != other.id) {
+        if (this.id != other.getId()) {
             return false;
         }
         return true;

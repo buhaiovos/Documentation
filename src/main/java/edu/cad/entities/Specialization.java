@@ -67,11 +67,11 @@ public class Specialization implements IDatabaseEntity{
         if (obj == null) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
+        /*if (getClass() != obj.getClass()) {
             return false;
-        }
+        }*/
         final Specialization other = (Specialization) obj;
-        if (this.id != other.id) {
+        if (this.id != other.getId()) {
             return false;
         }
         return true;
