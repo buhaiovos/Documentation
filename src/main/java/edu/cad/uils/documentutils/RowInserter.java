@@ -6,7 +6,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.util.CellRangeAddress;
 
-public class RowHandler {
+public class RowInserter {
     
     public static void insertRow(Sheet sheet, int position){
         int totalRows = sheet.getLastRowNum();
