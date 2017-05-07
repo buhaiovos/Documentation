@@ -24,4 +24,5 @@ buildNumber.properties
 
 Test.java
 *.xls
+*.xlsx
 
