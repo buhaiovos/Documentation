@@ -104,11 +104,11 @@ public class Practice implements IDatabaseEntity{
         if (obj == null) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
+        /*if (getClass() != obj.getClass()) {
             return false;
-        }
+        }*/
         final Practice other = (Practice) obj;
-        if (this.id != other.id) {
+        if (this.id != other.getId()) {
             return false;
         }
         return true;

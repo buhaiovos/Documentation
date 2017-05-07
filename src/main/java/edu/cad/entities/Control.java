@@ -5,7 +5,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "control")
-public class Control implements IDatabaseEntity{
+public class Control implements IDatabaseEntity, Comparable<Control>{
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -81,9 +81,9 @@ public class Control implements IDatabaseEntity{
         if (obj == null) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
+        /*if (getClass() != obj.getClass()) {
             return false;
-        }
+        }*/
         final Control other = (Control) obj;
         if (this.id != other.id) {
             return false;
@@ -92,8 +92,16 @@ public class Control implements IDatabaseEntity{
     }   
 
     @Override
+    public int compareTo(Control other) {
+        return this.semester - other.semester;
+    }
+
+    @Override
     public String toString() {
-        return "Control{hash=" + hashCode() + ", semester=" + semester + ", type=" + type + '}';
+        if(type.getId() == 9)
+            return semester + "д";
+        
+        return Integer.toString(semester);
     }
     
     

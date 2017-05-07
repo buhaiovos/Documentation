@@ -5,10 +5,6 @@ import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
 
-/**
- *
- * @author Олександр
- */
 @Entity
 @Table(name = "qualification")
 public class Qualification implements IDatabaseEntity{
@@ -71,11 +67,11 @@ public class Qualification implements IDatabaseEntity{
         if (obj == null) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
+        /*if (getClass() != obj.getClass()) {
             return false;
-        }
+        }*/
         final Qualification other = (Qualification) obj;
-        if (this.id != other.id) {
+        if (this.id != other.getId()) {
             return false;
         }
         return true;

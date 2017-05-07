@@ -53,18 +53,16 @@ public class CurriculumSubjectId implements Serializable{
         if (obj == null) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
+        /*if (getClass() != obj.getClass()) {
             return false;
-        }
+        }*/
         final CurriculumSubjectId other = (CurriculumSubjectId) obj;
-        if (!Objects.equals(this.curriculum, other.curriculum)) {
+        if (!this.curriculum.equals(other.getCurriculum())) {
             return false;
         }
-        if (!Objects.equals(this.subject, other.subject)) {
+        if (!this.subject.equals(other.getSubject())) {
             return false;
         }
         return true;
-    }
-    
-    
+    }   
 }

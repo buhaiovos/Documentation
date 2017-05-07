@@ -38,6 +38,9 @@ public class Subject implements IDatabaseEntity{
     
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "subject")
     private Set<Control> controls = new HashSet<>();
+    
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.subject", cascade = CascadeType.ALL)
+    private Set<CurriculumSubject> curriculumSubjects = new HashSet<>();
 
     public Subject() {
     }
@@ -125,6 +128,26 @@ public class Subject implements IDatabaseEntity{
     public void setControls(Set<Control> controls) {
         this.controls = controls;
     }
+
+    public Set<CurriculumSubject> getCurriculumSubjects() {
+        return curriculumSubjects;
+    }
+
+    public void setCurriculumSubjects(Set<CurriculumSubject> curriculumSubjects) {
+        this.curriculumSubjects = curriculumSubjects;
+    }
+    
+    public Set<Control> getControlsByType(ControlDictionary type){
+        Set<Control> result = new HashSet<>();
+        
+        for(Control control : controls){
+            if(control.getType().equals(type)){
+                result.add(control);
+            }
+        }
+        
+        return result;
+    }
     
     @Override
     public int hashCode() {
@@ -141,23 +164,13 @@ public class Subject implements IDatabaseEntity{
         if (obj == null) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
+        /*if (getClass() != obj.getClass()) {
             return false;
-        }
+        }*/
         final Subject other = (Subject) obj;
-        if (this.id != other.id) {
+        if (this.id != other.getId()) {
             return false;
         }
         return true;
     }
-
-    @Override
-    public String toString() {
-        return "Subject{semester=" + semester + ", semestersDuration=" 
-                + semestersDuration + ", lections=" + lections + ", labs=" 
-                + labs + ", practices=" + practices + ", ects=" + ects 
-                + ", subject=" + subject + ", controls=" + controls + '}';
-    }
-
-    
 }

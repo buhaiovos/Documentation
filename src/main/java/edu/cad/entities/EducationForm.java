@@ -5,10 +5,6 @@ import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
 
-/**
- *
- * @author Олександр
- */
 @Entity
 @Table(name = "form_of_education")
 public class EducationForm implements IDatabaseEntity{
@@ -71,11 +67,11 @@ public class EducationForm implements IDatabaseEntity{
         if (obj == null) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
+        /*if (getClass() != obj.getClass()) {
             return false;
-        }
+        }*/
         final EducationForm other = (EducationForm) obj;
-        if (this.id != other.id) {
+        if (this.id != other.getId()) {
             return false;
         }
         return true;
