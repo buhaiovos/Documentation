@@ -1,11 +1,35 @@
 package edu.cad.documentelements;
 
+import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 
 public abstract class AbstractDocumentElement {
     
-    protected int findInRow(Row row, String token){
-   
-        return -1;
+    public static final int RIGHTMOST_CELL_INDEX = 100;
+    
+    protected int findInRow(Row row, String token) {
+        int cellIndex = -1;
+        
+        if (row != null) {
+            for (int i = 0; i < RIGHTMOST_CELL_INDEX; i++) {
+                Cell cell;
+                if ( (cell = row.getCell(i)) != null ) {
+                    String cellValue = getStringFromCellIfPossible(cell);
+                    if (cellValue != null && cellValue.contains(token)) {
+                        cellIndex = i;
+                        break;
+                    }
+                }
+            }
+        }
+        return cellIndex;
+    }
+
+    private String getStringFromCellIfPossible(Cell cell) {
+        try {
+            return cell.getStringCellValue();
+        } catch (IllegalStateException ex) {
+            return null;
+        }
     }
 }

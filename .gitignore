@@ -23,4 +23,5 @@ buildNumber.properties
 .mvn/timing.properties
 
 Test.java
+*.xls
 
