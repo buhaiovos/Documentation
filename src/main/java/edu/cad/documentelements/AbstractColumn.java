@@ -16,7 +16,7 @@ public abstract class AbstractColumn extends AbstractDocumentElement {
         row.getCell(columnNumber).setCellValue(value);
     }
     
-    public void fill(Row row, int value){
+    public void fill(Row row, double value){
         row.getCell(columnNumber).setCellValue(value);
     }
     
