@@ -12,5 +12,7 @@ public abstract class AbstractColumn extends AbstractDocumentElement {
     
     public abstract void fill(Row row, CurriculumSubject record);
     
-    
+    public void fill(Row row, String value){
+        row.getCell(columnNumber).setCellValue(value);
+    }
 }
