@@ -5,6 +5,7 @@ import edu.cad.daos.IDAO;
 import edu.cad.entities.Curriculum;
 import edu.cad.entities.DiplomaPreparation;
 import edu.cad.entities.Section;
+import edu.cad.entities.Subject;
 import edu.cad.entities.WorkType;
 import edu.cad.entities.Workplan;
 import edu.cad.uils.Utils;
@@ -27,9 +28,8 @@ public class DiplomaPreparationArea extends AbstractDocumentArea{
         int startRow, currentRow = rowNumber;
         
         do{
-            rowNumber = currentRow;
-            
-            
+            rowNumber = currentRow;      
+            fillWorkArea(curriculum);
             
             startRow = rowNumber;
             do{
@@ -43,25 +43,43 @@ public class DiplomaPreparationArea extends AbstractDocumentArea{
         Row currentRow = sheet.getRow(rowNumber);
         AbstractColumn norm = new SimpleColumn(currentRow, "#work");
         AbstractColumn department = new SimpleColumn(currentRow, "#work_department");
-        IDAO<WorkType> workTypeDAO = new HibernateDAO(WorkType.class);
-        
-        String workId = currentRow.getCell(norm.getColumnNumber()).getStringCellValue()
-                .replaceAll("#work", "");
-        
-        if(!Utils.isParseable(workId)){
-            norm.fill(currentRow, "");
-            department.fill(currentRow, "");
-            return;
-        }
+        AbstractColumn budgetaryStudents = new SimpleColumn(currentRow, "#work_budget");
+        AbstractColumn contractStudents = new SimpleColumn(currentRow, "#work_contract");
+               
+        norm.fill(currentRow, "");
+        department.fill(currentRow, "");
+        budgetaryStudents.fill(currentRow, 0);
+        contractStudents.fill(currentRow, 0);
            
-        WorkType workType = workTypeDAO.get(Integer.parseInt(workId));
+        WorkType workType = getWorkType(currentRow, norm);
+        if(workType == null)
+            return;
+        
         for(DiplomaPreparation preparation : ((Workplan)curriculum).getDiplomaPreparations()){
             if(!preparation.getWorkType().equals(workType))
                 continue;
             
-            norm.fill(currentRow, rowNumber);
-        }
+            norm.fill(currentRow, preparation.getNorm());
+            norm.fill(currentRow, preparation.getDepartment().getDenotation());
+        }  
+    }
+    
+    private WorkType getWorkType(Row row, int columnNumber){
+        IDAO<WorkType> workTypeDAO = new HibernateDAO(WorkType.class);
         
+        String cellContent = row.getCell(columnNumber).getStringCellValue();
+        String workId = cellContent.replaceAll("#work", "");
         
+        WorkType workType = workTypeDAO.get(Integer.parseInt(workId));
+        
+        return workType;
+    }
+    
+    private void fillColumn(Row row, Curriculum curriculum){
+        
+    }
+    
+    protected interface CurriculumProperty{
+        public double getValue(Curriculum curriculum);
     }
 }

@@ -84,6 +84,26 @@ public class Workplan extends Curriculum {
     public void setGroups(Set<AcademicGroup> groups) {
         this.groups = groups;
     }
+    
+    public int countBudgetaryStudents(){
+        int total = 0; 
+        
+        for(AcademicGroup group : groups){
+            total += group.getBudgetaryStudents();
+        }
+        
+        return total;
+    }
+    
+    public int countContractStudents(){
+        int total = 0; 
+        
+        for(AcademicGroup group : groups){
+            total += group.getContractStudents();
+        }
+        
+        return total;
+    }
 
     @Override
     public Set<CurriculumSubject> getCurriculumSubjects() {

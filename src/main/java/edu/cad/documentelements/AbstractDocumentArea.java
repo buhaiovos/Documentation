@@ -9,11 +9,23 @@ public abstract class AbstractDocumentArea extends AbstractDocumentElement {
     
     public AbstractDocumentArea(Sheet sheet, String token, int startRow) {
         this.sheet = sheet;
-        
-        do{
-            rowNumber = findInRow(sheet.getRow(startRow++), token);
-        } while(rowNumber < 0 && startRow < sheet.getLastRowNum());
+        findRowNumber(startRow, token);
     }
     
     public abstract void fill(Curriculum curriculum);
+    
+    private void findRowNumber(int startRow, String token){
+        int columnNumber;
+        
+        do{
+            columnNumber = findInRow(sheet.getRow(startRow), token);
+            
+            if(columnNumber != -1)
+                break;
+            
+            startRow++;
+        } while(startRow < sheet.getLastRowNum());
+        
+        rowNumber = startRow;
+    }
 }
