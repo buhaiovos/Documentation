@@ -6,6 +6,7 @@ import edu.cad.entities.CurriculumSubject;
 import edu.cad.entities.Section;
 import edu.cad.entities.Subject;
 import edu.cad.entities.SubjectDictionary;
+import edu.cad.uils.documentutils.RowInserter;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
@@ -16,7 +17,7 @@ public abstract class AbstractSubjectList extends AbstractDocumentArea {
     protected Set<AbstractColumn> columns;
     
     public AbstractSubjectList(Sheet sheet, int startRow) {
-        super(sheet, "section", startRow);
+        super(sheet, "#section", startRow);
         columns = new HashSet<>();
         
         for(ControlDictionary control : getControls()){
@@ -32,13 +33,13 @@ public abstract class AbstractSubjectList extends AbstractDocumentArea {
         
         while(true){
             DocumentSection documentSection = new DocumentSection(sheet, rowNumber);
-            
+
             if(documentSection.getRowNumber() < 0)
                 return;
             
             rowNumber = documentSection.getRowNumber();
             Section section = documentSection.getSection();
-            
+           
             fillSection(section, records, subjectSection);
         }
     }
@@ -58,17 +59,29 @@ public abstract class AbstractSubjectList extends AbstractDocumentArea {
     
     private void fillSection(Section section, Set<CurriculumSubject> records,
             SubjectSection subjectSection){
-        for(CurriculumSubject record : records){
-            Row currentRow = sheet.getRow(rowNumber);
-            
+        boolean first = true;
+
+        for(CurriculumSubject record : records){    
             SubjectDictionary subject = record.getSubject().getSubject();
+
+            System.out.println(subject.getDenotation());
             if(!subjectSection.getSection(subject).equals(section))
                 continue;
-            
-            for(AbstractColumn column : columns){
-                column.fill(currentRow, record);
+
+            if(!first){
+                RowInserter.insertRow(sheet, rowNumber);
+            } else {
+                first = false;
             }
             
+            for(AbstractColumn column : columns){
+                column.fill(sheet.getRow(rowNumber), record);
+            }
+            
+            rowNumber++;
+        }
+        
+        if(first){
             rowNumber++;
         }
     }

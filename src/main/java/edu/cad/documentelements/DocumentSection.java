@@ -51,10 +51,11 @@ public class DocumentSection extends AbstractDocumentElement{
     }
     
     private int extractIdFromString(String stringCellValue) {
-        String idStr = stringCellValue.replaceFirst((SECTION_TOKEN), "");
+        String idStr = stringCellValue.replaceFirst(SECTION_TOKEN, "").trim();
         
-        if(Utils.isParseable(idStr))
+        if(Utils.isParseable(idStr)){
             return Integer.parseInt(idStr);
+        }
         
         return -1;
     }

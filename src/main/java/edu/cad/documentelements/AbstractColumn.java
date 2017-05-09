@@ -1,6 +1,7 @@
 package edu.cad.documentelements;
 
 import edu.cad.entities.CurriculumSubject;
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 
 public abstract class AbstractColumn extends AbstractDocumentElement {
@@ -17,6 +18,7 @@ public abstract class AbstractColumn extends AbstractDocumentElement {
     }
     
     public void fill(Row row, double value){
+        row.getCell(columnNumber).setCellType(CellType.NUMERIC);
         row.getCell(columnNumber).setCellValue(value);
     }
     

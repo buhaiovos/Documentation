@@ -14,18 +14,20 @@ public abstract class AbstractDocumentArea extends AbstractDocumentElement {
     
     public abstract void fill(Curriculum curriculum);
     
-    private void findRowNumber(int startRow, String token){
+    protected boolean findRowNumber(int startRow, String token){
         int columnNumber;
         
         do{
             columnNumber = findInRow(sheet.getRow(startRow), token);
             
-            if(columnNumber != -1)
-                break;
+            if(columnNumber != -1){
+                rowNumber = startRow;
+                return true;
+            }
             
             startRow++;
         } while(startRow < sheet.getLastRowNum());
         
-        rowNumber = startRow;
+        return false;
     }
 }

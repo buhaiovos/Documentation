@@ -26,10 +26,6 @@ public class RowInserter {
         
         for(int i = 0; i < oldRow.getLastCellNum(); i++){
             newRow.createCell(i).setCellStyle(oldRow.getCell(i).getCellStyle());
-            
-           /* if(oldRow.getCell(i).getCellTypeEnum().equals(CellType.FORMULA)){
-                newRow.getCell(i).setCellFormula("");
-            }*/
         }
     }
     
