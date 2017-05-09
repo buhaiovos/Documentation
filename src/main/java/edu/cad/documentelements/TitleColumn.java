@@ -1,17 +1,18 @@
 package edu.cad.documentelements;
 
-import edu.cad.entities.Subject;
+import edu.cad.entities.SubjectDictionary;
 import org.apache.poi.ss.usermodel.Row;
 
 public class TitleColumn extends AbstractColumn {
     
     public TitleColumn(Row row) {
-        super(row, "#section", null);
+        super(row, "#section");
     }
 
     @Override
-    public void fill(Row row, Subject subject) {
-        row.getCell(columnNumber).setCellValue(subject.getSubject().getDenotation());
+    public void fill(Row row, edu.cad.entities.CurriculumSubject record) {
+        SubjectDictionary subject = record.getSubject().getSubject();
+        row.getCell(columnNumber).setCellValue(subject.getDenotation());
     }
     
 }

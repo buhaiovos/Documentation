@@ -44,7 +44,6 @@ public class DocumentSection extends AbstractDocumentElement{
     
     private void setSection(int id) {
         if (id > 0) {
-            //System.out.println("AAAAAAAAAAAAAA");
             section = new HibernateDAO<>(Section.class).get(id);
         } else {
             section = null;
