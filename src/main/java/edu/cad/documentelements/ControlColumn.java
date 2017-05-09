@@ -7,7 +7,6 @@ import edu.cad.entities.CurriculumSubject;
 import edu.cad.entities.Subject;
 import edu.cad.entities.Workplan;
 import edu.cad.utils.entityutils.SubjectUtils;
-import edu.cad.uils.Utils;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -17,18 +16,9 @@ import org.apache.poi.ss.usermodel.Row;
 public class ControlColumn extends AbstractColumn{
     protected ControlDictionary control;
     
-    public ControlColumn(Row row, String token) {
-        super(row, token);
-        
-        String controlType = token.replace("#control", "");
-        
-        if(Utils.isParseable(controlType)){
-            int controlId = Integer.parseInt(controlType);   
-            control = new HibernateDAO<>(ControlDictionary.class).get(controlId);  
-        } else {
-            control = new ControlDictionary();
-        }
-        
+    public ControlColumn(Row row, String token, ControlDictionary control) {
+        super(row, "#control" + control.getId());
+        this.control = control;
     }
 
     @Override
