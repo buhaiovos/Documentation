@@ -31,24 +31,18 @@ public class PracticeArea extends AbstractDocumentArea {
 
     @Override
     public void fill(Curriculum curriculum) {
-        List<String> columnsValues = parseData(((Workplan)curriculum).getPractice());
-        System.out.println("!!!!!!!!" + rowNumber);
-        Row row = sheet.getRow(rowNumber);
-        for (int i = 0; i < columns.size(); i++) {
-            columns.get(i).fill(row, columnsValues.get(i));
-        }
+        Practice practice = ((Workplan)curriculum).getPractice();
+        fillColumns(practice);        
     }
 
-    private List<String> parseData(Practice practice) {
-        List<String> data = new ArrayList<>();
+    private void fillColumns(Practice practice) {
+        Row row = sheet.getRow(rowNumber);
         // order the same as in constructor
-        data.add("1");
-        data.add(practice.getDenotation());
-        data.add(DateIntervalStringCreator.getDatesString(practice.getStart(), 
-                                                         practice.getFinish()));
-        data.add(Integer.toString(practice.getWeeks()));
-        data.add(Integer.toString(practice.getSemester()));
-        
-        return data;
+        columns.get(0).fill(row, 1);
+        columns.get(1).fill(row, practice.getDenotation());
+        columns.get(2).fill(row, DateIntervalStringCreator.getDatesString(
+                                practice.getStart(), practice.getFinish()));
+        columns.get(3).fill(row, practice.getWeeks());
+        columns.get(4).fill(row, practice.getSemester());
     }    
 }
