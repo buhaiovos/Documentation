@@ -1,13 +1,14 @@
 package edu.cad.documentelements;
 
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 
 public abstract class AbstractDocumentElement {
     
     public static final int RIGHTMOST_CELL_INDEX = 100;
     
-    protected int findInRow(Row row, String token) {
+    protected final int findInRow(Row row, String token) {
         int cellIndex = -1;
         
         if (row != null) {
@@ -26,10 +27,9 @@ public abstract class AbstractDocumentElement {
     }
 
     private String getStringFromCellIfPossible(Cell cell) {
-        try {
+        if(cell.getCellTypeEnum().equals(CellType.STRING))
             return cell.getStringCellValue();
-        } catch (IllegalStateException ex) {
-            return null;
-        }
+        
+        return null;
     }
 }
