@@ -16,7 +16,7 @@ public class RowInserter {
         List<CellRangeAddress> addresses = getMergedRegions(sheet, oldRow);
         
         sheet.shiftRows(position, totalRows, 1, true, false); 
-        Row newRow = sheet.createRow(position);
+        Row newRow = sheet.getRow(position);
         copyRow(oldRow, newRow);
         shiftMergedRegions(sheet, addresses, oldRow);
     }
