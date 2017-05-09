@@ -12,7 +12,7 @@ public abstract class AbstractDocumentArea extends AbstractDocumentElement {
         
         do{
             rowNumber = findInRow(sheet.getRow(startRow++), token);
-        } while(rowNumber < 0);
+        } while(rowNumber < 0 && startRow < sheet.getLastRowNum());
     }
     
     public abstract void fill(Curriculum curriculum);

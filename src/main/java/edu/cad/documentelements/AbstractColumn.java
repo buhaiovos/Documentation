@@ -15,4 +15,12 @@ public abstract class AbstractColumn extends AbstractDocumentElement {
     public void fill(Row row, String value){
         row.getCell(columnNumber).setCellValue(value);
     }
+    
+    public void fill(Row row, int value){
+        row.getCell(columnNumber).setCellValue(value);
+    }
+    
+    public int getColumnNumber(){
+        return columnNumber;
+    }
 }

@@ -7,7 +7,7 @@ import org.apache.poi.ss.usermodel.Row;
 public class LectionsColumn extends HoursColumn{
     
     public LectionsColumn(Row row) {
-        super(row, "lections");
+        super(row, "#lections");
     }
 
     @Override

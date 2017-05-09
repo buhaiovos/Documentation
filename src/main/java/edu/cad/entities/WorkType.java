@@ -1,10 +1,11 @@
 package edu.cad.entities;
 
+import edu.cad.entities.interfaces.IDatabaseEntity;
 import javax.persistence.*;
 
 @Entity
 @Table(name = "type_of_work")
-public class WorkType {
+public class WorkType implements IDatabaseEntity {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

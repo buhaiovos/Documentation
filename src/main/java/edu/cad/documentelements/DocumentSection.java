@@ -2,12 +2,12 @@ package edu.cad.documentelements;
 
 import edu.cad.daos.HibernateDAO;
 import edu.cad.entities.Section;
+import edu.cad.uils.Utils;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Sheet;
 
 public class DocumentSection extends AbstractDocumentElement{
-    private static final String SECTION_TOKEN = "$section";
-    private static final String ESCAPE = "\\";
+    private static final String SECTION_TOKEN = "#section";
     
     private int rowNumber = -1;
     private Section section = null;
@@ -51,9 +51,12 @@ public class DocumentSection extends AbstractDocumentElement{
     }
     
     private int extractIdFromString(String stringCellValue) {
-        String idStr = stringCellValue.replaceFirst((ESCAPE 
-                            + SECTION_TOKEN), "");
-        return Integer.parseInt(idStr);
+        String idStr = stringCellValue.replaceFirst((SECTION_TOKEN), "");
+        
+        if(Utils.isParseable(idStr))
+            return Integer.parseInt(idStr);
+        
+        return -1;
     }
 
     public int getRowNumber() {
