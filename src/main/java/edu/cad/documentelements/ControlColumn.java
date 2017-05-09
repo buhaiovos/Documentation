@@ -16,7 +16,7 @@ import org.apache.poi.ss.usermodel.Row;
 public class ControlColumn extends AbstractColumn{
     protected ControlDictionary control;
     
-    public ControlColumn(Row row, String token, ControlDictionary control) {
+    public ControlColumn(Row row, ControlDictionary control) {
         super(row, "#control" + control.getId());
         this.control = control;
     }

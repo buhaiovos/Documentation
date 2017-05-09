@@ -7,9 +7,9 @@ import java.util.HashSet;
 import java.util.Set;
 import org.apache.poi.ss.usermodel.Sheet;
 
-public class CurriculumSubjectList extends AbstractSubjectList {
-    
-    public CurriculumSubjectList(Sheet sheet, int startRow) {
+public class WorkplanSubjectList extends AbstractSubjectList{
+
+    public WorkplanSubjectList(Sheet sheet, int startRow) {
         super(sheet, startRow);
     }
 
@@ -18,11 +18,11 @@ public class CurriculumSubjectList extends AbstractSubjectList {
         IDAO<ControlDictionary> controlDAO = new HibernateDAO<>(ControlDictionary.class);
         Set<ControlDictionary> controls = new HashSet<>();
         
-        controls.add(controlDAO.get(1));
-        controls.add(controlDAO.get(2));
-        controls.add(controlDAO.get(4));
-        controls.add(controlDAO.get(5));
+        for(int i = 1; i <= 8; i++){
+            controls.add(controlDAO.get(i));
+        }
         
-        return controls;
+        return controls;    
     }
+    
 }
