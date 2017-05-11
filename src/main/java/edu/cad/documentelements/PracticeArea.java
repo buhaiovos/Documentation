@@ -38,7 +38,7 @@ public class PracticeArea extends AbstractDocumentArea {
     private void fillColumns(Practice practice) {
         Row row = sheet.getRow(rowNumber);
         // order the same as in constructor
-        columns.get(0).fill(row, "1");
+        columns.get(0).fill(row, 1);
         columns.get(1).fill(row, practice.getDenotation());
         columns.get(2).fill(row, DateIntervalStringCreator.getDatesString(
                                 practice.getStart(), practice.getFinish()));
