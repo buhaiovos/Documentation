@@ -18,8 +18,8 @@ public abstract class AbstractColumn extends AbstractDocumentElement {
     }
     
     public void fill(Row row, double value){
-        row.getCell(columnNumber).setCellType(CellType.NUMERIC);
         row.getCell(columnNumber).setCellValue(value);
+        row.getCell(columnNumber).setCellType(CellType.NUMERIC);
     }
     
     public int getColumnNumber(){
