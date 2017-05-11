@@ -25,7 +25,11 @@ public abstract class HoursColumn extends AbstractColumn {
             }
         }
         
-        row.getCell(columnNumber).setCellValue(value);
+        if (value > 0) {
+            fill(row, value);
+        } else {
+            fill(row, "");
+        }
     }
     
     protected interface SubjectProperty{

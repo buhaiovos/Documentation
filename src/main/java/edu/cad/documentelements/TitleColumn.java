@@ -12,7 +12,7 @@ public class TitleColumn extends AbstractColumn {
     @Override
     public void fill(Row row, edu.cad.entities.CurriculumSubject record) {
         SubjectDictionary subject = record.getSubject().getSubject();
-        row.getCell(columnNumber).setCellValue(subject.getDenotation());
+        fill(row, subject.getDenotation());
     }
     
 }
