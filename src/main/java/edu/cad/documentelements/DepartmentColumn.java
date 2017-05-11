@@ -14,7 +14,7 @@ public class DepartmentColumn extends AbstractColumn {
     @Override
     public void fill(Row row, CurriculumSubject record) {
         SubjectDictionary subject = record.getSubject().getSubject();
-        row.getCell(columnNumber).setCellValue(subject.getDepartment().getDenotation());
+        fill(row, subject.getDepartment().getDenotation());
     }
     
 }

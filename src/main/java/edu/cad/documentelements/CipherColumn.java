@@ -11,6 +11,6 @@ public class CipherColumn extends AbstractColumn {
 
     @Override
     public void fill(Row row, CurriculumSubject record) {
-         row.getCell(columnNumber).setCellValue(record.getCipher());
+         fill(row, record.getCipher());
     }
 }
