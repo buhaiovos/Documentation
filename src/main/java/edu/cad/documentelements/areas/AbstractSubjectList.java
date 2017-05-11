@@ -1,15 +1,24 @@
-package edu.cad.documentelements;
+package edu.cad.documentelements.areas;
 
+import edu.cad.documentelements.DocumentSection;
+import edu.cad.documentelements.columns.LabsColumn;
+import edu.cad.documentelements.columns.ControlColumn;
+import edu.cad.documentelements.columns.TitleColumn;
+import edu.cad.documentelements.columns.PracticesColumn;
+import edu.cad.documentelements.columns.EctsColumn;
+import edu.cad.documentelements.columns.AbstractColumn;
+import edu.cad.documentelements.columns.LectionsColumn;
+import edu.cad.documentelements.columns.CipherColumn;
 import edu.cad.entities.ControlDictionary;
 import edu.cad.entities.Curriculum;
 import edu.cad.entities.CurriculumSubject;
 import edu.cad.entities.Section;
-import edu.cad.entities.Subject;
 import edu.cad.entities.SubjectDictionary;
 import edu.cad.uils.documentutils.RowInserter;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
+import org.apache.poi.hssf.usermodel.HSSFFormulaEvaluator;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 
@@ -64,7 +73,6 @@ public abstract class AbstractSubjectList extends AbstractDocumentArea {
         for(CurriculumSubject record : records){    
             SubjectDictionary subject = record.getSubject().getSubject();
 
-            System.out.println(subject.getDenotation());
             if(!subjectSection.getSection(subject).equals(section))
                 continue;
 
@@ -77,7 +85,8 @@ public abstract class AbstractSubjectList extends AbstractDocumentArea {
             for(AbstractColumn column : columns){
                 column.fill(sheet.getRow(rowNumber), record);
             }
-            
+            //REMOVE
+            HSSFFormulaEvaluator.evaluateAllFormulaCells(sheet.getWorkbook());
             rowNumber++;
         }
         

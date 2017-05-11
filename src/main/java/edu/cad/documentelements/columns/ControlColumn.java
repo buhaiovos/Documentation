@@ -1,4 +1,4 @@
-package edu.cad.documentelements;
+package edu.cad.documentelements.columns;
 
 import edu.cad.daos.HibernateDAO;
 import edu.cad.entities.Control;
@@ -6,6 +6,7 @@ import edu.cad.entities.ControlDictionary;
 import edu.cad.entities.CurriculumSubject;
 import edu.cad.entities.Subject;
 import edu.cad.entities.Workplan;
+import edu.cad.uils.Utils;
 import edu.cad.utils.entityutils.SubjectUtils;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -19,6 +20,7 @@ public class ControlColumn extends AbstractColumn{
     public ControlColumn(Row row, ControlDictionary control) {
         super(row, "#control" + control.getId());
         this.control = control;
+        clear(row);
     }
 
     @Override
@@ -53,18 +55,24 @@ public class ControlColumn extends AbstractColumn{
     }
     
     private void writeControls(Row row, Set<Control> controls){
-        Iterator<Control> iterator = controls.iterator();
+        if(controls.isEmpty())
+            return;
         
-        if(!controls.isEmpty()){
-            StringBuilder value = new StringBuilder();
-            value.append(iterator.next().toString());
-            
-            while(iterator.hasNext()){
-                value.append(",");
-                value.append(iterator.next().toString());
-            }
+        Iterator<Control> iterator = controls.iterator();
 
-            row.getCell(columnNumber).setCellValue(value.toString());
+        StringBuilder value = new StringBuilder();
+        value.append(iterator.next().toString());
+            
+        if(controls.size() == 1 && Utils.isParseable(value.toString())){
+            fill(row, Integer.parseInt(value.toString()));
+            return;
         }
+            
+        while(iterator.hasNext()){
+            value.append(",");
+            value.append(iterator.next().toString());
+        }
+
+        fill(row, value.toString());
     }
 }

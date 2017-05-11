@@ -2,6 +2,9 @@ package edu.cad.uils.documentutils;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.poi.ss.usermodel.BorderStyle;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.util.CellRangeAddress;
@@ -17,15 +20,25 @@ public class RowInserter {
         
         sheet.shiftRows(position, totalRows, 1, true, false); 
         Row newRow = sheet.getRow(position);
-        copyRow(oldRow, newRow);
+        copyRow(sheet, oldRow, newRow);
         shiftMergedRegions(sheet, addresses, oldRow);
     }
     
-    private static void copyRow(Row oldRow, Row newRow){
+    private static void copyRow(Sheet sheet, Row oldRow, Row newRow){
         newRow.setHeight(oldRow.getHeight());
         
         for(int i = 0; i < oldRow.getLastCellNum(); i++){
-            newRow.createCell(i).setCellStyle(oldRow.getCell(i).getCellStyle());
+            Cell oldCell = oldRow.getCell(i);
+            Cell newCell = newRow.createCell(i);
+
+            newCell.setCellStyle(oldCell.getCellStyle());
+            newCell.getCellStyle().setBorderTop(BorderStyle.THIN);
+            
+            if(oldCell.getCellTypeEnum().equals(CellType.FORMULA)){
+                FormulaCopier.copyFormula(sheet, oldCell, newCell);
+            }
+           
+            FormulaExtender.extendFormula(sheet, oldCell, newCell);
         }
     }
     

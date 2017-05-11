@@ -1,5 +1,7 @@
-package edu.cad.documentelements;
+package edu.cad.documentelements.areas;
 
+import edu.cad.documentelements.columns.SimpleColumn;
+import edu.cad.documentelements.columns.AbstractColumn;
 import edu.cad.daos.HibernateDAO;
 import edu.cad.daos.IDAO;
 import edu.cad.entities.Curriculum;
@@ -45,7 +47,7 @@ public class DiplomaPreparationArea extends AbstractDocumentArea{
         }  
         
         if(!filled){
-            clearColumns();
+            columns.get("norm").clear(currentRow);
         }
     }
     
@@ -79,13 +81,5 @@ public class DiplomaPreparationArea extends AbstractDocumentArea{
         columns.get("department").fill(row, preparation.getDepartment().getDenotation());
         columns.get("budgetary").fill(row, workplan.countBudgetaryStudents());
         columns.get("contract").fill(row, workplan.countContractStudents());
-    }
-    
-    private void clearColumns(){
-        Row row = sheet.getRow(rowNumber);
-        
-        for(AbstractColumn column : columns.values()){
-            column.fill(row, "");
-        }
     }
 }

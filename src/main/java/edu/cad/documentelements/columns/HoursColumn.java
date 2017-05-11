@@ -1,4 +1,4 @@
-package edu.cad.documentelements;
+package edu.cad.documentelements.columns;
 
 import edu.cad.entities.CurriculumSubject;
 import edu.cad.entities.Subject;
@@ -11,6 +11,7 @@ public abstract class HoursColumn extends AbstractColumn {
     
     public HoursColumn(Row row, String token) {
         super(row, token);
+        clear(row);
     }
     
     protected void setValue(Row row, CurriculumSubject record, SubjectProperty property){
@@ -27,9 +28,7 @@ public abstract class HoursColumn extends AbstractColumn {
         
         if (value > 0) {
             fill(row, value);
-        } else {
-            fill(row, "");
-        }
+        } 
     }
     
     protected interface SubjectProperty{

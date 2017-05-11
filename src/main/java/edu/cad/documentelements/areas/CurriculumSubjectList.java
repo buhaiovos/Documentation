@@ -1,4 +1,4 @@
-package edu.cad.documentelements;
+package edu.cad.documentelements.areas;
 
 import edu.cad.daos.HibernateDAO;
 import edu.cad.daos.IDAO;

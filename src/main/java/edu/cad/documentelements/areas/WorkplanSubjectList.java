@@ -1,5 +1,6 @@
-package edu.cad.documentelements;
+package edu.cad.documentelements.areas;
 
+import edu.cad.documentelements.columns.DepartmentColumn;
 import edu.cad.daos.HibernateDAO;
 import edu.cad.daos.IDAO;
 import edu.cad.entities.ControlDictionary;

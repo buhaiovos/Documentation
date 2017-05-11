@@ -1,4 +1,4 @@
-package edu.cad.documentelements;
+package edu.cad.documentelements.columns;
 
 import edu.cad.entities.SubjectDictionary;
 import org.apache.poi.ss.usermodel.Row;

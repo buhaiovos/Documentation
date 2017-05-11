@@ -1,5 +1,6 @@
-package edu.cad.documentelements;
+package edu.cad.documentelements.areas;
 
+import edu.cad.documentelements.AbstractDocumentElement;
 import edu.cad.entities.Curriculum;
 import org.apache.poi.ss.usermodel.Sheet;
 
