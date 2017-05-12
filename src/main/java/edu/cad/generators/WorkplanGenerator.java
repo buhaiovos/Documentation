@@ -36,8 +36,7 @@ public class WorkplanGenerator extends CurriculumGenerator {
         int startPos = subjectList.getRowNumer();
         workplanSpecificAreas.add(new PracticeArea(sheet, startPos));
         workplanSpecificAreas.add(new StateCertificationArea(sheet, startPos));
-        workplanSpecificAreas.add(new DiplomaPreparationArea(sheet, null, 
-                                                             startPos));
+        workplanSpecificAreas.add(new DiplomaPreparationArea(sheet, startPos));
         
     }
 
