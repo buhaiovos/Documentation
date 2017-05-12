@@ -72,7 +72,7 @@ public abstract class AbstractSubjectList extends AbstractDocumentArea {
 
         for(CurriculumSubject record : records){    
             SubjectDictionary subject = record.getSubject().getSubject();
-
+            
             if(!subjectSection.getSection(subject).equals(section))
                 continue;
 

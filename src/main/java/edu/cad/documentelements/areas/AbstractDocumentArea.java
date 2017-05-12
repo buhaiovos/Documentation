@@ -31,4 +31,8 @@ public abstract class AbstractDocumentArea extends AbstractDocumentElement {
         
         return false;
     }
+    
+    public int getRowNumer() {
+        return rowNumber;
+    }
 }
