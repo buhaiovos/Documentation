@@ -79,6 +79,10 @@ public class Curriculum implements IDatabaseEntity{
             
             if(!contains){
                 Subject appropriate = findAppropriate(dictionary.getAcademicSubjects());
+                
+                if(appropriate == null)
+                    continue;
+
                 subjects.add(appropriate);
                 subjects.addAll(getAllSubsubjects(appropriate));
             }
@@ -135,6 +139,6 @@ public class Curriculum implements IDatabaseEntity{
             } 
         }
 
-        return new Subject();
+        return null;
     }
 }
