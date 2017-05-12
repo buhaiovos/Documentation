@@ -1,6 +1,7 @@
 package edu.cad.entities;
 
 import edu.cad.entities.interfaces.IDatabaseEntity;
+import edu.cad.functionalinterfaces.SubjectProperty;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
@@ -135,6 +136,31 @@ public class Subject implements IDatabaseEntity{
 
     public void setCurriculumSubjects(Set<CurriculumSubject> curriculumSubjects) {
         this.curriculumSubjects = curriculumSubjects;
+    }
+    
+    public int getTotalHours(){
+        return lections + labs + practices;
+    }
+    
+    public int getSemesterHours(int currSemester, Curriculum curriculum, 
+            SubjectProperty property){
+        Set<Subject> subjects = curriculum.getAllSubsubjects(this);
+        int total = 0;
+        
+        for(Subject subject : subjects){
+            total += subject.getSemesterHours(currSemester, property);
+        }
+        
+        return total;
+    }
+    
+    private double getSemesterHours(int currSemester, SubjectProperty property){
+        for(int i = semester; i < semester + semestersDuration; i++){
+            if(i == currSemester)
+                return property.getValue(this) / semestersDuration; 
+        }
+        
+        return 0;
     }
     
     public Set<Control> getControlsByType(ControlDictionary type){

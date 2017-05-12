@@ -62,7 +62,11 @@ public abstract class AbstractSubjectList extends AbstractDocumentArea {
         columns.add(new LectionsColumn(currentRow));
         columns.add(new LabsColumn(currentRow));
         columns.add(new PracticesColumn(currentRow));
+        
+        addSemesterColumns();
     }
+    
+    protected abstract void addSemesterColumns();
     
     protected abstract Set<ControlDictionary> getControls();
     

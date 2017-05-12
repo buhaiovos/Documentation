@@ -57,6 +57,35 @@ public class Curriculum implements IDatabaseEntity{
     public Qualification getQualification() {
         return workplans.iterator().next().getQualification();
     }
+    
+    public Set<Subject> getAllSubsubjects(Subject subject){
+        Set<Subject> subjects = new HashSet<>();
+        subjects.add(subject);
+        
+        if(this instanceof Workplan)
+            return subjects;
+        
+        for(SubjectDictionary dictionary : subject.getSubject().getSubSubjects()){
+            boolean contains = false;
+            
+            for(Subject element : dictionary.getAcademicSubjects()){  
+                if(contains(element)){
+                    subjects.add(element);
+                    subjects.addAll(getAllSubsubjects(element));
+                    contains = true;
+                    break;
+                }  
+            }
+            
+            if(!contains){
+                Subject appropriate = findAppropriate(dictionary.getAcademicSubjects());
+                subjects.add(appropriate);
+                subjects.addAll(getAllSubsubjects(appropriate));
+            }
+        }
+        
+        return subjects;
+    }
 
     @Override
     public int hashCode() {
@@ -81,5 +110,31 @@ public class Curriculum implements IDatabaseEntity{
             return false;
         }
         return true;
+    }
+    
+    private boolean contains(Subject subject){
+        for(Workplan plan : getWorkplans()){
+            for(CurriculumSubject currSubject : plan.getCurriculumSubjects()){
+                if(currSubject.getSubject().equals(subject)){
+                    return true;
+                }
+            }
+        }
+        
+        return false;
+    }
+    
+    private Subject findAppropriate(Set<Subject> subjects){
+        Qualification current = getQualification();
+        
+        for(Subject subject : subjects){
+            for(CurriculumSubject currSubject : subject.getCurriculumSubjects()){
+                if(currSubject.getCurriculum().getQualification().equals(current)){
+                    return subject;
+                }
+            } 
+        }
+
+        return new Subject();
     }
 }

@@ -13,7 +13,7 @@ public class FormulaExtender {
         
         if(!formulaCell.getCellTypeEnum().equals(CellType.FORMULA))
             return;
-        System.out.print(src.getAddress().toString() + " ");
+
         String formula = formulaCell.getCellFormula();
         formula = formula.replaceAll(":" + src.getAddress().toString(), 
                 ":" + dest.getAddress().toString());

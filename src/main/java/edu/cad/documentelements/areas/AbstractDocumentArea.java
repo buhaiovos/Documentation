@@ -8,6 +8,10 @@ public abstract class AbstractDocumentArea extends AbstractDocumentElement {
     protected Sheet sheet;
     protected int rowNumber;
     
+    public AbstractDocumentArea(Sheet sheet) {
+        this.sheet = sheet;
+    }
+    
     public AbstractDocumentArea(Sheet sheet, String token, int startRow) {
         this.sheet = sheet;
         findRowNumber(startRow, token);
