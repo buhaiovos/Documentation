@@ -5,9 +5,7 @@ import edu.cad.entities.Control;
 import edu.cad.entities.ControlDictionary;
 import edu.cad.entities.CurriculumSubject;
 import edu.cad.entities.Subject;
-import edu.cad.entities.Workplan;
 import edu.cad.uils.Utils;
-import edu.cad.utils.entityutils.SubjectUtils;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -25,30 +23,24 @@ public class ControlColumn extends AbstractColumn{
 
     @Override
     public void fill(Row row, CurriculumSubject record) {
-        Set<Subject> children = SubjectUtils.getChildren(record.getSubject(), 
-                record.getCurriculum());
         Set<Control> controls = new TreeSet<>();
 
-        controls.addAll(getSubjectControls(record, children, control));
+        controls.addAll(getSubjectControls(record, control));
 
         if(control.getId() == 2){
             ControlDictionary diff = new HibernateDAO<>(ControlDictionary.class).get(9);
-            controls.addAll(getSubjectControls(record, children, diff));
+            controls.addAll(getSubjectControls(record, diff));
         }
 
         writeControls(row, controls);
     }
     
-    public Set<Control> getSubjectControls(CurriculumSubject record, 
-            Set<Subject> children, ControlDictionary type){
+    public Set<Control> getSubjectControls(CurriculumSubject record, ControlDictionary type){
+        Subject current = record.getSubject();
         Set<Control> result = new HashSet<>();
         
-        result.addAll(record.getSubject().getControlsByType(type));
-        
-        if(!(record.getCurriculum() instanceof Workplan) || !children.isEmpty()){
-            for(Subject element : children){
-                result.addAll(element.getControlsByType(type));
-            }
+        for(Subject element : record.getCurriculum().getAllSubsubjects(current)){
+            result.addAll(element.getControlsByType(type));
         }
         
         return result;

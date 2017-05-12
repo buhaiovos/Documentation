@@ -3,6 +3,7 @@ package edu.cad.documentelements.areas;
 import edu.cad.documentelements.columns.DepartmentColumn;
 import edu.cad.daos.HibernateDAO;
 import edu.cad.daos.IDAO;
+import edu.cad.documentelements.columns.semestercolumns.*;
 import edu.cad.entities.ControlDictionary;
 import edu.cad.entities.Curriculum;
 import edu.cad.entities.SubjectDictionary;
@@ -37,5 +38,25 @@ public class WorkplanSubjectList extends AbstractSubjectList{
     protected void addColumns(){
         super.addColumns();
         columns.add(new DepartmentColumn(sheet.getRow(rowNumber)));
+    }
+
+    @Override
+    protected void addSemesterColumns() {
+        int currentColumn = 0;
+        
+        while(true){
+            SemesterColumn column = new SemesterColumn(sheet, currentColumn);
+            
+            if(column.getColumnNumber() < 0)
+                break;
+            
+            currentColumn = column.getColumnNumber();
+            
+            columns.add(new SemesterLectionsColumn(sheet, currentColumn, column.getSemester(), column.getWeeks()));
+            columns.add(new SemesterLabsColumn(sheet, currentColumn, column.getSemester(), column.getWeeks()));
+            columns.add(new SemesterPracticesColumn(sheet, currentColumn, column.getSemester(), column.getWeeks()));
+            
+            currentColumn++;
+        }
     }
 }

@@ -1,10 +1,8 @@
 package edu.cad.documentelements.columns;
 
 import edu.cad.entities.CurriculumSubject;
-import edu.cad.entities.Subject;
-import edu.cad.entities.Workplan;
-import edu.cad.utils.entityutils.SubjectUtils;
-import java.util.Set;
+import edu.cad.entities.Subject;import edu.cad.functionalinterfaces.SubjectProperty;
+;
 import org.apache.poi.ss.usermodel.Row;
 
 public abstract class HoursColumn extends AbstractColumn {
@@ -15,23 +13,15 @@ public abstract class HoursColumn extends AbstractColumn {
     }
     
     protected void setValue(Row row, CurriculumSubject record, SubjectProperty property){
-        Set<Subject> children = SubjectUtils.getChildren(record.getSubject(), 
-                record.getCurriculum());
-        
-        double value = property.getValue(record.getSubject());
+        Subject subject = record.getSubject();
+        double value = 0;
 
-        if(!(record.getCurriculum() instanceof Workplan) || !children.isEmpty()){
-            for(Subject child : children){
-                value += property.getValue(child);
-            }
+        for(Subject child : record.getCurriculum().getAllSubsubjects(subject)){
+            value += property.getValue(child);
         }
-        
+
         if (value > 0) {
             fill(row, value);
         } 
-    }
-    
-    protected interface SubjectProperty{
-        public double getValue(Subject subject);
     }
 }

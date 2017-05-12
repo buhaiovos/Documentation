@@ -17,16 +17,16 @@ import org.apache.poi.ss.usermodel.Sheet;
 public class DiplomaPreparationArea extends AbstractDocumentArea{
     private Map<String, AbstractColumn> columns;
     
-    public DiplomaPreparationArea(Sheet sheet, String token, int startRow) {
-        super(sheet, "#work", startRow);
+    public DiplomaPreparationArea(Sheet sheet, int startRow) {
+        super(sheet);
         initializeColumns();
     }
 
     @Override
-    public void fill(Curriculum curriculum) {    
-        do{      
+    public void fill(Curriculum curriculum) {  
+        while(findRowNumber(rowNumber, "#work")){
             fillWorkArea(curriculum);
-        }while(findRowNumber(rowNumber, "#work"));
+        }
     }
     
     private void fillWorkArea(Curriculum curriculum){
