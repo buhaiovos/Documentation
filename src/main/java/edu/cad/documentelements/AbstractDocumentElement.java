@@ -1,6 +1,5 @@
 package edu.cad.documentelements;
 
-import edu.cad.documentelements.semestercolumns.SemesterColumn;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
@@ -24,25 +23,6 @@ public abstract class AbstractDocumentElement {
                 }
             }
         }
-        return cellIndex;
-    }
-    
-    protected final int findInRow(Row row, String token, int startColumnIndex) {
-        int cellIndex = -1;
-        
-        if (row != null) {
-            for (int i = startColumnIndex; i < RIGHTMOST_CELL_INDEX; i++) {
-                Cell cell;
-                if ( (cell = row.getCell(i)) != null ) {
-                    String cellValue = getStringFromCellIfPossible(cell);
-                    if (cellValue != null && cellValue.contains(token)) {
-                        cellIndex = i;
-                        break;
-                    }
-                }
-            }
-        }
-        
         return cellIndex;
     }
 

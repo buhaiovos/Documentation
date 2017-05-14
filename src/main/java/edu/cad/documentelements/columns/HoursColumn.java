@@ -7,11 +7,9 @@ import org.apache.poi.ss.usermodel.Row;
 
 public abstract class HoursColumn extends AbstractColumn {
     
-    public HoursColumn(Row row, String token) {
-        super(row, token);
-        clear(row);
+    public HoursColumn(int columnNumber) {
+        super(columnNumber);
     }
-    
     protected void setValue(Row row, CurriculumSubject record, SubjectProperty property){
         double value = 0;
 

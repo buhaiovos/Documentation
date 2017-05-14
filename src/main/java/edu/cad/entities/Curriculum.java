@@ -94,4 +94,32 @@ public class Curriculum implements IDatabaseEntity{
         
         return false;
     }
+    
+    public int countControlsByType(int semester, ControlDictionary type){
+        int total = 0;
+        
+        for(CurriculumSubject curriculumSubject : curriculumSubjects){
+            for(Control control : curriculumSubject.getSubject().getControls()){
+                if(control.getType().equals(type) && control.getSemester() == semester){
+                    total++;
+                }
+            }
+        }
+        
+        return total;
+    }
+    
+    public int countControlsByType(ControlDictionary type){
+        int total = 0;
+        
+        for(CurriculumSubject curriculumSubject : curriculumSubjects){
+            for(Control control : curriculumSubject.getSubject().getControls()){
+                if(control.getType().equals(type)){
+                    total++;
+                }
+            }
+        }
+        
+        return total;
+    }
 }

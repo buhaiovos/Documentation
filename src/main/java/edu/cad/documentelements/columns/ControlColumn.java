@@ -19,12 +19,6 @@ public class ControlColumn extends AbstractColumn{
         super(columnNumber);
         this.control = control;
     }
-    
-    public ControlColumn(Row row, ControlDictionary control) {
-        super(row, "#control" + control.getId());
-        this.control = control;
-        clear(row);
-    }
 
     @Override
     public void fill(Row row, CurriculumSubject record) {

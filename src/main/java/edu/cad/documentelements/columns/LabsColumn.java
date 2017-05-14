@@ -6,8 +6,8 @@ import org.apache.poi.ss.usermodel.Row;
 
 public class LabsColumn extends HoursColumn{
     
-    public LabsColumn(Row row) {
-        super(row, "#labs");
+    public LabsColumn(int columnNumber) {
+        super(columnNumber);
     }
 
     @Override

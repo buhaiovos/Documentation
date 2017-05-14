@@ -6,8 +6,8 @@ import org.apache.poi.ss.usermodel.Row;
 
 public class EctsColumn extends HoursColumn{
     
-    public EctsColumn(Row row) {
-        super(row, "#ects");
+    public EctsColumn(int columnNumber) {
+        super(columnNumber);
     }
 
     @Override

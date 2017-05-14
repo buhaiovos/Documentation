@@ -5,8 +5,8 @@ import org.apache.poi.ss.usermodel.Row;
 
 public class TitleColumn extends AbstractColumn {
     
-    public TitleColumn(Row row) {
-        super(row, "#section");
+    public TitleColumn(int columnNumber) {
+        super(columnNumber);
     }
 
     @Override
