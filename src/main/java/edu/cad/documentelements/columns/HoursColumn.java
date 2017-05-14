@@ -13,10 +13,9 @@ public abstract class HoursColumn extends AbstractColumn {
     }
     
     protected void setValue(Row row, CurriculumSubject record, SubjectProperty property){
-        Subject subject = record.getSubject();
         double value = 0;
 
-        for(Subject child : record.getCurriculum().getAllSubsubjects(subject)){
+        for(Subject child : record.getSubject().getSubSubjects(record.getCurriculum())){
             value += property.getValue(child);
         }
 

@@ -1,15 +1,15 @@
-package edu.cad.documentelements.columns.semestercolumns;
+package edu.cad.documentelements.semestercolumns;
 
 import edu.cad.entities.CurriculumSubject;
 import edu.cad.entities.Subject;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 
-public class SemesterLectionsColumn extends SemesterColumn{
+public class SemesterLabsColumn extends SemesterColumn{
     
-    public SemesterLectionsColumn(Sheet sheet, int startColumnIndex, int semester, 
+    public SemesterLabsColumn(Sheet sheet, int startColumnIndex, int semester, 
             int weeks) {
-        super(sheet, "#sem_lections", startColumnIndex);
+        super(sheet, "#sem_labs", startColumnIndex);
         this.semester = semester;
         this.weeks = weeks;
     }
@@ -18,7 +18,7 @@ public class SemesterLectionsColumn extends SemesterColumn{
     public void fill(Row row, CurriculumSubject record) {
         Subject subject = record.getSubject();
         double hours = subject.getSemesterHours(semester, record.getCurriculum(),
-                Subject::getLections);
+                Subject::getLabs);
         hours /= (double) weeks;
         
         if(hours > 0){

@@ -1,9 +1,12 @@
 package edu.cad.documentelements.areas;
 
+import edu.cad.documentelements.semestercolumns.SemesterLectionsColumn;
+import edu.cad.documentelements.semestercolumns.SemesterColumn;
+import edu.cad.documentelements.semestercolumns.SemesterLabsColumn;
+import edu.cad.documentelements.semestercolumns.SemesterPracticesColumn;
 import edu.cad.documentelements.columns.DepartmentColumn;
 import edu.cad.daos.HibernateDAO;
 import edu.cad.daos.IDAO;
-import edu.cad.documentelements.columns.semestercolumns.*;
 import edu.cad.entities.ControlDictionary;
 import edu.cad.entities.Curriculum;
 import edu.cad.entities.SubjectDictionary;

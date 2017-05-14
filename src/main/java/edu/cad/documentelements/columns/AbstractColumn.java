@@ -4,12 +4,15 @@ import edu.cad.documentelements.AbstractDocumentElement;
 import edu.cad.entities.CurriculumSubject;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
 
 public abstract class AbstractColumn extends AbstractDocumentElement {
     protected int columnNumber;
 
     public AbstractColumn() {
+    }
+    
+    public AbstractColumn(int columnNumber) {
+        this.columnNumber = columnNumber;
     }
     
     public AbstractColumn(Row row, String token) {
