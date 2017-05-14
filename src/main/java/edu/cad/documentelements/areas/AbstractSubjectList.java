@@ -9,6 +9,9 @@ import edu.cad.documentelements.columns.EctsColumn;
 import edu.cad.documentelements.columns.AbstractColumn;
 import edu.cad.documentelements.columns.LectionsColumn;
 import edu.cad.documentelements.columns.CipherColumn;
+import edu.cad.documentelements.columns.ColumnFactory;
+import edu.cad.documentelements.controlcounters.ControlCounter;
+import edu.cad.documentelements.controlcounters.ControlCounterFactory;
 import edu.cad.entities.ControlDictionary;
 import edu.cad.entities.Curriculum;
 import edu.cad.entities.CurriculumSubject;
@@ -23,11 +26,13 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 
 public abstract class AbstractSubjectList extends AbstractDocumentArea {
-    protected Set<AbstractColumn> columns = new HashSet<>();;
+    protected Set<AbstractColumn> columns = new HashSet<>();
+    protected Set<ControlCounter> counters = new HashSet<>();
     
     public AbstractSubjectList(Sheet sheet, int startRow) {
         super(sheet, "#section", startRow);
-        addColumns();
+        addColumns(); 
+        addCounters();
     }
     
     protected void fill(Curriculum curriculum, SubjectSection subjectSection) {
@@ -38,24 +43,45 @@ public abstract class AbstractSubjectList extends AbstractDocumentArea {
             DocumentSection documentSection = new DocumentSection(sheet, rowNumber);
 
             if(documentSection.getRowNumber() < 0)
-                return;
+                break;
             
             rowNumber = documentSection.getRowNumber();
             Section section = documentSection.getSection();
            
             fillSection(section, records, subjectSection);
         }
+        
+        for(ControlCounter counter : counters){
+            counter.fill(curriculum);
+        }
     }
     
-    protected void addColumns(){
+     private void addColumns(){
         Row row = sheet.getRow(rowNumber);
         
         for(int i = 0; i < row.getLastCellNum(); i++){
-            AbstractColumn column = ColumnFactory.getColumn(row.getCell(i));
+            /*AbstractColumn column = ColumnFactory.getColumn(row.getCell(i));
             
             if(column != null){
                 columns.add(column);
-            }
+                continue;
+            }*/
+        }
+    }
+    
+    private void addCounters(){
+        for(int i = 0; i < sheet.getLastRowNum(); i++){
+            Row row = sheet.getRow(i);
+            
+            if(row == null)
+                continue;
+            
+            for(int j = 0; j < row.getLastCellNum(); j++){
+                ControlCounter counter = ControlCounterFactory.getControlCounter(row.getCell(j));
+                if(counter != null){
+                    counters.add(counter);
+                }
+            }  
         }
     }
     

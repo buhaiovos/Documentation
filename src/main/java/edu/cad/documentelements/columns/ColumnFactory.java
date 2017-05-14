@@ -5,14 +5,9 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Sheet;
 
-/*
-semestercolumn takes colNum, semester, weeks
-semlabs1_18
-*/
-
 public class ColumnFactory {
     
-    public static AbstractColumn createColumn(Cell cell) {
+    /*public static AbstractColumn createColumn(Cell cell) {
         if (cell != null) {
             int rowIndex = cell.getRowIndex();
             int columnIndex = cell.getColumnIndex();
@@ -38,6 +33,6 @@ public class ColumnFactory {
             }        
         }  
         return null;
-    }
+    }*/
 
 }
