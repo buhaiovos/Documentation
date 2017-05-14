@@ -7,7 +7,7 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Sheet;
 
 public class DocumentSection extends AbstractDocumentElement{
-    private static final String SECTION_TOKEN = "#section";
+    private static final String SECTION_TOKEN = "#section_";
     
     private int rowNumber = -1;
     private Section section = null;

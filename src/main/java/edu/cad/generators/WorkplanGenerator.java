@@ -11,10 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import org.apache.poi.ss.usermodel.Workbook;
 
-/**
- *
- * @author Олександр
- */
 public class WorkplanGenerator extends CurriculumGenerator {
     
     private List<AbstractDocumentArea> workplanSpecificAreas = new ArrayList<>();
