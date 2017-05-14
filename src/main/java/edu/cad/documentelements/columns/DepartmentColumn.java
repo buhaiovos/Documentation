@@ -10,7 +10,7 @@ public class DepartmentColumn extends AbstractColumn {
     public DepartmentColumn(Row row) {
         super(row, "#department");
     }
-
+    
     @Override
     public void fill(Row row, CurriculumSubject record) {
         SubjectDictionary subject = record.getSubject().getSubject();

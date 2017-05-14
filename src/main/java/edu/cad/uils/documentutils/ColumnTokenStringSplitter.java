@@ -5,6 +5,8 @@
  */
 package edu.cad.uils.documentutils;
 
+import edu.cad.uils.Utils;
+
 /**
  *
  * @author Олександр
@@ -41,12 +43,18 @@ public class ColumnTokenStringSplitter {
                     secondNumString = null;
                     break;
                 case 2:
-                    firstNumString = parts[1].trim();
+                    if (Utils.isParseable(parts[1].trim())) {
+                        firstNumString = parts[1].trim();
+                    }
                     secondNumString = null;
                     break;
                 default:
-                    firstNumString = parts[1].trim();
-                    secondNumString = parts[2].trim();
+                    if (Utils.isParseable(parts[1].trim())) {
+                        firstNumString = parts[1].trim();
+                    }
+                    if (Utils.isParseable(parts[2].trim())) {
+                        secondNumString = parts[2].trim();
+                    }
                     break;
             }
         }

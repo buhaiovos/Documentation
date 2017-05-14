@@ -1,5 +1,7 @@
 package edu.cad.documentelements.columns;
 
+import edu.cad.daos.HibernateDAO;
+import edu.cad.entities.ControlDictionary;
 import edu.cad.uils.documentutils.ColumnTokenStringSplitter;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
@@ -31,13 +33,32 @@ public class ColumnFactory {
                 ColumnTokenStringSplitter ctss = 
                         new ColumnTokenStringSplitter(cellContent);
                 
-                column = createColumn();
+                column = createColumn(ctss, columnIndex);
+                return column;
             }
             else {
                 return null;
             }        
         }  
         return null;
+    }
+
+    private static AbstractColumn createColumn(ColumnTokenStringSplitter ctss, 
+                                                              int columnNumber) {
+        switch (ctss.getType()) {
+            case "cipher":
+                return new CipherColumn(columnNumber);
+            case "control":
+                int id = Integer.parseInt(ctss.getFirstNumString());
+                ControlDictionary cd = 
+                        new HibernateDAO<>(ControlDictionary.class)
+                                .get(id);
+                return new ControlColumn(columnNumber, cd);
+            case "department":
+                return new DepartmentColumn(columnNumber);
+            case "ects":
+                return new EctsColumn(columnNumber);
+        }
     }
 
 }
