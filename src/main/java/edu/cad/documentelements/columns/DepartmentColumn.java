@@ -7,8 +7,8 @@ import org.apache.poi.ss.usermodel.Row;
 
 public class DepartmentColumn extends AbstractColumn {
     
-    public DepartmentColumn(Row row) {
-        super(row, "#department");
+    public DepartmentColumn(int columnNumber) {
+        super(columnNumber);
     }
     
     @Override

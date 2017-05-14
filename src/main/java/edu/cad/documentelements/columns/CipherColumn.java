@@ -5,8 +5,8 @@ import org.apache.poi.ss.usermodel.Row;
 
 public class CipherColumn extends AbstractColumn {
     
-    public CipherColumn(Row row) {
-        super(row, "#cipher");
+    public CipherColumn(int columnNumber) {
+        super(columnNumber);
     }
 
     @Override

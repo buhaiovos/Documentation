@@ -131,6 +131,20 @@ public class SubjectDictionary implements IDatabaseEntity{
         this.academicSubjects = academicSubjects;
     }
     
+    public Subject findAppropriate(Curriculum curriculum){
+        Qualification current = curriculum.getQualification();
+        
+        for(Subject element : academicSubjects){
+            for(CurriculumSubject currSubject : element.getCurriculumSubjects()){
+                if(currSubject.getCurriculum().getQualification().equals(current)){
+                    return element;
+                }
+            } 
+        }
+
+        return null;
+    }
+    
     
     @Override
     public int hashCode() {

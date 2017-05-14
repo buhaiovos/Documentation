@@ -7,11 +7,8 @@ import org.apache.poi.ss.usermodel.Sheet;
 
 public class SemesterLabsColumn extends SemesterColumn{
     
-    public SemesterLabsColumn(Sheet sheet, int startColumnIndex, int semester, 
-            int weeks) {
-        super(sheet, "#sem_labs", startColumnIndex);
-        this.semester = semester;
-        this.weeks = weeks;
+    public SemesterLabsColumn(int columnNumber, int semester, int weeks) {
+        super(columnNumber, semester, weeks);
     }
     
     @Override

@@ -9,34 +9,30 @@ import edu.cad.documentelements.columns.EctsColumn;
 import edu.cad.documentelements.columns.AbstractColumn;
 import edu.cad.documentelements.columns.LectionsColumn;
 import edu.cad.documentelements.columns.CipherColumn;
+import edu.cad.documentelements.columns.ColumnFactory;
+import edu.cad.documentelements.controlcounters.ControlCounter;
+import edu.cad.documentelements.controlcounters.ControlCounterFactory;
 import edu.cad.entities.ControlDictionary;
 import edu.cad.entities.Curriculum;
 import edu.cad.entities.CurriculumSubject;
 import edu.cad.entities.Section;
 import edu.cad.entities.SubjectDictionary;
 import edu.cad.uils.documentutils.RowInserter;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.concurrent.atomic.AtomicInteger;
 import org.apache.poi.hssf.usermodel.HSSFFormulaEvaluator;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 
 public abstract class AbstractSubjectList extends AbstractDocumentArea {
-    protected Set<AbstractColumn> columns;
+    protected Set<AbstractColumn> columns = new HashSet<>();
+    protected Set<ControlCounter> counters = new HashSet<>();
     
     public AbstractSubjectList(Sheet sheet, int startRow) {
         super(sheet, "#section", startRow);
-        columns = new HashSet<>();
-        
-        for(ControlDictionary control : getControls()){
-            columns.add(new ControlColumn(sheet.getRow(rowNumber), control));
-        }
-        
-        addColumns();
+        addColumns(); 
+        addCounters();
     }
     
     protected void fill(Curriculum curriculum, SubjectSection subjectSection) {
@@ -47,31 +43,47 @@ public abstract class AbstractSubjectList extends AbstractDocumentArea {
             DocumentSection documentSection = new DocumentSection(sheet, rowNumber);
 
             if(documentSection.getRowNumber() < 0)
-                return;
+                break;
             
             rowNumber = documentSection.getRowNumber();
             Section section = documentSection.getSection();
            
             fillSection(section, records, subjectSection);
         }
+        
+        for(ControlCounter counter : counters){
+            counter.fill(curriculum);
+        }
     }
     
-    protected void addColumns(){
-        Row currentRow = sheet.getRow(rowNumber);
+     private void addColumns(){
+        Row row = sheet.getRow(rowNumber);
         
-        columns.add(new CipherColumn(currentRow));
-        columns.add(new TitleColumn(currentRow));
-        columns.add(new EctsColumn(currentRow));
-        columns.add(new LectionsColumn(currentRow));
-        columns.add(new LabsColumn(currentRow));
-        columns.add(new PracticesColumn(currentRow));
-        
-        addSemesterColumns();
+        for(int i = 0; i < row.getLastCellNum(); i++){
+            /*AbstractColumn column = ColumnFactory.getColumn(row.getCell(i));
+            
+            if(column != null){
+                columns.add(column);
+                continue;
+            }*/
+        }
     }
     
-    protected abstract void addSemesterColumns();
-    
-    protected abstract Set<ControlDictionary> getControls();
+    private void addCounters(){
+        for(int i = 0; i < sheet.getLastRowNum(); i++){
+            Row row = sheet.getRow(i);
+            
+            if(row == null)
+                continue;
+            
+            for(int j = 0; j < row.getLastCellNum(); j++){
+                ControlCounter counter = ControlCounterFactory.getControlCounter(row.getCell(j));
+                if(counter != null){
+                    counters.add(counter);
+                }
+            }  
+        }
+    }
     
     private void fillSection(Section section, Set<CurriculumSubject> records,
             SubjectSection subjectSection){

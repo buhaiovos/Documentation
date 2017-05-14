@@ -162,7 +162,7 @@ public class Subject implements IDatabaseEntity{
         
         return 0;
     }
-    
+
     public Set<Control> getControlsByType(ControlDictionary type){
         Set<Control> result = new HashSet<>();
         
@@ -195,7 +195,7 @@ public class Subject implements IDatabaseEntity{
             }
             
             if(!contains){
-                Subject appropriate = findAppropriate(dictionary.getAcademicSubjects(), curriculum);
+                Subject appropriate = dictionary.findAppropriate(curriculum);
                 
                 if(appropriate == null)
                     continue;
@@ -231,19 +231,5 @@ public class Subject implements IDatabaseEntity{
             return false;
         }
         return true;
-    }
-    
-    private Subject findAppropriate(Set<Subject> subjects, Curriculum curriculum){
-        Qualification current = curriculum.getQualification();
-        
-        for(Subject element : subjects){
-            for(CurriculumSubject currSubject : element.getCurriculumSubjects()){
-                if(currSubject.getCurriculum().getQualification().equals(current)){
-                    return element;
-                }
-            } 
-        }
-
-        return null;
     }
 }
