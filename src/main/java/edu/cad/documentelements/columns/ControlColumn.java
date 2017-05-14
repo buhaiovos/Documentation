@@ -15,6 +15,11 @@ import org.apache.poi.ss.usermodel.Row;
 public class ControlColumn extends AbstractColumn{
     protected ControlDictionary control;
     
+    public ControlColumn(int columnNumber, ControlDictionary control) {
+        super(columnNumber);
+        this.control = control;
+    }
+    
     public ControlColumn(Row row, ControlDictionary control) {
         super(row, "#control" + control.getId());
         this.control = control;
@@ -36,10 +41,9 @@ public class ControlColumn extends AbstractColumn{
     }
     
     public Set<Control> getSubjectControls(CurriculumSubject record, ControlDictionary type){
-        Subject current = record.getSubject();
         Set<Control> result = new HashSet<>();
         
-        for(Subject element : record.getCurriculum().getAllSubsubjects(current)){
+        for(Subject element : record.getSubject().getSubSubjects(record.getCurriculum())){
             result.addAll(element.getControlsByType(type));
         }
         

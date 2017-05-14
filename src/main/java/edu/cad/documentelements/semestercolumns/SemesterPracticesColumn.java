@@ -1,4 +1,4 @@
-package edu.cad.documentelements.columns.semestercolumns;
+package edu.cad.documentelements.semestercolumns;
 
 import edu.cad.entities.CurriculumSubject;
 import edu.cad.entities.Subject;

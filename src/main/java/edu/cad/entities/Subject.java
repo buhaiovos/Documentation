@@ -144,7 +144,7 @@ public class Subject implements IDatabaseEntity{
     
     public int getSemesterHours(int currSemester, Curriculum curriculum, 
             SubjectProperty property){
-        Set<Subject> subjects = curriculum.getAllSubsubjects(this);
+        Set<Subject> subjects = getSubSubjects(curriculum);
         int total = 0;
         
         for(Subject subject : subjects){
@@ -175,6 +175,39 @@ public class Subject implements IDatabaseEntity{
         return result;
     }
     
+    public Set<Subject> getSubSubjects(Curriculum curriculum){
+        Set<Subject> subjects = new HashSet<>();
+        subjects.add(this);
+        
+        if(curriculum instanceof Workplan)
+            return subjects;
+        
+        for(SubjectDictionary dictionary : getSubject().getSubSubjects()){
+            boolean contains = false;
+            
+            for(Subject element : dictionary.getAcademicSubjects()){  
+                if(curriculum.contains(element)){
+                    subjects.add(element);
+                    subjects.addAll(element.getSubSubjects(curriculum));
+                    contains = true;
+                    break;
+                }  
+            }
+            
+            if(!contains){
+                Subject appropriate = findAppropriate(dictionary.getAcademicSubjects(), curriculum);
+                
+                if(appropriate == null)
+                    continue;
+
+                subjects.add(appropriate);
+                subjects.addAll(appropriate.getSubSubjects(curriculum));
+            }
+        }
+        
+        return subjects;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 5;
@@ -198,5 +231,19 @@ public class Subject implements IDatabaseEntity{
             return false;
         }
         return true;
+    }
+    
+    private Subject findAppropriate(Set<Subject> subjects, Curriculum curriculum){
+        Qualification current = curriculum.getQualification();
+        
+        for(Subject element : subjects){
+            for(CurriculumSubject currSubject : element.getCurriculumSubjects()){
+                if(currSubject.getCurriculum().getQualification().equals(current)){
+                    return element;
+                }
+            } 
+        }
+
+        return null;
     }
 }

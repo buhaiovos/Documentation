@@ -1,6 +1,6 @@
 package edu.cad.documentelements;
 
-import edu.cad.documentelements.columns.semestercolumns.SemesterColumn;
+import edu.cad.documentelements.semestercolumns.SemesterColumn;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
