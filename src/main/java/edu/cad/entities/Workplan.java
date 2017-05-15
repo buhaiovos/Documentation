@@ -69,6 +69,16 @@ public class Workplan extends Curriculum {
         this.curriculum = curriculum;
     }
 
+    @Override
+    public Set<CurriculumSubject> getCurriculumSubjects() {
+        return curriculumSubjects;
+    }
+
+    @Override
+    public void setCurriculumSubjects(Set<CurriculumSubject> curriculumSubjects) {
+        this.curriculumSubjects = curriculumSubjects;
+    }
+
     public Set<DiplomaPreparation> getDiplomaPreparations() {
         return diplomaPreparations;
     }
@@ -104,15 +114,15 @@ public class Workplan extends Curriculum {
         
         return total;
     }
-
-    @Override
-    public Set<CurriculumSubject> getCurriculumSubjects() {
-        return curriculumSubjects;
-    }
-
-    @Override
-    public void setCurriculumSubjects(Set<CurriculumSubject> curriculumSubjects) {
-        this.curriculumSubjects = curriculumSubjects;
+    
+    public int countTotalStudents(){
+        int total = 0; 
+        
+        for(AcademicGroup group : groups){
+            total += group.getTotalStudents();
+        }
+        
+        return total;
     }
 }
 
