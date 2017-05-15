@@ -15,7 +15,7 @@ public class Curriculum implements IDatabaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", unique = true, nullable = false)
-    private int id;
+    protected int id;
     
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.curriculum", cascade = CascadeType.ALL)
     private Set<CurriculumSubject> curriculumSubjects = new HashSet<>();
@@ -98,12 +98,14 @@ public class Curriculum implements IDatabaseEntity{
     public int countControlsByType(int semester, ControlDictionary type){
         int total = 0;
         
-        for(CurriculumSubject curriculumSubject : curriculumSubjects){
-            for(Control control : curriculumSubject.getSubject().getControls()){
-                if(control.getType().equals(type) && control.getSemester() == semester){
-                    total++;
+        for(CurriculumSubject curriculumSubject : getCurriculumSubjects()){
+            for(Subject subject : curriculumSubject.getSubject().getSubSubjects(this)){
+                for(Control control : subject.getControlsByType(type)){
+                    if(control.getSemester() == semester){
+                        total++;
+                    }
                 }
-            }
+            } 
         }
         
         return total;
@@ -112,12 +114,10 @@ public class Curriculum implements IDatabaseEntity{
     public int countControlsByType(ControlDictionary type){
         int total = 0;
         
-        for(CurriculumSubject curriculumSubject : curriculumSubjects){
-            for(Control control : curriculumSubject.getSubject().getControls()){
-                if(control.getType().equals(type)){
-                    total++;
-                }
-            }
+        for(CurriculumSubject curriculumSubject : getCurriculumSubjects()){
+            for(Subject subject : curriculumSubject.getSubject().getSubSubjects(this)){
+                total += subject.getControlsByType(type).size();
+            } 
         }
         
         return total;

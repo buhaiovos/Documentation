@@ -22,6 +22,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
 import org.apache.poi.hssf.usermodel.HSSFFormulaEvaluator;
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 
@@ -63,7 +64,8 @@ public abstract class AbstractSubjectList extends AbstractDocumentArea {
             /*AbstractColumn column = ColumnFactory.getColumn(row.getCell(i));
             
             if(column != null){
-                columns.add(column);
+                column.clear(row);
+                columns.add(column);  
                 continue;
             }*/
         }
@@ -79,6 +81,7 @@ public abstract class AbstractSubjectList extends AbstractDocumentArea {
             for(int j = 0; j < row.getLastCellNum(); j++){
                 ControlCounter counter = ControlCounterFactory.getControlCounter(row.getCell(j));
                 if(counter != null){
+                    counter.clear();
                     counters.add(counter);
                 }
             }  

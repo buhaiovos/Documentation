@@ -129,6 +129,10 @@ public class AcademicGroup implements IDatabaseEntity{
     public void setWorkplan(Curriculum workplan) {
         this.workplan = workplan;
     }
+    
+    public int getTotalStudents() {
+        return budgetaryStudents + contractStudents;
+    }
 
     @Override
     public int hashCode() {
