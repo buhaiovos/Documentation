@@ -6,7 +6,8 @@ import edu.cad.documentelements.semestercolumns.SemesterLabsColumn;
 import edu.cad.documentelements.semestercolumns.SemesterLectionsColumn;
 import edu.cad.documentelements.semestercolumns.SemesterPracticesColumn;
 import edu.cad.entities.ControlDictionary;
-import edu.cad.uils.documentutils.ColumnTokenStringSplitter;
+import edu.cad.utils.documentutils.ColumnTokenStringSplitter;
+
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 

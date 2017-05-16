@@ -1,11 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package edu.cad.uils.documentutils;
+package edu.cad.utils.documentutils;
 
-import edu.cad.uils.Utils;
+import edu.cad.utils.Utils;
 
 /**
  *

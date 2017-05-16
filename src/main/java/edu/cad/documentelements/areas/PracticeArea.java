@@ -5,7 +5,7 @@ import edu.cad.documentelements.columns.AbstractColumn;
 import edu.cad.entities.Curriculum;
 import edu.cad.entities.Practice;
 import edu.cad.entities.Workplan;
-import edu.cad.uils.documentutils.DateIntervalStringCreator;
+import edu.cad.utils.documentutils.DateIntervalStringCreator;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.poi.ss.usermodel.Row;

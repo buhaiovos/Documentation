@@ -2,8 +2,8 @@ package edu.cad.documentelements.controlcounters;
 
 import edu.cad.daos.HibernateDAO;
 import edu.cad.entities.ControlDictionary;
-import edu.cad.uils.Utils;
-import edu.cad.uils.documentutils.ColumnTokenStringSplitter;
+import edu.cad.utils.Utils;
+import edu.cad.utils.documentutils.ColumnTokenStringSplitter;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 

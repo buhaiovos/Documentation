@@ -17,7 +17,7 @@ import edu.cad.entities.Curriculum;
 import edu.cad.entities.CurriculumSubject;
 import edu.cad.entities.Section;
 import edu.cad.entities.SubjectDictionary;
-import edu.cad.uils.documentutils.RowInserter;
+import edu.cad.utils.documentutils.RowInserter;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;

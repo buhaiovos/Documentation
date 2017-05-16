@@ -133,6 +133,13 @@ public class AcademicGroup implements IDatabaseEntity{
     public int getTotalStudents() {
         return budgetaryStudents + contractStudents;
     }
+    
+    public boolean isBudgetary(){
+        if(budgetaryStudents > 0)
+            return true;
+        
+        return false;
+    }
 
     @Override
     public int hashCode() {
