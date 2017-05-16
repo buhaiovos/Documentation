@@ -9,7 +9,7 @@ import org.hibernate.service.ServiceRegistry;
 public class HibernateSession{
     private static Session session;
     
-    private HibernateSession(){ }
+    private HibernateSession(){}
     
     private static void openSession(){
         Configuration configuration = new Configuration();  
@@ -22,8 +22,16 @@ public class HibernateSession{
         session = factory.openSession();
     }
     
+    public static void openSession(Configuration configuration){  
+        ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
+                .applySettings(configuration.getProperties()).build();
+        SessionFactory factory = configuration.buildSessionFactory(serviceRegistry); 
+        
+        session = factory.openSession();
+    }
+    
     public static synchronized Session getInstance(){
-        if(!session.isOpen()){
+        if((session == null) || !session.isOpen()){
             openSession();
         }
         
@@ -31,6 +39,8 @@ public class HibernateSession{
     }
 
     public static void close(){
-        session.close();
+        if((session != null) && session.isOpen()){
+           session.close(); 
+        }
     }
 }

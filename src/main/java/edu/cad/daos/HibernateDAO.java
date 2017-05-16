@@ -11,12 +11,18 @@ import org.hibernate.Transaction;
 @SuppressWarnings("unchecked")
 public class HibernateDAO<T extends IDatabaseEntity> implements IDAO<T>{	
     private final Class<T> typeParameterClass;
-    private final Session session = HibernateSession.getInstance();
+    private final Session session;
     
     public HibernateDAO(Class<T> typeParameterClass){
         this.typeParameterClass = typeParameterClass;
+        this.session = HibernateSession.getInstance();
     }
 
+    public HibernateDAO(Class<T> typeParameterClass, Session session){
+        this.typeParameterClass = typeParameterClass;
+        this.session = session;
+    }
+    
     @Override
     public List<T> getAll() {
 	//Session session = factory.openSession(); 
