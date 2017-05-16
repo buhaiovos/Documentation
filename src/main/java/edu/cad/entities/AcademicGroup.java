@@ -5,7 +5,7 @@ import edu.cad.entities.interfaces.IDatabaseEntity;
 
 @Entity
 @Table(name = "academic_group")
-public class AcademicGroup implements IDatabaseEntity{
+public class AcademicGroup implements IDatabaseEntity, Comparable<AcademicGroup>{
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -165,4 +165,9 @@ public class AcademicGroup implements IDatabaseEntity{
         }
         return true;
     }    
+
+    @Override
+    public int compareTo(AcademicGroup other) {
+        return other.startYear - this.startYear;
+    }
 }
