@@ -11,6 +11,9 @@ public class DatabaseYear implements IDatabaseEntity {
     @Column(name = "year", unique = true, nullable = false)
     private int year;
 
+    public DatabaseYear() {
+    }
+    
     public DatabaseYear(int year) {
         this.year = year;
     }
