@@ -1,4 +1,4 @@
-package edu.cad.uils;
+package edu.cad.utils;
 
 public class Utils {
     

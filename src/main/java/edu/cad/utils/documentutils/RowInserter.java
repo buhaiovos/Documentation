@@ -1,4 +1,4 @@
-package edu.cad.uils.documentutils;
+package edu.cad.utils.documentutils;
 
 import java.util.ArrayList;
 import java.util.List;

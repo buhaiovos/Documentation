@@ -1,6 +1,6 @@
 package edu.cad.daos;
 
-import edu.cad.databaseutils.HibernateSession;
+import edu.cad.utils.hibernateutils.HibernateSession;
 import edu.cad.entities.interfaces.IDatabaseEntity;
 import java.util.List;
 

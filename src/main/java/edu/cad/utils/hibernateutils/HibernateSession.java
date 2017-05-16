@@ -1,4 +1,4 @@
-package edu.cad.databaseutils;
+package edu.cad.utils.hibernateutils;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -6,14 +6,12 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
-/**
- *
- * @author Олена
- */
 public class HibernateSession{
-    private static final Session session = openSession();
+    private static Session session;
     
-    private static Session openSession(){
+    private HibernateSession(){ }
+    
+    private static void openSession(){
         Configuration configuration = new Configuration();  
         configuration.configure("hibernate.cfg.xml");  
         
@@ -21,10 +19,14 @@ public class HibernateSession{
                 .applySettings(configuration.getProperties()).build();
         SessionFactory factory = configuration.buildSessionFactory(serviceRegistry); 
         
-        return factory.openSession();
+        session = factory.openSession();
     }
     
     public static synchronized Session getInstance(){
+        if(!session.isOpen()){
+            openSession();
+        }
+        
         return session;
     }
 

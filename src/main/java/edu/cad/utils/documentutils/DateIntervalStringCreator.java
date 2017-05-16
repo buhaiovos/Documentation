@@ -1,4 +1,4 @@
-package edu.cad.uils.documentutils;
+package edu.cad.utils.documentutils;
 
 import java.text.DateFormat;
 import java.util.Date;

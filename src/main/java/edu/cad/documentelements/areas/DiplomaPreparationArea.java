@@ -8,7 +8,7 @@ import edu.cad.entities.Curriculum;
 import edu.cad.entities.DiplomaPreparation;
 import edu.cad.entities.WorkType;
 import edu.cad.entities.Workplan;
-import edu.cad.uils.Utils;
+import edu.cad.utils.Utils;
 import java.util.HashMap;
 import java.util.Map;
 import org.apache.poi.ss.usermodel.Row;

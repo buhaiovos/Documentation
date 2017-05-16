@@ -5,7 +5,7 @@ import edu.cad.entities.Control;
 import edu.cad.entities.ControlDictionary;
 import edu.cad.entities.CurriculumSubject;
 import edu.cad.entities.Subject;
-import edu.cad.uils.Utils;
+import edu.cad.utils.Utils;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;

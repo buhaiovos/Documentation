@@ -2,7 +2,7 @@ package edu.cad.documentelements;
 
 import edu.cad.daos.HibernateDAO;
 import edu.cad.entities.Section;
-import edu.cad.uils.Utils;
+import edu.cad.utils.Utils;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Sheet;
 

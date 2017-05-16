@@ -1,6 +1,6 @@
 package edu.cad.documentelements.columns;
 
-import edu.cad.uils.documentutils.ColumnTokenStringSplitter;
+import edu.cad.utils.documentutils.ColumnTokenStringSplitter;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Sheet;
