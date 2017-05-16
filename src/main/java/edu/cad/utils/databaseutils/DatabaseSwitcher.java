@@ -1,10 +1,8 @@
 package edu.cad.utils.databaseutils;
 
-import edu.cad.daos.HibernateDAO;
-import edu.cad.entities.DatabaseYear;
 import edu.cad.utils.Utils;
 import edu.cad.utils.hibernateutils.HibernateSession;
-import java.util.List;
+import java.util.Set;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.cfg.Configuration;
@@ -36,15 +34,15 @@ public class DatabaseSwitcher {
             String sql = "DROP DATABASE cad_database_" + year;
             executeSQLQuery(sql);
             
-            new HibernateDAO<>(DatabaseYear.class).delete(year);
+            DatabaseYears.deleteYear(year);
         }
     }
     
     private static boolean exist(int year){
-        List<DatabaseYear> years = new HibernateDAO<>(DatabaseYear.class).getAll();
+        Set<Integer> years = DatabaseYears.getAllYears();
         
-        for(DatabaseYear element : years){
-            if(element.getYear() == year){
+        for(int element : years){
+            if(element == year){
                 return true;
             }
         }
@@ -55,11 +53,13 @@ public class DatabaseSwitcher {
     private static boolean isCurrent(int year){
         Configuration configuration = HibernateSession.getConfiguration();
         
+        if(configuration == null)
+            return false; 
+        
         String url = configuration.getProperty("hibernate.connection.url");
         int yearPosition = url.lastIndexOf("_");
         
         String yearString = url.substring(yearPosition + 1, url.length());
-        System.out.println("\n\n\n" + yearString + "\n\n\n");
         if(Utils.isParseable(yearString)){
             if(Integer.parseInt(yearString) == year){
                 return true;
@@ -78,7 +78,7 @@ public class DatabaseSwitcher {
         String newUrl = oldUrl.substring(0, yearPosition + 1) + year;
         configuration.setProperty("hibernate.connection.url", newUrl);
         
-        new HibernateDAO<>(DatabaseYear.class).create(new DatabaseYear(year));
+        DatabaseYears.addYear(year);
         
         Session oldSession = HibernateSession.getInstance();
         HibernateSession.openSession(configuration);

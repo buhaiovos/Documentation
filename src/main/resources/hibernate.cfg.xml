@@ -48,7 +48,6 @@ Contributor(s):
     <mapping class="edu.cad.entities.Curriculum" />
     <mapping class="edu.cad.entities.CurriculumSubject" />
     <mapping class="edu.cad.entities.Cycle" />
-    <mapping class="edu.cad.entities.DatabaseYear" />
     <mapping class="edu.cad.entities.Department" />  
     <mapping class="edu.cad.entities.DiplomaPreparation" />
     <mapping class="edu.cad.entities.EducationForm" />
