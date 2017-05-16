@@ -1,25 +1,44 @@
 package edu.cad.utils.databaseutils;
 
+import edu.cad.daos.HibernateDAO;
+import edu.cad.entities.DatabaseYear;
 import edu.cad.utils.hibernateutils.HibernateSession;
-import org.hibernate.Session;
+import java.util.List;
 import org.hibernate.cfg.Configuration;
 
 public class DatabaseSwitcher {
     
     public static void switchDatabase(int year){
+        
+        
+        
+        
+    }
+    
+    private boolean exist(int year){
+        List<DatabaseYear> years = new HibernateDAO<>(DatabaseYear.class).getAll();
+        
+        for(DatabaseYear element : years){
+            if(element.getYear() == year){
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    
+    private static void switchDatabaseAndSession(int year){
         Configuration configuration = new Configuration().configure("hibernate.cfg.xml");
         
         String oldUrl = configuration.getProperty("hibernate.connection.url");
-        System.out.println("!!!" + oldUrl);
-        int slashPosition = oldUrl.lastIndexOf("/");
-        String newUrl = oldUrl.substring(0, slashPosition + 1) 
-                + "cad_database_" + year;
-        System.out.println("!!!" + newUrl);
-        configuration.setProperty("hibernate.connection.url", newUrl);
-        System.out.println("!!!" + configuration.getProperty("hibernate.connection.url"));
+        int yearPosition = oldUrl.lastIndexOf("_");
         
-        System.out.println(HibernateSession.getInstance().hashCode());
+        String newUrl = oldUrl.substring(0, yearPosition + 1) + year;
+        configuration.setProperty("hibernate.connection.url", newUrl);
+        
+        HibernateSession.close();
         HibernateSession.openSession(configuration);
-        System.out.println(HibernateSession.getInstance().hashCode());
     }
+    
+    
 }
