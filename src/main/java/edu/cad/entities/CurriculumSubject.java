@@ -29,6 +29,11 @@ public class CurriculumSubject implements IDatabaseEntity, Comparable<Curriculum
         this.cipher = cipher;
     }
     
+    @Override
+    public int getId(){
+        return 0;
+    }
+    
     public CurriculumSubjectId getPk() {
         return pk;
     }

@@ -3,13 +3,18 @@ package edu.cad.entities;
 import edu.cad.entities.interfaces.IDatabaseEntity;
 import java.util.Date;
 import javax.persistence.*;
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "state_certification")
 public class StateCertification implements IDatabaseEntity{
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GenericGenerator(
+        name = "assigned-identity", 
+        strategy = "edu.cad.utils.hibernateutils.AssignedIdentityGenerator"
+    )
+    @GeneratedValue(generator = "assigned-identity", strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, nullable = false)
     private int id;
     
@@ -40,6 +45,7 @@ public class StateCertification implements IDatabaseEntity{
         this.finish = finish;
     }
     
+    @Override
     public int getId() {
         return id;
     }

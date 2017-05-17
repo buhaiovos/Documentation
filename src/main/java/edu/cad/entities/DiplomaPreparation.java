@@ -2,13 +2,18 @@ package edu.cad.entities;
 
 import edu.cad.entities.interfaces.IDatabaseEntity;
 import javax.persistence.*;
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "diploma_preparation")
 public class DiplomaPreparation implements IDatabaseEntity{
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GenericGenerator(
+        name = "assigned-identity", 
+        strategy = "edu.cad.utils.hibernateutils.AssignedIdentityGenerator"
+    )
+    @GeneratedValue(generator = "assigned-identity", strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, nullable = false)
     private int id;
     
@@ -39,6 +44,7 @@ public class DiplomaPreparation implements IDatabaseEntity{
         this.curriculum = curriculum;
     }
 
+    @Override
     public int getId() {
         return id;
     }

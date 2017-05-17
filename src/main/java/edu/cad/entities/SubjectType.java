@@ -11,13 +11,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "subject_type")
 public class SubjectType implements IDatabaseEntity{
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GenericGenerator(
+        name = "assigned-identity", 
+        strategy = "edu.cad.utils.hibernateutils.AssignedIdentityGenerator"
+    )
+    @GeneratedValue(generator = "assigned-identity", strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, nullable = false)
     private int id;
 
@@ -35,6 +40,7 @@ public class SubjectType implements IDatabaseEntity{
         this.denotation = denotation;
     }
 
+    @Override
     public int getId() {
         return id;
     }

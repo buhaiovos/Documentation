@@ -4,13 +4,18 @@ import edu.cad.entities.interfaces.IDatabaseEntity;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "form_of_education")
 public class EducationForm implements IDatabaseEntity{
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GenericGenerator(
+        name = "assigned-identity", 
+        strategy = "edu.cad.utils.hibernateutils.AssignedIdentityGenerator"
+    )
+    @GeneratedValue(generator = "assigned-identity", strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, nullable = false)
     private int id;
     
@@ -28,6 +33,7 @@ public class EducationForm implements IDatabaseEntity{
         this.denotation = denotation;
     }
 
+    @Override
     public int getId() {
         return id;
     }
@@ -49,7 +55,8 @@ public class EducationForm implements IDatabaseEntity{
     }
 
     public void setAcademicGroups(Set<AcademicGroup> academicGroups) {
-        this.academicGroups = academicGroups;
+        this.academicGroups.clear();
+        this.academicGroups.addAll(academicGroups);
     }
 
     @Override

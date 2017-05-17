@@ -2,13 +2,18 @@ package edu.cad.entities;
 
 import javax.persistence.*;
 import edu.cad.entities.interfaces.IDatabaseEntity;
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "academic_group")
 public class AcademicGroup implements IDatabaseEntity, Comparable<AcademicGroup>{
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GenericGenerator(
+        name = "assigned-identity", 
+        strategy = "edu.cad.utils.hibernateutils.AssignedIdentityGenerator"
+    )
+    @GeneratedValue(generator = "assigned-identity", strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, nullable = false)
     private int id;
     
@@ -58,6 +63,7 @@ public class AcademicGroup implements IDatabaseEntity, Comparable<AcademicGroup>
         this.workplan = workplan;
     }
     
+    @Override
     public int getId() {
         return id;
     }

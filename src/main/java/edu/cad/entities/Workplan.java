@@ -76,7 +76,8 @@ public class Workplan extends Curriculum {
 
     @Override
     public void setCurriculumSubjects(Set<CurriculumSubject> curriculumSubjects) {
-        this.curriculumSubjects = curriculumSubjects;
+        this.curriculumSubjects.clear();
+        this.curriculumSubjects.addAll(curriculumSubjects);
     }
 
     public Set<DiplomaPreparation> getDiplomaPreparations() {

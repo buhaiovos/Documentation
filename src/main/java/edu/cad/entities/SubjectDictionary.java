@@ -4,13 +4,19 @@ import edu.cad.entities.interfaces.IDatabaseEntity;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
+import org.hibernate.Hibernate;
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "dict_subjects")
-public class SubjectDictionary implements IDatabaseEntity{
+public class SubjectDictionary implements IDatabaseEntity {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GenericGenerator(
+        name = "assigned-identity", 
+        strategy = "edu.cad.utils.hibernateutils.AssignedIdentityGenerator"
+    )
+    @GeneratedValue(generator = "assigned-identity", strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, nullable = false)
     private int id;
     
@@ -59,6 +65,7 @@ public class SubjectDictionary implements IDatabaseEntity{
         this.department = department;
     }
     
+    @Override
     public int getId() {
         return id;
     }

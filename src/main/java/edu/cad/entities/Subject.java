@@ -5,13 +5,18 @@ import edu.cad.functionalinterfaces.SubjectProperty;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "academic_subject")
 public class Subject implements IDatabaseEntity{
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GenericGenerator(
+        name = "assigned-identity", 
+        strategy = "edu.cad.utils.hibernateutils.AssignedIdentityGenerator"
+    )
+    @GeneratedValue(generator = "assigned-identity", strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, nullable = false)
     private int id;
 
@@ -58,6 +63,7 @@ public class Subject implements IDatabaseEntity{
         this.subject = subject;
     }
     
+    @Override
     public int getId() {
         return id;
     }
