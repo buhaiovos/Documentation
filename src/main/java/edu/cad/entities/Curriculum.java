@@ -49,7 +49,8 @@ public class Curriculum implements IDatabaseEntity{
     }
 
     public void setCurriculumSubjects(Set<CurriculumSubject> curriculumSubjects) {
-        this.curriculumSubjects = curriculumSubjects;
+        this.curriculumSubjects.clear();
+        this.curriculumSubjects.addAll(curriculumSubjects);
     }
 
     public Set<Workplan> getWorkplans() {
@@ -57,7 +58,8 @@ public class Curriculum implements IDatabaseEntity{
     }
 
     public void setWorkplans(Set<Workplan> workplans) {
-        this.workplans = workplans;
+        this.workplans.clear();
+        this.workplans.addAll(workplans);
     }
     
     public Qualification getQualification() {

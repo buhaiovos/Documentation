@@ -55,7 +55,8 @@ public class Qualification implements IDatabaseEntity{
     }
 
     public void setAcademicGroups(Set<AcademicGroup> academicGroups) {
-        this.academicGroups = academicGroups;
+        this.academicGroups.clear();
+        this.academicGroups.addAll(academicGroups);
     }
 
     @Override

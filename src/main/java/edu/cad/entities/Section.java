@@ -87,7 +87,8 @@ public class Section implements IDatabaseEntity{
     }
 
     public void setCurriculumSubjects(Set<SubjectDictionary> curriculumSubjects) {
-        this.curriculumSubjects = curriculumSubjects;
+        this.curriculumSubjects.clear();
+        this.curriculumSubjects.addAll(curriculumSubjects);
     }
 
     public Set<SubjectDictionary> getWorkplanSubjects() {
@@ -95,7 +96,8 @@ public class Section implements IDatabaseEntity{
     }
 
     public void setWorkplanSubjects(Set<SubjectDictionary> workplanSubjects) {
-        this.workplanSubjects = workplanSubjects;
+        this.workplanSubjects.clear();
+        this.workplanSubjects.addAll(workplanSubjects);
     }
     
     @Override
