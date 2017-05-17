@@ -25,7 +25,7 @@ public class Section implements IDatabaseEntity{
     
     @Column(name = "is_optional", columnDefinition = "TINYINT")
     @Type(type = "org.hibernate.type.NumericBooleanType")
-    private boolean isOptional;
+    private boolean optional;
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_cycle")
@@ -45,7 +45,7 @@ public class Section implements IDatabaseEntity{
     public Section(int id, String denotation, boolean isOptional, Cycle cycle) {
         this.id = id;
         this.denotation = denotation;
-        this.isOptional = isOptional;
+        this.optional = isOptional;
         this.cycle = cycle;
     }
 
@@ -66,12 +66,12 @@ public class Section implements IDatabaseEntity{
         this.denotation = denotation;
     }
 
-    public boolean isIsOptional() {
-        return isOptional;
+    public boolean isOptional() {
+        return optional;
     }
 
-    public void setIsOptional(boolean isOptional) {
-        this.isOptional = isOptional;
+    public void setOptional(boolean optional) {
+        this.optional = optional;
     }
 
     public Cycle getCycle() {

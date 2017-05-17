@@ -30,18 +30,18 @@ public class DiplomaPreparation implements IDatabaseEntity{
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_curriculum")
-    private Curriculum curriculum;
+    private Workplan workplan;
 
     public DiplomaPreparation() {
     }
 
     public DiplomaPreparation(int id, float norm, WorkType workType, 
-            Department department, Curriculum curriculum) {
+            Department department, Workplan workplan) {
         this.id = id;
         this.norm = norm;
         this.workType = workType;
         this.department = department;
-        this.curriculum = curriculum;
+        this.workplan = workplan;
     }
 
     @Override
@@ -77,12 +77,12 @@ public class DiplomaPreparation implements IDatabaseEntity{
         this.department = department;
     }
 
-    public Curriculum getCurriculum() {
-        return curriculum;
+    public Workplan getWorkplan() {
+        return workplan;
     }
 
-    public void setCurriculum(Curriculum curriculum) {
-        this.curriculum = curriculum;
+    public void setWorkplan(Workplan workplan) {
+        this.workplan = workplan;
     }
     
     @Override

@@ -3,6 +3,7 @@ package edu.cad.entities;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @DiscriminatorValue("workplan")
@@ -21,9 +22,9 @@ public class Workplan extends Curriculum {
     private Curriculum curriculum;
     
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.curriculum", cascade = CascadeType.ALL)
-    private Set<CurriculumSubject> curriculumSubjects = new HashSet<>();
+    private Set<CurriculumSubject> workplanSubjects = new HashSet<>();
     
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "curriculum")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "workplan")
     private Set<DiplomaPreparation> diplomaPreparations = new HashSet<>();
     
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "workplan")
@@ -71,13 +72,13 @@ public class Workplan extends Curriculum {
 
     @Override
     public Set<CurriculumSubject> getCurriculumSubjects() {
-        return curriculumSubjects;
+        return workplanSubjects;
     }
 
     @Override
-    public void setCurriculumSubjects(Set<CurriculumSubject> curriculumSubjects) {
-        this.curriculumSubjects.clear();
-        this.curriculumSubjects.addAll(curriculumSubjects);
+    public void setCurriculumSubjects(Set<CurriculumSubject> workplanSubjects) {
+        this.workplanSubjects.clear();
+        this.workplanSubjects.addAll(workplanSubjects);
     }
 
     public Set<DiplomaPreparation> getDiplomaPreparations() {

@@ -1,8 +1,11 @@
 package edu.cad.daos;
 
+import edu.cad.entities.Curriculum;
 import edu.cad.entities.SubjectDictionary;
+import edu.cad.entities.Workplan;
 import edu.cad.utils.hibernateutils.HibernateSession;
 import edu.cad.entities.interfaces.IDatabaseEntity;
+import java.util.Iterator;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -27,10 +30,22 @@ public class HibernateDAO<T extends IDatabaseEntity> implements IDAO<T>{
     @Override
     public List<T> getAll() {
 	//Session session = factory.openSession(); 
-	Query query = session.createQuery("from " + 
-                typeParameterClass.getSimpleName()); 
-        List<T> list = query.list();
+	
+        List<T> list = session.createCriteria(typeParameterClass).list();
+        
+        
+        if(typeParameterClass.equals(Curriculum.class)){
+            Iterator<T> iterator = list.iterator();
+            while(iterator.hasNext()){
+                T element = iterator.next();
+                if(element instanceof Workplan){
+                    iterator.remove();
+                }
+            }
+        }
+        
         //session.close();
+        
         
         return list;
     }
@@ -66,15 +81,19 @@ public class HibernateDAO<T extends IDatabaseEntity> implements IDAO<T>{
     public boolean create(T instance) {
 	//Session session = factory.openSession();  
         Transaction transaction = session.beginTransaction();  
-        ((SubjectDictionary)instance).setId(0);
         try {
             session.save(instance); 
+            session.flush();
             transaction.commit();
+            //session.flush();
+            session.clear();
+            //session.flush();
         } catch(RuntimeException e) {
+            System.out.println(e);
             transaction.rollback();
             return false;
         } finally {
-            session.flush();
+            //session.flush();
             //session.close();
         }
         

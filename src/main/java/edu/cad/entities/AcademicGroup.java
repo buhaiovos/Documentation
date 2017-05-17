@@ -43,7 +43,7 @@ public class AcademicGroup implements IDatabaseEntity, Comparable<AcademicGroup>
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_workplan")
-    private Curriculum workplan;
+    private Workplan workplan;
 
     public AcademicGroup() {
     }
@@ -51,7 +51,7 @@ public class AcademicGroup implements IDatabaseEntity, Comparable<AcademicGroup>
     public AcademicGroup(int id, String cipher, int budgetaryStudents, 
             int contractStudents, int startYear, Specialization specialization, 
             Qualification qualification, EducationForm educationForm,
-            Curriculum workplan) {
+            Workplan workplan) {
         this.id = id;
         this.cipher = cipher;
         this.budgetaryStudents = budgetaryStudents;
@@ -128,11 +128,11 @@ public class AcademicGroup implements IDatabaseEntity, Comparable<AcademicGroup>
         this.educationForm = educationForm;
     }
 
-    public Curriculum getWorkplan() {
+    public Workplan getWorkplan() {
         return workplan;
     }
 
-    public void setWorkplan(Curriculum workplan) {
+    public void setWorkplan(Workplan workplan) {
         this.workplan = workplan;
     }
     
