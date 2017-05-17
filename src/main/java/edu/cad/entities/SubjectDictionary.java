@@ -95,7 +95,8 @@ public class SubjectDictionary implements IDatabaseEntity {
     }
 
     public void setSubSubjects(Set<SubjectDictionary> subSubjects) {
-        this.subSubjects = subSubjects;
+        this.subSubjects.clear();
+        this.subSubjects.addAll(subSubjects);
     }
 
     public Section getCurriculumSection() {
@@ -135,7 +136,8 @@ public class SubjectDictionary implements IDatabaseEntity {
     }
 
     public void setAcademicSubjects(Set<Subject> academicSubjects) {
-        this.academicSubjects = academicSubjects;
+        this.academicSubjects.clear();
+        this.academicSubjects.addAll(academicSubjects);
     }
     
     public Subject findAppropriate(Curriculum curriculum){
@@ -151,7 +153,6 @@ public class SubjectDictionary implements IDatabaseEntity {
 
         return null;
     }
-    
     
     @Override
     public int hashCode() {

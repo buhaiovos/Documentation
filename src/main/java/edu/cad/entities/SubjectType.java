@@ -62,7 +62,8 @@ public class SubjectType implements IDatabaseEntity{
     }
 
     public void setSubjects(Set<SubjectDictionary> subjects) {
-        this.subjects = subjects;
+        this.subjects.clear();
+        this.subjects.addAll(subjects);
     }
     
     @Override

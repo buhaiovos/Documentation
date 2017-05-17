@@ -133,7 +133,8 @@ public class Subject implements IDatabaseEntity{
     }
 
     public void setControls(Set<Control> controls) {
-        this.controls = controls;
+        this.controls.clear();
+        this.controls.addAll(controls);
     }
 
     public Set<CurriculumSubject> getCurriculumSubjects() {
@@ -141,7 +142,8 @@ public class Subject implements IDatabaseEntity{
     }
 
     public void setCurriculumSubjects(Set<CurriculumSubject> curriculumSubjects) {
-        this.curriculumSubjects = curriculumSubjects;
+        this.curriculumSubjects.clear();
+        this.curriculumSubjects.addAll(curriculumSubjects);
     }
     
     public int getTotalHours(){

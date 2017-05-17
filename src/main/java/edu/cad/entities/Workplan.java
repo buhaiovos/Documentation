@@ -85,7 +85,8 @@ public class Workplan extends Curriculum {
     }
 
     public void setDiplomaPreparations(Set<DiplomaPreparation> diplomaPreparations) {
-        this.diplomaPreparations = diplomaPreparations;
+        this.diplomaPreparations.clear();
+        this.diplomaPreparations.addAll(diplomaPreparations);
     }
 
     public Set<AcademicGroup> getGroups() {
@@ -93,7 +94,8 @@ public class Workplan extends Curriculum {
     }
 
     public void setGroups(Set<AcademicGroup> groups) {
-        this.groups = groups;
+        this.groups.clear();
+        this.groups.addAll(groups);
     }
     
     public int countBudgetaryStudents(){
