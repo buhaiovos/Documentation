@@ -55,7 +55,8 @@ public class Cycle implements IDatabaseEntity{
     }
 
     public void setSections(Set<Section> sections) {
-        this.sections = sections;
+        this.sections.clear();
+        this.sections.addAll(sections);
     }
 
     @Override
