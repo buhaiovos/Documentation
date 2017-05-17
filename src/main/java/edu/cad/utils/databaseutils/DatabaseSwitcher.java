@@ -9,20 +9,24 @@ import org.hibernate.cfg.Configuration;
 
 public class DatabaseSwitcher {
     
-    public static void switchDatabase(int year){
-        boolean exist = exist(year);
-        
-        if(!exist){
-            createDatabase(year);
+    public static boolean switchDatabase(int year){
+        if(exist(year)){
+            switchDatabaseAndSession(year).close();
+            return true;
         } 
         
-        Session oldSession = switchDatabaseAndSession(year);
-        
-        if(!exist){
-            //DatabaseCloner.cloneDatabase(oldSession);
+        if(!exist(year - 1)){
+            return false;
         }
-       
-        oldSession.close();
+        
+        switchDatabaseAndSession(year - 1).close();
+        Session prevYearSession = HibernateSession.getInstance();     
+        createDatabase(year);
+        switchDatabaseAndSession(year);
+        //DatabaseCloner.cloneDatabase(prevYearSession);
+        prevYearSession.close();
+        
+        return true;
     }
     
     public static void dropDatabase(int year){
@@ -80,10 +84,10 @@ public class DatabaseSwitcher {
         
         DatabaseYears.addYear(year);
         
-        Session oldSession = HibernateSession.getInstance();
+        Session prevSession = HibernateSession.getInstance();
         HibernateSession.openSession(configuration);
         
-        return oldSession;
+        return prevSession;
     }
     
     private static void createDatabase(int year){
