@@ -19,7 +19,7 @@ public class DatabaseSwitcher {
         Session oldSession = switchDatabaseAndSession(year);
         
         if(!exist){
-            //DatabaseCloner.cloneDatabase(oldSession);
+            DatabaseCloner.cloneDatabase(oldSession);
         }
        
         oldSession.close();

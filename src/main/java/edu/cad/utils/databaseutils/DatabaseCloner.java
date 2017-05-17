@@ -2,7 +2,9 @@ package edu.cad.utils.databaseutils;
 
 import edu.cad.daos.HibernateDAO;
 import edu.cad.entities.AcademicGroup;
+import edu.cad.entities.SubjectDictionary;
 import edu.cad.entities.interfaces.IDatabaseEntity;
+import edu.cad.utils.hibernateutils.HibernateSession;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -13,16 +15,17 @@ import org.hibernate.Session;
 
 public class DatabaseCloner {
     
-    public static void cloneDatabase(Session oldSession, 
-                                     Session newSession){
+    public static void cloneDatabase(Session oldSession){
+        Session newSession = HibernateSession.getInstance();
         //get Class objects of all @Entity classes
         List<Class<? extends IDatabaseEntity>> entityClasses = getEntityClasses();
         
         //clone all data except AcademicGroup
         entityClasses.remove(AcademicGroup.class);
-        entityClasses.stream().forEach((classObj) -> {
+        /*entityClasses.stream().forEach((classObj) -> {
             cloneAllEntriesOfEntity(classObj, oldSession, newSession);
-        });
+        });*/
+        cloneAllEntriesOfEntity(SubjectDictionary.class, oldSession, newSession);
         //handle groups
         rewriteGroups(oldSession, newSession);
     }
@@ -46,7 +49,10 @@ public class DatabaseCloner {
         HibernateDAO destDAO = new HibernateDAO(classObj, newSession);
 
         List<IDatabaseEntity> allEntries = sourceDAO.getAll();
+        System.out.println("!!!!!!!!!!!" + allEntries.size());
         for (IDatabaseEntity entry : allEntries) {
+            System.out.println(((SubjectDictionary)entry).getId()+ " " +((SubjectDictionary)entry).getDenotation());
+            
             destDAO.create(entry);
         }
     }

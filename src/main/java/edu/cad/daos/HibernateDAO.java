@@ -1,5 +1,6 @@
 package edu.cad.daos;
 
+import edu.cad.entities.SubjectDictionary;
 import edu.cad.utils.hibernateutils.HibernateSession;
 import edu.cad.entities.interfaces.IDatabaseEntity;
 import java.util.List;
@@ -65,7 +66,7 @@ public class HibernateDAO<T extends IDatabaseEntity> implements IDAO<T>{
     public boolean create(T instance) {
 	//Session session = factory.openSession();  
         Transaction transaction = session.beginTransaction();  
-
+        ((SubjectDictionary)instance).setId(0);
         try {
             session.save(instance); 
             transaction.commit();
