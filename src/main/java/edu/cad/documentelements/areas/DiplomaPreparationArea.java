@@ -75,7 +75,7 @@ public class DiplomaPreparationArea extends AbstractDocumentArea{
     
     private void fillColumns(DiplomaPreparation preparation){
         Row row = sheet.getRow(rowNumber);
-        Workplan workplan = (Workplan)preparation.getCurriculum();
+        Workplan workplan = (Workplan)preparation.getWorkplan();
         
         columns.get("norm").fill(row, preparation.getNorm());
         columns.get("department").fill(row, preparation.getDepartment().getDenotation());

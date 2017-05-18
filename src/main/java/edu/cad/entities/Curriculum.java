@@ -4,6 +4,7 @@ import edu.cad.entities.interfaces.IDatabaseEntity;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
+import org.hibernate.annotations.DiscriminatorOptions;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
@@ -11,6 +12,7 @@ import org.hibernate.annotations.GenericGenerator;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.STRING)
 @DiscriminatorValue(value = "curriculum")
+@DiscriminatorOptions(force=true)
 public class Curriculum implements IDatabaseEntity{
     
     @Id

@@ -10,14 +10,14 @@ import org.hibernate.cfg.Configuration;
 public class DatabaseSwitcher {
     
     public static boolean switchDatabase(int year){
-    /*    if(exist(year)){
+        /*if(exist(year)){
             switchDatabaseAndSession(year).close();
             return true;
         } 
         
-         if(!exist(year - 1)){
+        if(!exist(year - 1)){
             return false;
-        } */
+        }*/
                 
         switchDatabaseAndSession(year - 1).close();
         Session prevYearSession = HibernateSession.getInstance();     
