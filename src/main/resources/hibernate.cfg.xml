@@ -32,13 +32,13 @@ to extend the choice of license to its licensees as provided above.
 However, if you add GPL Version 2 code and therefore, elected the GPL
 Version 2 license, then the option applies only if the new code is
 made subject to such option by the copyright holder.
-Contributor(s):
+Contributor(s): 192.168.1.2
 -->
 <hibernate-configuration>
   <session-factory>
     <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-    <property name="hibernate.connection.url">jdbc:mysql://192.168.1.2:3306/cad_database_2016</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/cad_database_2016</property>
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password">1111</property>
     <property name="hbm2ddl.auto">update</property>

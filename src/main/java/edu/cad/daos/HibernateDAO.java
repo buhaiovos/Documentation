@@ -66,11 +66,12 @@ public class HibernateDAO<T extends IDatabaseEntity> implements IDAO<T>{
     public boolean create(T instance) {
 	//Session session = factory.openSession();  
         Transaction transaction = session.beginTransaction();  
-        ((SubjectDictionary)instance).setId(0);
+ 
         try {
             session.save(instance); 
             transaction.commit();
         } catch(RuntimeException e) {
+            e.printStackTrace();
             transaction.rollback();
             return false;
         } finally {

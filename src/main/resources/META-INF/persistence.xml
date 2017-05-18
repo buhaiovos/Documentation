@@ -5,7 +5,7 @@
 
     <persistence-unit name="documentation" transaction-type="RESOURCE_LOCAL">
 
-        <provider>org.hibernate.ejb.HibernatePersistence</provider>
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
   
         <properties>
             <property name="hibernate.ejb.cfgfile" value="hibernate.cfg.xml" />
