@@ -17,6 +17,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.metamodel.EntityType;
 import org.hibernate.Session;
+import org.reflections.Reflections;
 
 public class DatabaseCloner {
     private static final String FK_CHECKS_0_QUERY = "SET FOREIGN_KEY_CHECKS=0";
@@ -60,7 +61,7 @@ public class DatabaseCloner {
     }
 
     private static List<Class<? extends IDatabaseEntity>> getEntityClasses() {
-        EntityManagerFactory emf =
+        /*EntityManagerFactory emf =
         Persistence.createEntityManagerFactory("documentation");
         //get all entity types of @entity annotated classes
         Set<EntityType<?>> entities = emf.getMetamodel().getEntities();
@@ -70,7 +71,11 @@ public class DatabaseCloner {
             classes.add((Class<? extends IDatabaseEntity>)e.getJavaType());
         }
 
-        return classes;
+        return classes;*/
+        Set<Class<? extends IDatabaseEntity>> set = new Reflections("edu.cad.entities").getSubTypesOf(IDatabaseEntity.class);
+        List<Class<? extends IDatabaseEntity>> list = new ArrayList<>();
+        list.addAll(set);
+        return list;
     }
     
     private static List<IDatabaseEntity> fill(
