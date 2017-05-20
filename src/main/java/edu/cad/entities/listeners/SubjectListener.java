@@ -11,9 +11,9 @@ import javax.persistence.*;
 
 public class SubjectListener {
 
-    @PostLoad
-    @PostPersist
-    @PostUpdate
+    //@PostLoad
+    //@PostPersist
+    //@PostUpdate
     public void update(Subject subject){
         updateSubSubjects(subject);
         updateGroups(subject);
