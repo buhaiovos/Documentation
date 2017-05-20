@@ -1,18 +1,11 @@
 package edu.cad.documentelements.areas;
 
 import edu.cad.documentelements.DocumentSection;
-import edu.cad.documentelements.columns.LabsColumn;
-import edu.cad.documentelements.columns.ControlColumn;
-import edu.cad.documentelements.columns.TitleColumn;
-import edu.cad.documentelements.columns.PracticesColumn;
-import edu.cad.documentelements.columns.EctsColumn;
 import edu.cad.documentelements.columns.AbstractColumn;
-import edu.cad.documentelements.columns.LectionsColumn;
-import edu.cad.documentelements.columns.CipherColumn;
 import edu.cad.documentelements.columns.ColumnFactory;
+import edu.cad.documentelements.columns.TitleColumn;
 import edu.cad.documentelements.controlcounters.ControlCounter;
 import edu.cad.documentelements.controlcounters.ControlCounterFactory;
-import edu.cad.entities.ControlDictionary;
 import edu.cad.entities.Curriculum;
 import edu.cad.entities.CurriculumSubject;
 import edu.cad.entities.Section;
@@ -22,7 +15,6 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
 import org.apache.poi.hssf.usermodel.HSSFFormulaEvaluator;
-import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 
@@ -61,13 +53,15 @@ public abstract class AbstractSubjectList extends AbstractDocumentArea {
         Row row = sheet.getRow(rowNumber);
         
         for(int i = 0; i < row.getLastCellNum(); i++){
-            /*AbstractColumn column = ColumnFactory.getColumn(row.getCell(i));
+            AbstractColumn column = ColumnFactory.createColumn(row.getCell(i));
             
             if(column != null){
-                column.clear(row);
                 columns.add(column);  
-                continue;
-            }*/
+                
+                if(!(column instanceof TitleColumn)){
+                    column.clear(row);
+                }
+            }
         }
     }
     

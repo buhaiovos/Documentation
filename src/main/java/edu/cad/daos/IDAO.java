@@ -1,8 +1,7 @@
 package edu.cad.daos;
 
-import java.util.List;
 import edu.cad.entities.interfaces.IDatabaseEntity;
-import java.io.Closeable;
+import java.util.List;
 
 public interface IDAO <T extends IDatabaseEntity>{
 	

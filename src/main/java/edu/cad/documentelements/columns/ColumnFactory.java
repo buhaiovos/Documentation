@@ -1,13 +1,16 @@
 package edu.cad.documentelements.columns;
 
 import edu.cad.daos.HibernateDAO;
+import edu.cad.documentelements.hourscolumns.EctsColumn;
+import edu.cad.documentelements.hourscolumns.LabsColumn;
+import edu.cad.documentelements.hourscolumns.LectionsColumn;
+import edu.cad.documentelements.hourscolumns.PracticesColumn;
 import edu.cad.documentelements.semestercolumns.SemesterColumn;
 import edu.cad.documentelements.semestercolumns.SemesterLabsColumn;
 import edu.cad.documentelements.semestercolumns.SemesterLectionsColumn;
 import edu.cad.documentelements.semestercolumns.SemesterPracticesColumn;
 import edu.cad.entities.ControlDictionary;
 import edu.cad.utils.documentutils.ColumnTokenStringSplitter;
-
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 

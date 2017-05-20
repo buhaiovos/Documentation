@@ -1,14 +1,11 @@
 package edu.cad.daos;
 
 import edu.cad.entities.Curriculum;
-import edu.cad.entities.SubjectDictionary;
 import edu.cad.entities.Workplan;
-import edu.cad.utils.hibernateutils.HibernateSession;
 import edu.cad.entities.interfaces.IDatabaseEntity;
+import edu.cad.utils.hibernateutils.HibernateSession;
 import java.util.Iterator;
 import java.util.List;
-
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 

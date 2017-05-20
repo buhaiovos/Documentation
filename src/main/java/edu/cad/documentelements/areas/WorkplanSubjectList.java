@@ -1,6 +1,5 @@
 package edu.cad.documentelements.areas;
 
-import edu.cad.documentelements.columns.DepartmentColumn;
 import edu.cad.entities.Curriculum;
 import edu.cad.entities.SubjectDictionary;
 import org.apache.poi.ss.usermodel.Sheet;

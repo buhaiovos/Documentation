@@ -3,9 +3,7 @@ package edu.cad.documentelements.semestercolumns;
 import edu.cad.documentelements.columns.AbstractColumn;
 import edu.cad.entities.CurriculumSubject;
 import edu.cad.entities.Subject;
-import edu.cad.utils.Utils;
 import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
 
 public class SemesterColumn extends AbstractColumn{
     protected int semester;

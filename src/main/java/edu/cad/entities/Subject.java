@@ -1,13 +1,17 @@
 package edu.cad.entities;
 
 import edu.cad.entities.interfaces.IDatabaseEntity;
+import edu.cad.entities.listeners.SubjectListener;
 import edu.cad.functionalinterfaces.SubjectProperty;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import javax.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
+@EntityListeners(SubjectListener.class)
 @Table(name = "academic_subject")
 public class Subject implements IDatabaseEntity{
     
@@ -47,6 +51,12 @@ public class Subject implements IDatabaseEntity{
     
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.subject", cascade = CascadeType.ALL)
     private Set<CurriculumSubject> curriculumSubjects = new HashSet<>();
+    
+    @Transient
+    private Map<Curriculum, Set<Subject>> subSubjects = new HashMap<>();
+    
+    @Transient
+    private Set<AcademicGroup> groups = new HashSet<>();
 
     public Subject() {
     }
@@ -150,6 +160,10 @@ public class Subject implements IDatabaseEntity{
         return lections + labs + practices;
     }
     
+    public int getEctsHours(){
+        return (int) (ects * 30);
+    }
+    
     public int getSemesterHours(int currSemester, Curriculum curriculum, 
             SubjectProperty property){
         Set<Subject> subjects = getSubSubjects(curriculum);
@@ -184,38 +198,22 @@ public class Subject implements IDatabaseEntity{
     }
     
     public Set<Subject> getSubSubjects(Curriculum curriculum){
-        Set<Subject> subjects = new HashSet<>();
-        subjects.add(this);
-        
-        if(curriculum instanceof Workplan)
-            return subjects;
-        
-        for(SubjectDictionary dictionary : getSubject().getSubSubjects()){
-            boolean contains = false;
-            
-            for(Subject element : dictionary.getAcademicSubjects()){  
-                if(curriculum.contains(element)){
-                    subjects.add(element);
-                    subjects.addAll(element.getSubSubjects(curriculum));
-                    contains = true;
-                    break;
-                }  
-            }
-            
-            if(!contains){
-                Subject appropriate = dictionary.findAppropriate(curriculum);
-                
-                if(appropriate == null)
-                    continue;
-
-                subjects.add(appropriate);
-                subjects.addAll(appropriate.getSubSubjects(curriculum));
-            }
-        }
-        
-        return subjects;
+        return subSubjects.get(curriculum);
     }
     
+    public void setSubSubjects(Curriculum curriculum, Set<Subject> subjects){
+        subSubjects.put(curriculum, subjects);
+    }
+
+    public Set<AcademicGroup> getGroups() {
+        return groups;
+    }
+
+    public void setGroups(Set<AcademicGroup> groups) {
+        this.groups.clear();
+        groups.addAll(groups);
+    }
+
     @Override
     public int hashCode() {
         int hash = 5;
