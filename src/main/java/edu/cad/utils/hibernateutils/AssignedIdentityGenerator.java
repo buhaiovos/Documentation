@@ -3,9 +3,9 @@ package edu.cad.utils.hibernateutils;
 import edu.cad.entities.interfaces.IDatabaseEntity;
 import java.io.Serializable;
 import org.hibernate.engine.spi.SessionImplementor;
-import org.hibernate.id.IdentityGenerator;
+import org.hibernate.id.IncrementGenerator;
 
-public class AssignedIdentityGenerator extends IdentityGenerator {
+public class AssignedIdentityGenerator extends IncrementGenerator {
  
     @Override
     public Serializable generate(SessionImplementor session, Object obj) {
@@ -16,9 +16,7 @@ public class AssignedIdentityGenerator extends IdentityGenerator {
                 return id;
             }
         }
-        int ig = (int) super.generate(session, obj);
-        
-        System.out.println("\n\n\n" + ig + "\n\n\n");
-        return ig;
+
+        return super.generate(session, obj);
     }
 }

@@ -20,7 +20,7 @@ public class Curriculum implements IDatabaseEntity{
         name = "assigned-identity", 
         strategy = "edu.cad.utils.hibernateutils.AssignedIdentityGenerator"
     )
-    @GeneratedValue(generator = "assigned-identity", strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "assigned-identity")
     @Column(name = "id", unique = true, nullable = false)
     protected int id;
     
