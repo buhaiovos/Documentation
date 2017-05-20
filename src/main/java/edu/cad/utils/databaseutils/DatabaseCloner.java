@@ -32,8 +32,7 @@ public class DatabaseCloner {
     
     public static void cloneDatabase(Session oldSession){
         //get Class objects of all @Entity classes
-        entityClasses = getEntityClasses();
-            
+        entityClasses = getEntityClasses();   
         // saveOldData();
         for(Class<? extends IDatabaseEntity> classObj : entityClasses){
             entityMap.put(classObj, fill(classObj, oldSession));
@@ -51,7 +50,6 @@ public class DatabaseCloner {
 
         //handle groups
         rewriteGroups();
-        
         executeQuery(FK_CHECKS_1_QUERY);
     }
     
