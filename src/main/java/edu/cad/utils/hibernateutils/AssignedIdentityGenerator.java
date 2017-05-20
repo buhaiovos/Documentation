@@ -8,8 +8,7 @@ import org.hibernate.id.IdentityGenerator;
 public class AssignedIdentityGenerator extends IdentityGenerator {
  
     @Override
-    public Serializable generate(SessionImplementor session, 
-        Object obj) {
+    public Serializable generate(SessionImplementor session, Object obj) {
         if(obj instanceof IDatabaseEntity) {
             IDatabaseEntity entity = (IDatabaseEntity) obj;
             int id = entity.getId();
@@ -17,6 +16,9 @@ public class AssignedIdentityGenerator extends IdentityGenerator {
                 return id;
             }
         }
-        return super.generate(session, obj);
+        int ig = (int) super.generate(session, obj);
+        
+        System.out.println("\n\n\n" + ig + "\n\n\n");
+        return ig;
     }
 }

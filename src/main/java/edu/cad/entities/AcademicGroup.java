@@ -3,6 +3,7 @@ package edu.cad.entities;
 import edu.cad.entities.interfaces.IDatabaseEntity;
 import javax.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
 @Entity
 @Table(name = "academic_group")
