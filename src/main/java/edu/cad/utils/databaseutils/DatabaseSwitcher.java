@@ -24,7 +24,7 @@ public class DatabaseSwitcher {
         //createDatabase(year);
         switchDatabaseAndSession(year);
         DatabaseCloner.cloneDatabase(prevYearSession);
-        prevYearSession.close();
+        //prevYearSession.close();
         
         return true;
     }

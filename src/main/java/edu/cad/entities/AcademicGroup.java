@@ -9,11 +9,12 @@ import org.hibernate.annotations.GenericGenerator;
 public class AcademicGroup implements IDatabaseEntity, Comparable<AcademicGroup>{
     
     @Id
-    @GenericGenerator(
+    /*@GenericGenerator(
         name = "assigned-identity", 
         strategy = "edu.cad.utils.hibernateutils.AssignedIdentityGenerator"
     )
-    @GeneratedValue(generator = "assigned-identity", strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "assigned-identity", strategy = GenerationType.IDENTITY)*/
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", unique = true, nullable = false)
     private int id;
     
