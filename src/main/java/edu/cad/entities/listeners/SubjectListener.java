@@ -14,17 +14,20 @@ public class SubjectListener {
     @PostLoad
     @PostPersist
     @PostUpdate
-    public void updateSubSubjects(Subject subject){
+    public void update(Subject subject){
+        updateSubSubjects(subject);
+        updateGroups(subject);
+    }
+    
+    
+    private void updateSubSubjects(Subject subject){
         for(CurriculumSubject curriculumSubject : subject.getCurriculumSubjects()){
             Curriculum curriculum = curriculumSubject.getCurriculum();
             subject.setSubSubjects(curriculum, findSubSubjects(subject, curriculum));
         }
     }
     
-    @PostLoad
-    @PostPersist
-    @PostUpdate
-    public void updateGroups(Subject subject){
+    private void updateGroups(Subject subject){
         for(CurriculumSubject curriculumSubject : subject.getCurriculumSubjects()){
             Curriculum curriculum = curriculumSubject.getCurriculum();
             if(curriculum instanceof Workplan){
