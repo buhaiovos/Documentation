@@ -17,22 +17,23 @@ public class ControlCounter extends AbstractDocumentElement{
     }
 
     public void fill(Curriculum curriculum) {
-        int count;
         StringBuilder value = new StringBuilder();
+        int count = curriculum.countControlsByType(control);
         
         if(control.getId() == 2){
             ControlDictionary diff = new HibernateDAO<>(ControlDictionary.class).get(9); 
-            count = curriculum.countControlsByType(diff);
+            int diffCount = curriculum.countControlsByType(diff);
             
-            if(count > 0){
+            if(diffCount > 0){
                 value.append(count);
                 value.append('д');
-                value.append('+');
+                
+                if(count > 0){
+                    value.append('+');
+                }   
             } 
         }
-        
-        count = curriculum.countControlsByType(control);
-        
+
         if(count > 0)
             value.append(count);
         

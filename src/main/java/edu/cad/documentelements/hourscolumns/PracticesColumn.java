@@ -1,4 +1,4 @@
-package edu.cad.documentelements.columns;
+package edu.cad.documentelements.hourscolumns;
 
 import edu.cad.entities.CurriculumSubject;
 import edu.cad.entities.Subject;

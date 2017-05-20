@@ -2,9 +2,7 @@ package edu.cad.entities;
 
 import edu.cad.entities.interfaces.IDatabaseEntity;
 import edu.cad.utils.Utils;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 import javax.persistence.*;
 
 @Entity

@@ -3,8 +3,6 @@ package edu.cad.utils.documentutils;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.util.CellRangeAddress;
-import org.apache.poi.ss.util.CellReference;
 
 public class FormulaExtender {
     
@@ -13,11 +11,10 @@ public class FormulaExtender {
         
         if(!formulaCell.getCellTypeEnum().equals(CellType.FORMULA))
             return;
-
+        
         String formula = formulaCell.getCellFormula();
         formula = formula.replaceAll(":" + src.getAddress().toString(), 
                 ":" + dest.getAddress().toString());
-        
         formulaCell.setCellFormula(formula);
     }
 }

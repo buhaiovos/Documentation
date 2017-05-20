@@ -1,7 +1,7 @@
 package edu.cad.documentelements.areas;
 
-import edu.cad.documentelements.columns.SimpleColumn;
 import edu.cad.documentelements.columns.AbstractColumn;
+import edu.cad.documentelements.columns.SimpleColumn;
 import edu.cad.entities.Curriculum;
 import edu.cad.entities.StateCertification;
 import edu.cad.entities.Workplan;

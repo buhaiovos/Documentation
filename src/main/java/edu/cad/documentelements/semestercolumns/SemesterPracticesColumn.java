@@ -3,7 +3,6 @@ package edu.cad.documentelements.semestercolumns;
 import edu.cad.entities.CurriculumSubject;
 import edu.cad.entities.Subject;
 import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
 
 public class SemesterPracticesColumn extends SemesterColumn{
     

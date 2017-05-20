@@ -1,19 +1,13 @@
 package edu.cad.entities;
 
-import javax.persistence.*;
 import edu.cad.entities.interfaces.IDatabaseEntity;
-import org.hibernate.annotations.GenericGenerator;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "academic_group")
 public class AcademicGroup implements IDatabaseEntity, Comparable<AcademicGroup>{
     
     @Id
-    /*@GenericGenerator(
-        name = "assigned-identity", 
-        strategy = "edu.cad.utils.hibernateutils.AssignedIdentityGenerator"
-    )
-    @GeneratedValue(generator = "assigned-identity", strategy = GenerationType.IDENTITY)*/
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", unique = true, nullable = false)
     private int id;
