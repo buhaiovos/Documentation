@@ -45,7 +45,7 @@ public class DatabaseCloner {
         // copy all except groups
         executeQuery(FK_CHECKS_0_QUERY);
         for(Class<? extends IDatabaseEntity> classObj : entityMap.keySet()){
-              cloneAllEntriesOfEntity(classObj, entityMap.get(classObj));
+              //cloneAllEntriesOfEntity(classObj, entityMap.get(classObj));
         }
 
         //handle groups

@@ -15,7 +15,7 @@ public class Cycle implements IDatabaseEntity{
         name = "assigned-identity", 
         strategy = "edu.cad.utils.hibernateutils.AssignedIdentityGenerator"
     )
-    @GeneratedValue(generator = "assigned-identity", strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "assigned-identity")
     @Column(name = "id", unique = true, nullable = false)
     private int id;
     
