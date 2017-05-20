@@ -11,7 +11,7 @@ import javax.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-//@EntityListeners(SubjectListener.class)
+@EntityListeners(SubjectListener.class)
 @Table(name = "academic_subject")
 public class Subject implements IDatabaseEntity{
     

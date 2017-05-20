@@ -2,9 +2,6 @@ package edu.cad.utils.databaseutils;
 
 import edu.cad.daos.HibernateDAO;
 import edu.cad.entities.AcademicGroup;
-import edu.cad.entities.EducationForm;
-import edu.cad.entities.Qualification;
-import edu.cad.entities.Specialization;
 import edu.cad.entities.interfaces.IDatabaseEntity;
 import edu.cad.utils.hibernateutils.HibernateSession;
 import java.util.ArrayList;
@@ -13,9 +10,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.metamodel.EntityType;
 import org.hibernate.Session;
 import org.reflections.Reflections;
 
@@ -45,7 +39,7 @@ public class DatabaseCloner {
         // copy all except groups
         executeQuery(FK_CHECKS_0_QUERY);
         for(Class<? extends IDatabaseEntity> classObj : entityMap.keySet()){
-              //cloneAllEntriesOfEntity(classObj, entityMap.get(classObj));
+            cloneAllEntriesOfEntity(classObj, entityMap.get(classObj));
         }
 
         //handle groups
@@ -70,7 +64,9 @@ public class DatabaseCloner {
         }
 
         return classes;*/
-        Set<Class<? extends IDatabaseEntity>> set = new Reflections("edu.cad.entities").getSubTypesOf(IDatabaseEntity.class);
+        Set<Class<? extends IDatabaseEntity>> set = 
+                new Reflections("edu.cad.entities")
+                        .getSubTypesOf(IDatabaseEntity.class);
         List<Class<? extends IDatabaseEntity>> list = new ArrayList<>();
         list.addAll(set);
         return list;
