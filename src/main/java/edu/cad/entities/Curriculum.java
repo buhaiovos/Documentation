@@ -1,6 +1,7 @@
 package edu.cad.entities;
 
 import edu.cad.entities.interfaces.IDatabaseEntity;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
@@ -13,7 +14,7 @@ import org.hibernate.annotations.GenericGenerator;
 @DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.STRING)
 @DiscriminatorValue(value = "curriculum")
 @DiscriminatorOptions(force=true)
-public class Curriculum implements IDatabaseEntity{
+public class Curriculum implements IDatabaseEntity, Serializable{
     
     @Id
     @GenericGenerator(

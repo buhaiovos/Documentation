@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Entity
 @DiscriminatorValue("workplan")
-public class Workplan extends Curriculum {
+public class Workplan extends Curriculum implements Comparable<Workplan>{
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_practice")
@@ -28,11 +28,6 @@ public class Workplan extends Curriculum {
     
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "workplan")
     private Set<AcademicGroup> groups = new HashSet<>();
-    
-    @Override
-    public Qualification getQualification() {
-        return groups.iterator().next().getQualification();
-    }
 
     public Workplan() {
     }
@@ -98,6 +93,19 @@ public class Workplan extends Curriculum {
         this.groups.addAll(groups);
     }
     
+    @Override
+    public Qualification getQualification() {
+        return groups.iterator().next().getQualification();
+    }
+    
+    public EducationForm getEducationForm(){
+        return groups.iterator().next().getEducationForm();
+    }
+    
+    public int getStartYear(){
+        return groups.iterator().next().getStartYear();
+    }
+    
     public int countBudgetaryStudents(){
         int total = 0; 
         
@@ -126,6 +134,17 @@ public class Workplan extends Curriculum {
         }
         
         return total;
+    }
+
+    @Override
+    public int compareTo(Workplan o) {
+        if(!getEducationForm().equals(o.getEducationForm()))
+            return getEducationForm().getId() - o.getEducationForm().getId();
+        
+        if(!getQualification().equals(o.getQualification()))
+            return getQualification().getId() - o.getQualification().getId();
+        
+        return o.getStartYear() - getStartYear();
     }
 }
 

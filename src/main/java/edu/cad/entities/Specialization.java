@@ -22,8 +22,8 @@ public class Specialization implements IDatabaseEntity{
     @Column(name = "denotation")
     private String denotation;
     
-    @OneToMany(fetch = FetchType.LAZY)
-    private Set<AcademicGroup> academicGroups = new HashSet<>(0);
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "specialization")
+    private Set<AcademicGroup> academicGroups = new HashSet<>();
 
     public Specialization() {
     }
