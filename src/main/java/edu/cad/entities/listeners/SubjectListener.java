@@ -17,8 +17,7 @@ public class SubjectListener {
     public void update(Subject subject){
         updateSubSubjects(subject);
         updateGroups(subject);
-    }
-    
+    }   
     
     private void updateSubSubjects(Subject subject){
         for(CurriculumSubject curriculumSubject : subject.getCurriculumSubjects()){

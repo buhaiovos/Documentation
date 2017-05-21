@@ -8,8 +8,8 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 
 public class ControlCounter extends AbstractDocumentElement{
-    protected Cell cell;
-    protected ControlDictionary control;
+    protected final Cell cell;
+    protected final ControlDictionary control;
     
     public ControlCounter(Cell cell, ControlDictionary control) {
         this.cell = cell;

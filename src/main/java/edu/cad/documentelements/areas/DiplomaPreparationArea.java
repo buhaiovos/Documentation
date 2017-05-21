@@ -15,10 +15,11 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 
 public class DiplomaPreparationArea extends AbstractDocumentArea{
-    private Map<String, AbstractColumn> columns;
+    private final Map<String, AbstractColumn> columns;
     
     public DiplomaPreparationArea(Sheet sheet, int startRow) {
         super(sheet);
+        columns = new HashMap<>();
         initializeColumns();
     }
 
@@ -65,7 +66,6 @@ public class DiplomaPreparationArea extends AbstractDocumentArea{
     
     private void initializeColumns(){
         Row row = sheet.getRow(rowNumber);
-        columns = new HashMap<>();
         
         columns.put("norm", new SimpleColumn(row, "#work"));
         columns.put("department", new SimpleColumn(row, "#work_department"));

@@ -2,7 +2,7 @@ package edu.cad.entities;
 
 import edu.cad.entities.interfaces.IDatabaseEntity;
 import edu.cad.entities.listeners.SubjectListener;
-import edu.cad.functionalinterfaces.SubjectProperty;
+import edu.cad.entities.interfaces.SubjectProperty;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;

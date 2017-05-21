@@ -1,18 +1,20 @@
-package edu.cad.documentelements.hourscolumns;
+package edu.cad.documentelements.columns;
 
-import edu.cad.documentelements.columns.AbstractColumn;
 import edu.cad.entities.CurriculumSubject;
 import edu.cad.entities.Subject;
-import edu.cad.functionalinterfaces.SubjectProperty;
+import edu.cad.entities.interfaces.SubjectProperty;
 import org.apache.poi.ss.usermodel.Row;
 
-public abstract class HoursColumn extends AbstractColumn {
+public class HoursColumn extends AbstractColumn {
+    private final SubjectProperty property;
     
-    public HoursColumn(int columnNumber) {
+    public HoursColumn(int columnNumber, SubjectProperty property) {
         super(columnNumber);
+        this.property = property;
     }
-    
-    protected void setValue(Row row, CurriculumSubject record, SubjectProperty property){
+
+    @Override
+    public void fill(Row row, CurriculumSubject record) {
         double value = 0;
 
         for(Subject child : record.getSubject().getSubSubjects(record.getCurriculum())){
@@ -21,6 +23,6 @@ public abstract class HoursColumn extends AbstractColumn {
 
         if (value > 0) {
             fill(row, value);
-        } 
+        }
     }
 }

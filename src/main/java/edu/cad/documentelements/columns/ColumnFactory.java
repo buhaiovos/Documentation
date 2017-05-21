@@ -1,15 +1,8 @@
 package edu.cad.documentelements.columns;
 
 import edu.cad.daos.HibernateDAO;
-import edu.cad.documentelements.hourscolumns.EctsColumn;
-import edu.cad.documentelements.hourscolumns.LabsColumn;
-import edu.cad.documentelements.hourscolumns.LectionsColumn;
-import edu.cad.documentelements.hourscolumns.PracticesColumn;
-import edu.cad.documentelements.semestercolumns.SemesterColumn;
-import edu.cad.documentelements.semestercolumns.SemesterLabsColumn;
-import edu.cad.documentelements.semestercolumns.SemesterLectionsColumn;
-import edu.cad.documentelements.semestercolumns.SemesterPracticesColumn;
 import edu.cad.entities.ControlDictionary;
+import edu.cad.entities.Subject;
 import edu.cad.utils.documentutils.ColumnTokenStringSplitter;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
@@ -51,31 +44,35 @@ public class ColumnFactory {
             case "department":
                 return new DepartmentColumn(columnNumber);
             case "ects":
-                return new EctsColumn(columnNumber);
+                return new HoursColumn(columnNumber, Subject::getEcts);
             case "labs":
-                return new LabsColumn(columnNumber);
+                return new HoursColumn(columnNumber, Subject::getLabs);
             case "lections":
-                return new LectionsColumn(columnNumber);
+                return new HoursColumn(columnNumber, Subject::getLections);
             case "practices":
-                return new PracticesColumn(columnNumber);
+                return new HoursColumn(columnNumber, Subject::getPractices);
             case "section":
                 return new TitleColumn(columnNumber);
             case "semester":
                 return new SemesterColumn(columnNumber, 
                         Integer.parseInt(ctss.getFirstNumString()), // semester
-                        Integer.parseInt(ctss.getSecondNumString())); // weeks
+                        Integer.parseInt(ctss.getSecondNumString()), // weeks
+                        Subject::getTotalHours); 
             case "semlabs":
-                return new SemesterLabsColumn(columnNumber, 
-                        Integer.parseInt(ctss.getFirstNumString()),
-                        Integer.parseInt(ctss.getSecondNumString()));
+                return new SemesterColumn(columnNumber, 
+                        Integer.parseInt(ctss.getFirstNumString()), 
+                        Integer.parseInt(ctss.getSecondNumString()), 
+                        Subject::getLabs); 
             case "semlections":
-                return new SemesterLectionsColumn(columnNumber, 
-                        Integer.parseInt(ctss.getFirstNumString()),
-                        Integer.parseInt(ctss.getSecondNumString()));
+                return new SemesterColumn(columnNumber, 
+                        Integer.parseInt(ctss.getFirstNumString()), 
+                        Integer.parseInt(ctss.getSecondNumString()), 
+                        Subject::getLections); 
             case "sempractices":
-                return new SemesterPracticesColumn(columnNumber, 
-                        Integer.parseInt(ctss.getFirstNumString()),
-                        Integer.parseInt(ctss.getSecondNumString()));
+                return new SemesterColumn(columnNumber, 
+                        Integer.parseInt(ctss.getFirstNumString()), 
+                        Integer.parseInt(ctss.getSecondNumString()), 
+                        Subject::getPractices); 
             default: 
                 return null;                
         }
