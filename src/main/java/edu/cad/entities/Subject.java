@@ -1,5 +1,6 @@
 package edu.cad.entities;
 
+import edu.cad.daos.HibernateDAO;
 import edu.cad.entities.interfaces.IDatabaseEntity;
 import edu.cad.entities.listeners.SubjectListener;
 import edu.cad.entities.interfaces.SubjectProperty;
@@ -49,7 +50,7 @@ public class Subject implements IDatabaseEntity{
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "subject")
     private Set<Control> controls = new HashSet<>();
     
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.subject", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.subject")
     private Set<CurriculumSubject> curriculumSubjects = new HashSet<>();
     
     @Transient
@@ -164,6 +165,13 @@ public class Subject implements IDatabaseEntity{
         return (int) (ects * 30);
     }
     
+    public int getEctsHoursWithoutExam(){
+        if(hasCourseWork())
+            return getEctsHours() - 30;
+        
+        return getEctsHours();
+    }
+    
     public int getSemesterHours(int currSemester, Curriculum curriculum, 
             SubjectProperty property){
         Set<Subject> subjects = getSubSubjects(curriculum);
@@ -197,6 +205,16 @@ public class Subject implements IDatabaseEntity{
         return result;
     }
     
+    public boolean hasControlOfType(ControlDictionary type){
+        for(Control control : controls){
+            if(control.getType().equals(type)){
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    
     public Set<Subject> getSubSubjects(Curriculum curriculum){
         return subSubjects.get(curriculum);
     }
@@ -212,6 +230,20 @@ public class Subject implements IDatabaseEntity{
     public void setGroups(Set<AcademicGroup> groups) {
         this.groups.clear();
         groups.addAll(groups);
+    }
+    
+    public boolean hasCourseWork(){
+        ControlDictionary courseWork = new HibernateDAO<>(ControlDictionary.class).get(5);
+        
+        for(SubjectDictionary subjectDictionary : subject.getSubSubjects()){
+            for(Subject element : subjectDictionary.getAcademicSubjects()){
+                if(element.hasControlOfType(courseWork)){
+                    return true;
+                }
+            }
+        }
+        
+        return false;
     }
 
     @Override

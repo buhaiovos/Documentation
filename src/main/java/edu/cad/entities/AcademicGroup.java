@@ -1,12 +1,13 @@
 package edu.cad.entities;
 
 import edu.cad.entities.interfaces.IDatabaseEntity;
+import java.io.Serializable;
 import javax.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "academic_group")
-public class AcademicGroup implements IDatabaseEntity, Comparable<AcademicGroup>{
+public class AcademicGroup implements IDatabaseEntity, Comparable<AcademicGroup>, Serializable{
     
     @Id
     @GenericGenerator(
@@ -44,6 +45,10 @@ public class AcademicGroup implements IDatabaseEntity, Comparable<AcademicGroup>
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_workplan")
     private Workplan workplan;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_department")
+    private Department department;
 
     public AcademicGroup() {
     }
@@ -134,6 +139,14 @@ public class AcademicGroup implements IDatabaseEntity, Comparable<AcademicGroup>
 
     public void setWorkplan(Workplan workplan) {
         this.workplan = workplan;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
     }
     
     public int getTotalStudents() {

@@ -30,6 +30,14 @@ public abstract class AbstractColumn extends AbstractDocumentElement {
         row.getCell(columnNumber).setCellType(CellType.NUMERIC);
     }
     
+    public double getNumericCellValue(Row row){
+        if(!row.getCell(columnNumber).getCellTypeEnum().equals(CellType.NUMERIC)){
+            return -1;
+        }
+        
+        return row.getCell(columnNumber).getNumericCellValue();
+    }
+    
     public void clear(Row row){
         row.getCell(columnNumber).setCellType(CellType.BLANK);
     }

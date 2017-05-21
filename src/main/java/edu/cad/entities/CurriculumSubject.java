@@ -2,6 +2,7 @@ package edu.cad.entities;
 
 import edu.cad.entities.interfaces.IDatabaseEntity;
 import edu.cad.utils.Utils;
+import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.*;
 
@@ -12,7 +13,7 @@ import javax.persistence.*;
 	joinColumns = @JoinColumn(name = "id_curriculum")),
     @AssociationOverride(name = "pk.subject",
 	joinColumns = @JoinColumn(name = "id_subject")) })
-public class CurriculumSubject implements IDatabaseEntity, Comparable<CurriculumSubject>{
+public class CurriculumSubject implements IDatabaseEntity, Comparable<CurriculumSubject>, Serializable{
     
     @EmbeddedId
     private CurriculumSubjectId pk = new CurriculumSubjectId();

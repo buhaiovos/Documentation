@@ -14,11 +14,18 @@ public class FullTitleColumn extends AbstractK3Column{
     }
 
     @Override
-    public void fill(Row row, Subject subject) {
+    public String getValue(Subject subject) {
         String mainString = getMainString(subject);
         String groupsString = getGroupsString(subject.getGroups());
         
-        row.getCell(columnNumber).setCellValue(mainString + groupsString);
+        return mainString + groupsString;
+        //row.getCell(columnNumber).setCellValue(mainString + groupsString);
+    }
+    
+    @Override
+    public  void fill(Row row, Subject subject, String value){
+        value = getValue(subject);
+        fill(row, value);
     }
     
     private String getMainString(Subject subject){
