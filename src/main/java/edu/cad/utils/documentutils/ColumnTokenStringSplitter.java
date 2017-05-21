@@ -8,8 +8,13 @@ import edu.cad.utils.Utils;
  */
 public class ColumnTokenStringSplitter {
     
-    private String token;
+    public static final String CURRICULUM_TOKEN_BEGINNING = "#";
+    public static final String K3_ST_LOAD_TOKEN_BEGINNING = "#k3";
+    
+    private final String token;
+    
     private String type;
+    private String formula;
     private String firstNumString;
     private String secondNumString;
     
@@ -19,8 +24,14 @@ public class ColumnTokenStringSplitter {
     }
 
     private void split() {
-        setType();
-        setNumStrings();
+        if ( ! token.contains(K3_ST_LOAD_TOKEN_BEGINNING)) {
+            setType();
+            setNumStrings();
+        }
+        else {
+            setType();
+            setFormula();
+        }
     }
 
     private void setType() {
@@ -59,11 +70,19 @@ public class ColumnTokenStringSplitter {
         }
                     
     }
+    
+    private void setFormula() {
+        formula = token.substring(token.indexOf('_') + 1);
+    }
 
     public String getType() {
         return type;
     }
 
+    public String getFormula() {
+        return formula;
+    }
+    
     public String getFirstNumString() {
         return firstNumString;
     }
