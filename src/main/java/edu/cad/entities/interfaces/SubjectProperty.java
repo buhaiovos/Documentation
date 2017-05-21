@@ -1,4 +1,4 @@
-package edu.cad.functionalinterfaces;
+package edu.cad.entities.interfaces;
 
 import edu.cad.entities.Subject;
 

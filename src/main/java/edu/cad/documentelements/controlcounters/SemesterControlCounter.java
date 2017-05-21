@@ -6,7 +6,7 @@ import edu.cad.entities.Curriculum;
 import org.apache.poi.ss.usermodel.Cell;
 
 public class SemesterControlCounter extends ControlCounter{
-    private int semester; 
+    private final int semester; 
     
     public SemesterControlCounter(Cell cell, ControlDictionary control, int semester){
         super(cell, control);
@@ -15,21 +15,22 @@ public class SemesterControlCounter extends ControlCounter{
 
     @Override
     public void fill(Curriculum curriculum) {
-        int count;
         StringBuilder value = new StringBuilder();
+        int count = curriculum.countControlsByType(semester, control);
         
         if(control.getId() == 2){
             ControlDictionary diff = new HibernateDAO<>(ControlDictionary.class).get(9); 
-            count = curriculum.countControlsByType(semester, diff);
+            int diffCount = curriculum.countControlsByType(semester, diff);
             
-            if(count > 0){
-                value.append(count);
+            if(diffCount > 0){
+                value.append(diffCount);
                 value.append('д');
-                value.append('+');
+                
+                if(count > 0){
+                    value.append('+');
+                }
             } 
         }
-        
-        count = curriculum.countControlsByType(semester, control);
         
         if(count > 0)
             value.append(count);

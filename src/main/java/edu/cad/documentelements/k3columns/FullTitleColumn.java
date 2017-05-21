@@ -6,7 +6,7 @@ import java.util.Set;
 import org.apache.poi.ss.usermodel.Row;
 
 public class FullTitleColumn extends AbstractK3Column{
-    private String faculty;
+    private final String faculty;
     
     public FullTitleColumn(int columnNumber, String faculty) {
         super(columnNumber);

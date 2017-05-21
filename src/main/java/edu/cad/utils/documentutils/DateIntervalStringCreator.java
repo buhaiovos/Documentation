@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.util.Date;
 
 public class DateIntervalStringCreator {
+    
     public static String getDatesString(Date st, Date fin) {
         String start = getProperlyFormattedDate(st);
         String finish = getProperlyFormattedDate(fin);

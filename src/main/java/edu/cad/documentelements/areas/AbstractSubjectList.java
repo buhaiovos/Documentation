@@ -19,12 +19,14 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 
 public abstract class AbstractSubjectList extends AbstractDocumentArea {
-    protected Set<AbstractColumn> columns = new HashSet<>();
-    protected Set<ControlCounter> counters = new HashSet<>();
+    protected final Set<AbstractColumn> columns;
+    protected final Set<ControlCounter> counters;
     
     public AbstractSubjectList(Sheet sheet, int startRow) {
         super(sheet, "#section", startRow);
+        columns = new HashSet<>();
         addColumns(); 
+        counters = new HashSet<>();
         addCounters();
     }
     

@@ -7,9 +7,9 @@ import org.apache.poi.ss.usermodel.Sheet;
 
 public class FormK3Generator implements IDocumentGenerator{
     private Department department;
-    private Sheet sheet;
-    private EducationForm educationForm;
-    private SourceOfFinancing source;
+    private final Sheet sheet;
+    private final EducationForm educationForm;
+    private final SourceOfFinancing source;
     
     public FormK3Generator(Sheet sheet, Department department, 
             EducationForm educationForm, SourceOfFinancing source){

@@ -13,7 +13,7 @@ import java.util.TreeSet;
 import org.apache.poi.ss.usermodel.Row;
 
 public class ControlColumn extends AbstractColumn{
-    protected ControlDictionary control;
+    private final ControlDictionary control;
     
     public ControlColumn(int columnNumber, ControlDictionary control) {
         super(columnNumber);
