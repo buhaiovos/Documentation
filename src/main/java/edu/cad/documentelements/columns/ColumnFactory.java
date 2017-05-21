@@ -3,31 +3,25 @@ package edu.cad.documentelements.columns;
 import edu.cad.daos.HibernateDAO;
 import edu.cad.entities.ControlDictionary;
 import edu.cad.entities.Subject;
+import edu.cad.utils.documentutils.CellWithTokenValidator;
 import edu.cad.utils.documentutils.ColumnTokenStringSplitter;
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellType;
 
 public class ColumnFactory {
     
+    private static final String TOKEN_BEGINNING = 
+            ColumnTokenStringSplitter.CURRICULUM_TOKEN_BEGINNING;
+    
     public static AbstractColumn createColumn(Cell cell) {
         if (cell != null) {             
-            String cellContent = getContentIfCellValid(cell);
+            String cellContent = 
+                    CellWithTokenValidator.getContentIfCellValid(cell,
+                            TOKEN_BEGINNING);
             if (cellContent != null) {
                 return createColumn(new ColumnTokenStringSplitter(cellContent), 
                                     cell.getColumnIndex());
             }      
         }  
-        return null;
-    }
-    
-    private static String getContentIfCellValid(Cell cell) {
-        
-        if (cell.getCellTypeEnum() == CellType.STRING) {
-            String cellContent = cell.getStringCellValue();
-            if ( (cellContent != null) && (cellContent.contains("#")) ) {
-                return cellContent;
-            }
-        }
         return null;
     }
 
