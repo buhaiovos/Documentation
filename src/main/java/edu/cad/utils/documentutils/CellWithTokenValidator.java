@@ -7,12 +7,13 @@ public class CellWithTokenValidator {
     
     public static String getContentIfCellValid(Cell cell, 
             String tokenBeginning) {
-        
-        if (cell.getCellTypeEnum() == CellType.STRING) {
-            String cellContent = cell.getStringCellValue();
-            if ( (cellContent != null) 
-                    && (cellContent.contains(tokenBeginning)) ) {
-                return cellContent;
+        if (cell != null) {
+            if (cell.getCellTypeEnum() == CellType.STRING) {
+                String cellContent = cell.getStringCellValue();
+                if ( (cellContent != null) 
+                        && (cellContent.contains(tokenBeginning)) ) {
+                    return cellContent;
+                }
             }
         }
         return null;

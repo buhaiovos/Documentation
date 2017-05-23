@@ -11,19 +11,19 @@ package edu.cad.documentelements.k3columns;
  */
 public enum StudyLoadType {
     
-    LECTIONS("k3lection"), 
-    PRACTICES("k3practice"),
-    LABS("k3lab"),
-    INDIVIDUALS("k3individual"),
-    EXAMS("k3exam"),
-    CREDITS("k3credit"),
-    CONTROL_WORKS("k3contrwork"),
-    COURSE_PROJECTS("k3courseproj"),
-    COURSEWORKS("k3coursework"),
-    RGRS("k3rgr"),
-    DKR("k3dkr"),
-    REFERATS("k3referat"),
-    CONSULTATIONS("k3consult");
+    LECTIONS("k3(SL)lection"), 
+    PRACTICES("k3(SL)practice"),
+    LABS("k3(SL)lab"),
+    INDIVIDUALS("k3(SL)individual"),
+    EXAMS("k3(SL)exam"),
+    CREDITS("k3(SL)credit"),
+    CONTROL_WORKS("k3(SL)contrwork"),
+    COURSE_PROJECTS("k3(SL)courseproj"),
+    COURSEWORKS("k3(SL)coursework"),
+    RGRS("k3(SL)rgr"),
+    DKR("k3(SL)dkr"),
+    REFERATS("k3(SL)referat"),
+    CONSULTATIONS("k3(SL)consult");
     
     private final String token;
     
