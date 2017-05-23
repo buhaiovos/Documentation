@@ -1,12 +1,13 @@
 package edu.cad.entities;
 
 import edu.cad.entities.interfaces.IDatabaseEntity;
+import java.io.Serializable;
 import javax.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "diploma_preparation")
-public class DiplomaPreparation implements IDatabaseEntity{
+public class DiplomaPreparation implements IDatabaseEntity, Serializable{
     
     @Id
     @GenericGenerator(

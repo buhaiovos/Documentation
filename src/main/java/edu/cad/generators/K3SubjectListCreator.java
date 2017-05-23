@@ -6,11 +6,13 @@ import edu.cad.entities.CurriculumSubject;
 import edu.cad.entities.Department;
 import edu.cad.entities.EducationForm;
 import edu.cad.entities.Subject;
+import edu.cad.entities.SubjectDictionary;
 import edu.cad.entities.Workplan;
 import edu.cad.utils.hibernateutils.EntityCloner;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -19,37 +21,38 @@ import java.util.TreeSet;
 
 public class K3SubjectListCreator {
     
-    public static List<Subject> createList(EducationForm educationForm, 
-            Department department){
-        Set<Subject> subjectSet = createSubjectSet(createWorkplanSet(educationForm), department);
-        List<Subject> subjectList = new ArrayList<>();
-        
+    public static List<K3SubjectEntity> createList(EducationForm educationForm, 
+            Department department, int semester){
+        Set<Subject> subjectSet = createSubjectSet(createWorkplanSet(educationForm), 
+                department, semester);
+        Map<SubjectDictionary, List<Subject>> subjectMap = new LinkedHashMap<>();
+      
         for(Subject subject : subjectSet){
+            int position = findPosition(subjectMap, subject);
             Map<Department, List<AcademicGroup>> map = new HashMap<>();
             
             for(AcademicGroup group : subject.getGroups()){
+                if(!group.getEducationForm().equals(educationForm)){
+                    subject.getGroups().remove(group);
+                    continue;
+                }       
+                
                 if(!group.getDepartment().equals(department)){
-                    if(!map.containsKey(group.getDepartment())){
-                        map.put(group.getDepartment(), new ArrayList<>());
-                    }
-                    
-                    map.get(group.getDepartment()).add(group);
+                    addToMap(map, group);
                     subject.getGroups().remove(group);
                 }
             }
             
-            subjectList.add(subject);
-            
-            /*if(!map.isEmpty()){
-                for(Department key : map.keySet()){
-                    Subject clone = EntityCloner.
-                }
-            }*/
-            
-            
+            subjectMap.get(subject.getSubject()).add(position++, subject);
+            addClones(subjectMap, subject, position, map);
         }
         
-        return subjectList;
+        List<K3SubjectEntity> entities = new ArrayList<>();
+        for(SubjectDictionary dictionary : subjectMap.keySet()){
+            entities.addAll(K3SubgroupsCaculator.calculateList(subjectMap.get(dictionary)));
+        }
+        
+        return entities;
     }
     
     private static Set<Workplan> createWorkplanSet(EducationForm educationForm){
@@ -68,7 +71,8 @@ public class K3SubjectListCreator {
     }
     
     private static Set<Subject> createSubjectSet(Set<Workplan> workplans, 
-            Department department){
+            Department department, int semester){
+        int modulo = semester % 2;
         Set<Subject> subjects = new LinkedHashSet<>();
         
         for(Workplan workplan : workplans){
@@ -79,11 +83,56 @@ public class K3SubjectListCreator {
                 Subject subject = curriculumSubject.getSubject();
                 
                 if(subject.getSubject().getDepartment().equals(department)){
+                    if(subject.isCourseWork()|| subject.getSemester() % 2 != modulo)
+                        continue;
+                    
                     subjects.add(subject);
                 }
             }
         }
         
         return subjects;
+    }
+    
+    private static void addToMap(Map<Department, List<AcademicGroup>> map, AcademicGroup group){
+        if(!map.containsKey(group.getDepartment())){
+            map.put(group.getDepartment(), new ArrayList<>());
+        }
+                    
+        map.get(group.getDepartment()).add(group);            
+    }
+    
+    private static void addClones(Map<SubjectDictionary, List<Subject>> subjectMap, 
+            Subject subject, int position, Map<Department, List<AcademicGroup>> map){
+        
+        if(map.isEmpty())
+            return;
+                
+        for(Department key : map.keySet()){
+            Subject clone = EntityCloner.clone(Subject.class, subject);
+            clone.getGroups().clear();
+                    
+            for(AcademicGroup group : map.get(key)){
+                clone.getGroups().add(group);
+            }
+                    
+            subjectMap.get(subject.getSubject()).add(position++, clone);
+        } 
+    }
+    
+    private static int findPosition(Map<SubjectDictionary, List<Subject>> subjectMap, Subject subject){ 
+        if(!subjectMap.containsKey(subject.getSubject())){
+            subjectMap.put(subject.getSubject(), new ArrayList<>());
+            return 0;
+        }
+        
+        int index = 0;        
+        for(Subject element: subjectMap.get(subject.getSubject())){
+            if(element.getEctsHours() < subject.getEctsHours()){
+                index = subjectMap.get(subject.getSubject()).indexOf(element) + 1;
+            }
+        }
+        
+        return index;
     }
 }

@@ -7,7 +7,8 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "academic_group")
-public class AcademicGroup implements IDatabaseEntity, Comparable<AcademicGroup>, Serializable{
+public class AcademicGroup implements IDatabaseEntity, Serializable, 
+        Comparable<AcademicGroup> {
     
     @Id
     @GenericGenerator(
@@ -45,10 +46,6 @@ public class AcademicGroup implements IDatabaseEntity, Comparable<AcademicGroup>
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_workplan")
     private Workplan workplan;
-    
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_department")
-    private Department department;
 
     public AcademicGroup() {
     }
@@ -142,11 +139,7 @@ public class AcademicGroup implements IDatabaseEntity, Comparable<AcademicGroup>
     }
 
     public Department getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(Department department) {
-        this.department = department;
+        return specialization.getDepartment();
     }
     
     public int getTotalStudents() {
