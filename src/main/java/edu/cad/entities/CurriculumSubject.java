@@ -13,7 +13,8 @@ import javax.persistence.*;
 	joinColumns = @JoinColumn(name = "id_curriculum")),
     @AssociationOverride(name = "pk.subject",
 	joinColumns = @JoinColumn(name = "id_subject")) })
-public class CurriculumSubject implements IDatabaseEntity, Comparable<CurriculumSubject>, Serializable{
+public class CurriculumSubject implements IDatabaseEntity, Serializable,
+        Comparable<CurriculumSubject> {
     
     @EmbeddedId
     private CurriculumSubjectId pk = new CurriculumSubjectId();

@@ -1,6 +1,7 @@
 package edu.cad.entities;
 
 import edu.cad.entities.interfaces.IDatabaseEntity;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
@@ -8,7 +9,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "cycle")
-public class Cycle implements IDatabaseEntity{
+public class Cycle implements IDatabaseEntity, Serializable{
     
     @Id
     @GenericGenerator(
