@@ -149,7 +149,7 @@ public class AcademicGroup implements IDatabaseEntity, Serializable,
     public boolean isBudgetary(){
         if(budgetaryStudents > 0)
             return true;
-        
+            
         return false;
     }
 

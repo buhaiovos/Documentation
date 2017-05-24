@@ -2,6 +2,7 @@ package edu.cad.documentelements.k3columns;
 
 import edu.cad.entities.AcademicGroup;
 import edu.cad.entities.Subject;
+import edu.cad.generators.K3SubjectEntity;
 import java.util.Set;
 import org.apache.poi.ss.usermodel.Row;
 
@@ -14,16 +15,16 @@ public class FullTitleColumn extends AbstractK3Column{
     }
 
     @Override
-    public String getValue(Subject subject) {
-        String mainString = getMainString(subject);
-        String groupsString = getGroupsString(subject.getGroups());
+    public String getValue(K3SubjectEntity subject) {
+        String mainString = getMainString(subject.getSubject());
+        String groupsString = getGroupsString(subject.getSubject().getGroups());
         
         return mainString + groupsString;
         //row.getCell(columnNumber).setCellValue(mainString + groupsString);
     }
     
     @Override
-    public  void fill(Row row, Subject subject, String value){
+    public  void fill(Row row, edu.cad.generators.K3SubjectEntity subject, String value){
         value = getValue(subject);
         fill(row, value);
     }

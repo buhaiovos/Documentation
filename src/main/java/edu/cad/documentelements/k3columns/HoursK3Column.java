@@ -1,7 +1,7 @@
 package edu.cad.documentelements.k3columns;
 
-import edu.cad.entities.Subject;
 import edu.cad.entities.interfaces.SubjectProperty;
+import edu.cad.generators.K3SubjectEntity;
 
 public class HoursK3Column extends AbstractK3Column{
     private final SubjectProperty property;
@@ -12,8 +12,8 @@ public class HoursK3Column extends AbstractK3Column{
     }
 
     @Override
-    public String getValue(Subject subject) {
-        return Double.toString(property.getValue(subject));
+    public String getValue(K3SubjectEntity subject) {
+        return Double.toString(property.getValue(subject.getSubject()));
         //fill(row, property.getValue(subject));
     }
 }

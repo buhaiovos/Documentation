@@ -1,7 +1,6 @@
 package edu.cad.documentelements.k3columns;
 
-import edu.cad.entities.AcademicGroup;
-import edu.cad.entities.Subject;
+import edu.cad.generators.K3SubjectEntity;
 import edu.cad.generators.SourceOfFinancing;
 import edu.cad.generators.TypeOfGroupWork;
 
@@ -17,18 +16,8 @@ public class GroupsK3Column extends AbstractK3Column{
     }
 
     @Override
-    public String getValue(Subject subject) {
-        int total = 0;
-        
-        for(AcademicGroup group : subject.getGroups()){
-            if(source.sourceEquals(group)){
-                total += group.getTotalStudents();
-            }
-        }
-        
-        int subgroups = (int) Math.ceil(total / (double) type.getMaxStudents());
-        
-        return Integer.toString(subgroups);
+    public String getValue(K3SubjectEntity subject) {
+        return Integer.toString(subject.getSubgroup(type));
     }
     
 }

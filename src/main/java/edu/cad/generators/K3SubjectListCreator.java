@@ -21,8 +21,8 @@ import java.util.TreeSet;
 
 public class K3SubjectListCreator {
     
-    public static List<K3SubjectEntity> createList(EducationForm educationForm, 
-            Department department, int semester){
+    public static List<K3SubjectEntity> createList(EducationForm educationForm,
+            SourceOfFinancing source, Department department, int semester){
         Set<Subject> subjectSet = createSubjectSet(createWorkplanSet(educationForm), 
                 department, semester);
         Map<SubjectDictionary, List<Subject>> subjectMap = new LinkedHashMap<>();
@@ -49,7 +49,7 @@ public class K3SubjectListCreator {
         
         List<K3SubjectEntity> entities = new ArrayList<>();
         for(SubjectDictionary dictionary : subjectMap.keySet()){
-            entities.addAll(K3SubgroupsCaculator.calculateList(subjectMap.get(dictionary)));
+            entities.addAll(K3SubgroupsCaculator.calculateList(subjectMap.get(dictionary), source));
         }
         
         return entities;

@@ -82,7 +82,7 @@ public class K3WPColumnsFactory {
                 
             case AC_BUDG_GROUPS:
                 return new GroupsK3Column(columnIndex, 
-                        SourceOfFinancing.Budgetary, TypeOfGroupWork.Lection);
+                        SourceOfFinancing.Budgetary, TypeOfGroupWork.Academic);
             case SUBGR_PRACT_BUDG:
                 return new GroupsK3Column(columnIndex, 
                         SourceOfFinancing.Budgetary, TypeOfGroupWork.Practice);
@@ -91,7 +91,7 @@ public class K3WPColumnsFactory {
                         SourceOfFinancing.Budgetary, TypeOfGroupWork.Lab);
             case AC_CONT_GROUPS:
                 return new GroupsK3Column(columnIndex, 
-                        SourceOfFinancing.Contract, TypeOfGroupWork.Lection);
+                        SourceOfFinancing.Contract, TypeOfGroupWork.Academic);
             case SUBGR_PRACT_CONT:
                 return new GroupsK3Column(columnIndex, 
                         SourceOfFinancing.Contract, TypeOfGroupWork.Practice);
