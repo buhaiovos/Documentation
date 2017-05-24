@@ -22,8 +22,15 @@ public abstract class AbstractK3Column extends AbstractColumn{
     public void fill(Row row, K3SubjectEntity subject, String value){
         value = getValue(subject);
         
-        if(Utils.isParseable(value)){
-            fill(row, Integer.parseInt(value));
+        if(!Utils.isParseable(value))
+            return;
+            
+        int intValue = Integer.parseInt(value);
+        
+        if(intValue > 0) {
+            this.fill(row, intValue);
+        } else {
+            this.clear(row);
         }
     }
 }

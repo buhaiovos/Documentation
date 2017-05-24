@@ -29,7 +29,7 @@ public class StudentsK3Column extends AbstractK3Column{
             return Integer.toString(total);
         }
         
-        return "";
+        return "0";
     }
     
 }
