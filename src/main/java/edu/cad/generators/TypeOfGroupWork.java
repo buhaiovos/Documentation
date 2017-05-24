@@ -1,15 +1,23 @@
 package edu.cad.generators;
 
 public enum TypeOfGroupWork {
-    Lection, Practice, Lab;
+    Academic, Practice, Lab, OtherSource;
+    
+    public int getMinStudents(){
+        switch(this){
+            case Practice   :   return 20;
+            case Lab        :   return 12;  
+        }
+        
+        return Integer.MIN_VALUE;
+    }
     
     public int getMaxStudents(){
         switch(this){
-            case Lection    :   return 35;
             case Practice   :   return 35;
-            case Lab        :   return 26;
+            case Lab        :   return 23;
         }
         
-        return -1;
+        return Integer.MAX_VALUE;
     }
 }

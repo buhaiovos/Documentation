@@ -8,8 +8,12 @@ public enum SourceOfFinancing {
     
     public boolean sourceEquals(AcademicGroup group){
         switch(this){
-            case Budgetary  :   if(group.isBudgetary())     return true;
-            case Contract   :   if(!group.isBudgetary())    return true;
+            case Budgetary  :   if(group.isBudgetary())     
+                                    return true;
+                                break;
+            case Contract   :   if(!group.isBudgetary())    
+                                    return true;
+                                break;
         }
         
         return false;
@@ -21,6 +25,6 @@ public enum SourceOfFinancing {
             case Contract   :   return group.getContractStudents();
         }
         
-        return 0;
+        return group.getTotalStudents();
     }
 }

@@ -7,7 +7,8 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "control")
-public class Control implements IDatabaseEntity, Comparable<Control>, Serializable{
+public class Control implements IDatabaseEntity, Serializable, 
+        Comparable<Control>{
     
     @Id
     @GenericGenerator(

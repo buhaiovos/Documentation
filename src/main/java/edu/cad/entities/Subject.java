@@ -2,8 +2,9 @@ package edu.cad.entities;
 
 import edu.cad.daos.HibernateDAO;
 import edu.cad.entities.interfaces.IDatabaseEntity;
-import edu.cad.entities.listeners.SubjectListener;
 import edu.cad.entities.interfaces.SubjectProperty;
+import edu.cad.entities.listeners.SubjectListener;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -14,7 +15,7 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity
 @EntityListeners(SubjectListener.class)
 @Table(name = "academic_subject")
-public class Subject implements IDatabaseEntity{
+public class Subject implements IDatabaseEntity, Serializable{
     
     @Id
     @GenericGenerator(
@@ -245,6 +246,12 @@ public class Subject implements IDatabaseEntity{
         
         return false;
     }
+    
+    public boolean isCourseWork(){
+        ControlDictionary courseWork = new HibernateDAO<>(ControlDictionary.class).get(5);
+        
+        return hasControlOfType(courseWork);
+    }
 
     @Override
     public int hashCode() {
@@ -270,4 +277,5 @@ public class Subject implements IDatabaseEntity{
         }
         return true;
     }
+    
 }

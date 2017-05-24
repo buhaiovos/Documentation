@@ -1,6 +1,7 @@
 package edu.cad.entities;
 
 import edu.cad.entities.interfaces.IDatabaseEntity;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
@@ -8,7 +9,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "specialization")
-public class Specialization implements IDatabaseEntity{
+public class Specialization implements IDatabaseEntity, Serializable{
     
     @Id
     @GenericGenerator(
@@ -21,6 +22,10 @@ public class Specialization implements IDatabaseEntity{
 
     @Column(name = "denotation")
     private String denotation;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_department")
+    private Department department;
     
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "specialization")
     private Set<AcademicGroup> academicGroups = new HashSet<>();
@@ -50,6 +55,14 @@ public class Specialization implements IDatabaseEntity{
         this.denotation = denotation;
     }
 
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+    
     public Set<AcademicGroup> getAcademicGroups() {
         return academicGroups;
     }

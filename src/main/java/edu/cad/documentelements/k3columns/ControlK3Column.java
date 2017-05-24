@@ -1,7 +1,8 @@
 package edu.cad.documentelements.k3columns;
 
+import edu.cad.daos.HibernateDAO;
 import edu.cad.entities.ControlDictionary;
-import edu.cad.entities.Subject;
+import edu.cad.generators.K3SubjectEntity;
 
 public class ControlK3Column extends AbstractK3Column{
     private final ControlDictionary control;
@@ -12,15 +13,22 @@ public class ControlK3Column extends AbstractK3Column{
     }
 
     @Override
-    public String getValue(Subject subject) {
+    public String getValue(K3SubjectEntity subject) {
         if(control.getId() == 5){
-            if(subject.hasCourseWork()){
+            if(subject.getSubject().hasCourseWork()){
                 return "3";
             }
         }
         
-        if(subject.hasControlOfType(control)){
+        if(subject.getSubject().hasControlOfType(control)){
             return "1";
+        }
+        
+        if(control.getId() == 2){
+            ControlDictionary diff = new HibernateDAO<>(ControlDictionary.class).get(9);
+            if(subject.getSubject().hasControlOfType(diff)){
+                return "1";
+            }
         }
         
         return "";

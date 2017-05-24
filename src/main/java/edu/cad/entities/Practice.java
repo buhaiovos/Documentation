@@ -1,13 +1,14 @@
 package edu.cad.entities;
 
 import edu.cad.entities.interfaces.IDatabaseEntity;
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "practice")
-public class Practice implements IDatabaseEntity{
+public class Practice implements IDatabaseEntity, Serializable{
     
     @Id
     @GenericGenerator(

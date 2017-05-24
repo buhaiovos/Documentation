@@ -1,7 +1,7 @@
 package edu.cad.documentelements.k3columns;
 
 import edu.cad.entities.AcademicGroup;
-import edu.cad.entities.Subject;
+import edu.cad.generators.K3SubjectEntity;
 import edu.cad.generators.SourceOfFinancing;
 
 public class StudentsK3Column extends AbstractK3Column{
@@ -16,10 +16,10 @@ public class StudentsK3Column extends AbstractK3Column{
     }
 
     @Override
-    public String getValue(Subject subject) {
+    public String getValue(K3SubjectEntity subject) {
         int total = 0;
         
-        for(AcademicGroup group : subject.getGroups()){
+        for(AcademicGroup group : subject.getSubject().getGroups()){
             if(groupSource.sourceEquals(group)){
                 total += studentSource.getStudents(group);
             }
