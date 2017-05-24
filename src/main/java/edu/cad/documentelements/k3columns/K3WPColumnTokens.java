@@ -22,20 +22,16 @@ public interface K3WPColumnTokens {
     String DKR              = TOKEN_BEGINNING + "dkr";
     String REFERATS         = TOKEN_BEGINNING + "referat";
     
-    String AC_BUDG_GROUPS   = TOKEN_BEGINNING + "acgroupb";
-    String SUBGR_PRACT_BUDG = TOKEN_BEGINNING + "subgrpractb";
-    String SUBGR_LABS_BUDG  = TOKEN_BEGINNING + "subgrlabsb";
-    
-    String AC_CONT_GROUPS   = TOKEN_BEGINNING + "acgroupc";
-    String SUBGR_PRACT_CONT = TOKEN_BEGINNING + "subgrpractc";
-    String SUBGR_LABS_CONT  = TOKEN_BEGINNING + "subgrlabsc";
-    
+    String AC_GROUPS       = TOKEN_BEGINNING + "acgroup";
+    String AC_GROUPS_OTHER = TOKEN_BEGINNING + "acgroupother";
+    String SUBGR_PRACT     = TOKEN_BEGINNING + "subgrpract";
+    String SUBGR_LABS      = TOKEN_BEGINNING + "subgrlab";
+     
     String BUDG_GR_BUDG_STUD = TOKEN_BEGINNING + "groupbstb";
     String BUDG_GR_CONT_STUD = TOKEN_BEGINNING + "groupbstc";
     String CONT_GR_BUDG_STUD = TOKEN_BEGINNING + "groupcstb";
     String CONT_GR_CONT_STUD = TOKEN_BEGINNING + "groupcstc";
     
-    String BUDG_STREAM = TOKEN_BEGINNING + "streamb";
-    String CONT_STREAM = TOKEN_BEGINNING + "streamc";
+    String STREAM = TOKEN_BEGINNING + "stream";
    
 }

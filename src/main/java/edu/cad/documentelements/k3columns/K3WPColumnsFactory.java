@@ -14,7 +14,9 @@ public class K3WPColumnsFactory {
     private static final String TOKEN_BEGINNING = 
             ColumnTokenStringSplitter.K3_WP_TOKEN_BEGINNING;
     
-    public static AbstractK3Column createColumn(Cell cell) {
+    public static AbstractK3Column createColumn(Cell cell, 
+            SourceOfFinancing mainSource) {
+        
         if (cell != null) {             
             String cellContent = 
                     CellWithTokenValidator.getContentIfCellValid(cell,
@@ -27,7 +29,8 @@ public class K3WPColumnsFactory {
                     return createTitleColumn(cell);
                 } 
                 else {
-                    return createColumn(cell.getColumnIndex(), ctss.getType());
+                    return createColumn(cell.getColumnIndex(), ctss.getType(),
+                            mainSource);
                 }
             }      
         }  
@@ -35,7 +38,7 @@ public class K3WPColumnsFactory {
     }
 
     private static AbstractK3Column createColumn(int columnIndex, 
-            String typeStr) {
+            String typeStr, SourceOfFinancing mainSource) {
         
         HibernateDAO<ControlDictionary> controlDAO = 
                 new HibernateDAO<>(ControlDictionary.class);
@@ -71,24 +74,18 @@ public class K3WPColumnsFactory {
             case REFERATS:
                 return new ControlK3Column(columnIndex, controlDAO.get(8));
                 
-            case AC_BUDG_GROUPS://AC_MAIN_SOURCE
-                return new GroupsK3Column(columnIndex, 
-                        SourceOfFinancing.Budgetary, TypeOfGroupWork.Academic);
-            case SUBGR_PRACT_BUDG:
-                return new GroupsK3Column(columnIndex,
-                        SourceOfFinancing.Budgetary, TypeOfGroupWork.Practice);
-            case SUBGR_LABS_BUDG:
-                return new GroupsK3Column(columnIndex, 
-                        SourceOfFinancing.Budgetary, TypeOfGroupWork.Lab);
-            case AC_CONT_GROUPS:
-                return new GroupsK3Column(columnIndex, 
-                        SourceOfFinancing.Contract, TypeOfGroupWork.Academic);
-            case SUBGR_PRACT_CONT:
-                return new GroupsK3Column(columnIndex, 
-                        SourceOfFinancing.Contract, TypeOfGroupWork.Practice);
-            case SUBGR_LABS_CONT:
-                return new GroupsK3Column(columnIndex,
-                        SourceOfFinancing.Contract, TypeOfGroupWork.Lab);
+            case AC_GROUPS:
+                return new GroupsK3Column(columnIndex, mainSource,
+                        TypeOfGroupWork.Academic);
+            case SUBGR_PRACT:
+                return new GroupsK3Column(columnIndex, mainSource, 
+                        TypeOfGroupWork.Practice);
+            case SUBGR_LABS:
+                return new GroupsK3Column(columnIndex, mainSource, 
+                        TypeOfGroupWork.Lab);
+            case AC_GROUPS_OTHER:
+                return new GroupsK3Column(columnIndex, getOtherSource(mainSource), 
+                        TypeOfGroupWork.Lab);
                 
             case BUDG_GR_BUDG_STUD:
                 return new StudentsK3Column(columnIndex, 
@@ -102,14 +99,13 @@ public class K3WPColumnsFactory {
             case CONT_GR_CONT_STUD:
                 return new StudentsK3Column(columnIndex, 
                         SourceOfFinancing.Contract, SourceOfFinancing.Contract);
-            case BUDG_STREAM:
-                /*throw new UnsupportedOperationException("Budget stream column "
-                        + "(k3) not supported");*/
+                
+            case STREAM:
+                /*
+                return new StreamColumn(columnIndex, mainSource);
+                */
                 System.out.println("BudgetStream");
                 break;
-            case CONT_STREAM:
-                throw new UnsupportedOperationException("Contract stream column "
-                        + "(k3) not supported");
         }
         return null;        
     }
@@ -119,6 +115,17 @@ public class K3WPColumnsFactory {
         String faculty = cell.getStringCellValue().split("_")[1];
         
         return new FullTitleColumn(columnIndex, faculty);
+    }
+
+    private static SourceOfFinancing getOtherSource(SourceOfFinancing mainSource) {
+        switch (mainSource) {
+            case Budgetary:
+                return SourceOfFinancing.Contract;
+            case Contract:
+                return SourceOfFinancing.Budgetary;
+            default:
+                return null;
+        }
     }
     
 }

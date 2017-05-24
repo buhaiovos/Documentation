@@ -1,6 +1,7 @@
 package edu.cad.documentelements.k3columns;
 
 import edu.cad.documentelements.columns.AbstractColumn;
+import edu.cad.generators.SourceOfFinancing;
 import edu.cad.utils.documentutils.CellWithTokenValidator;
 import edu.cad.utils.documentutils.ColumnTokenStringSplitter;
 import java.util.List;
@@ -15,11 +16,11 @@ public class AllK3ColumnsFactory {
             ColumnTokenStringSplitter.K3_ST_LOAD_TOKEN_BEGINNING;
     
     public static void createAndAddColumn(Map<Class, List<AbstractColumn>> dest,
-            Cell cell) {
+            Cell cell, SourceOfFinancing mainSource) {
         
         if (null != CellWithTokenValidator.getContentIfCellValid(cell, K3_WP)){
             dest.get(AbstractK3Column.class)
-                    .add(K3WPColumnsFactory.createColumn(cell));
+                    .add(K3WPColumnsFactory.createColumn(cell, mainSource));
         }
         else if (null != CellWithTokenValidator.getContentIfCellValid(cell, K3_ST)) {
             dest.get(StudyLoadColumn.class)

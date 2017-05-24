@@ -56,6 +56,7 @@ Contributor(s): 192.168.1.2
     <mapping class="edu.cad.entities.Section" />
     <mapping class="edu.cad.entities.Specialization" />  
     <mapping class="edu.cad.entities.StateCertification" />
+    <mapping class="edu.cad.entities.StudyLoadResults" />
     <mapping class="edu.cad.entities.Subject" />
     <mapping class="edu.cad.entities.SubjectDictionary" />
     <mapping class="edu.cad.entities.SubjectType" />
