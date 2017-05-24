@@ -31,7 +31,7 @@ public class ControlK3Column extends AbstractK3Column{
             }
         }
         
-        return "";
+        return "0";
     }
     
 }

@@ -20,6 +20,8 @@ public class K3SubgroupsCaculator {
             calculateSubgroups(entities, type, source);
         }  
 
+        correctPractice(entities);
+        
         return entities;
     }
     
@@ -60,41 +62,26 @@ public class K3SubgroupsCaculator {
         if(type.equals(TypeOfGroupWork.OtherSource)){
             return;
         }
-        
+
         K3SubjectEntity currentSubject = subjects.get(0);
-        int total = 0;
         
+        List<Integer> subgroups = new ArrayList<>();
         for(K3SubjectEntity subjectEntity : subjects){
             Subject subject = subjectEntity.getSubject();
-            int subjectTotal = 0;
             
-            for(AcademicGroup group : subject.getGroups()){
-                if(!source.sourceEquals(group))
-                    continue;
-                
-                if(canBeAdded(type, group, subjectTotal)){
-                    subjectTotal += group.getTotalStudents();
-                } else {
-                    currentSubject.addSubgroups(type, calculateSubgroups(type, subjectTotal));
-                    
-                    currentSubject = subjectEntity;
-                    subjectTotal = group.getTotalStudents();
-                    total = subjectTotal;
-                }
-            }
+            List<Integer> current = addToPrevSubject(type, subject, subgroups);
             
-            if(currentSubject != subjectEntity){
+            if(current.isEmpty()){  
+                currentSubject.addSubgroups(type, subgroups.size());
+                subgroups = createSubgroupsList(type, subject);
+                currentSubject = subjectEntity;
+            } else {
+                subgroups = current;
                 resetHours(type, subject);
             }
-            
-            if(total + subjectTotal <= type.getMaxStudents()){
-                total += subjectTotal;
-            } else {
-                total = subjectTotal;
-            }
         } 
-        
-        currentSubject.addSubgroups(type, calculateSubgroups(type, total));
+
+        currentSubject.addSubgroups(type, subgroups.size());
     }
     
     private static void calculateAcademicGroups(List<K3SubjectEntity> subjects,
@@ -114,12 +101,55 @@ public class K3SubgroupsCaculator {
         } 
     }
     
+    private static List<Integer> addToPrevSubject(TypeOfGroupWork type, Subject subject, 
+            List<Integer> subgroups){      
+        List<Integer> result = new ArrayList<>();
+        result.addAll(subgroups);
+        
+        for(AcademicGroup group : subject.getGroups()){
+            if(!addToList(type, group, result)){
+                return new ArrayList<>();
+            }
+        }
+        
+        return result;
+    }
+    
+    private static List<Integer> createSubgroupsList(TypeOfGroupWork type, Subject subject){
+        List<Integer> result = new ArrayList<>();
+        
+        for(AcademicGroup group : subject.getGroups()){
+            if(!addToList(type, group, result)){
+                int total = calculateSubgroups(type, group.getTotalStudents());
+                
+                for(int i = 0; i < total - 1; i++){
+                    result.add(type.getMaxStudents());
+                }
+                
+                result.add(group.getTotalStudents() % type.getMaxStudents());               
+            }
+        }
+        
+        return result;
+    }
+    
+    private static boolean addToList(TypeOfGroupWork type, AcademicGroup group, 
+            List<Integer> subgroups){
+        for(int i = 0; i < subgroups.size(); i++){
+            if(canBeAdded(type, group, subgroups.get(i))){
+                subgroups.set(i, subgroups.get(i) + group.getTotalStudents());
+                return true;  
+            }
+        }
+        
+        return false;
+    }
+    
     private static boolean canBeAdded(TypeOfGroupWork type, AcademicGroup group, 
             int total){
-        if(total == 0)
-            return true;
+        int min = type.getMinStudents();
         
-        if(group.getTotalStudents() > type.getMinStudents())
+        if(total > min && group.getTotalStudents() > min)
             return false;
         
         return group.getTotalStudents() + total <= type.getMaxStudents();
@@ -138,5 +168,17 @@ public class K3SubgroupsCaculator {
     
     private static int calculateSubgroups(TypeOfGroupWork type, int total){
         return (int) Math.ceil(total / (double) type.getMaxStudents());
+    }
+    
+    private static void correctPractice(List<K3SubjectEntity> subjects){
+        TypeOfGroupWork practice = TypeOfGroupWork.Practice;
+        K3SubjectEntity firstSubject = subjects.get(0);
+        
+        for(K3SubjectEntity subject : subjects){
+            if(subject.getSubgroup(TypeOfGroupWork.Lab) == 0){
+                firstSubject.addSubgroups(practice, subject.getSubgroup(practice));
+                subject.resetSubgroups(practice);
+            }
+        }
     }
 }

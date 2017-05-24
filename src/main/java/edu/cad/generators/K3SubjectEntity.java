@@ -29,4 +29,8 @@ public class K3SubjectEntity {
     public void addSubgroups(TypeOfGroupWork type, int value){
         subgroups.put(type, subgroups.get(type) + value);
     }
+    
+    public void resetSubgroups(TypeOfGroupWork type){
+        subgroups.put(type, 0);
+    }
 }
