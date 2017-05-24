@@ -18,7 +18,6 @@ public class AllK3ColumnsFactory {
             Cell cell) {
         
         if (null != CellWithTokenValidator.getContentIfCellValid(cell, K3_WP)){
-            System.out.println("HUI");
             dest.get(AbstractK3Column.class)
                     .add(K3WPColumnsFactory.createColumn(cell));
         }

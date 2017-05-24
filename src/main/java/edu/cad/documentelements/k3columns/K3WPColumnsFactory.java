@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package edu.cad.documentelements.k3columns;
 
 import edu.cad.daos.HibernateDAO;
@@ -15,10 +10,6 @@ import edu.cad.utils.documentutils.CellWithTokenValidator;
 import edu.cad.utils.documentutils.ColumnTokenStringSplitter;
 import org.apache.poi.ss.usermodel.Cell;
 
-/**
- *
- * @author Олександр
- */
 public class K3WPColumnsFactory {
     private static final String TOKEN_BEGINNING = 
             ColumnTokenStringSplitter.K3_WP_TOKEN_BEGINNING;
@@ -80,11 +71,11 @@ public class K3WPColumnsFactory {
             case REFERATS:
                 return new ControlK3Column(columnIndex, controlDAO.get(8));
                 
-            case AC_BUDG_GROUPS:
+            case AC_BUDG_GROUPS://AC_MAIN_SOURCE
                 return new GroupsK3Column(columnIndex, 
                         SourceOfFinancing.Budgetary, TypeOfGroupWork.Lection);
             case SUBGR_PRACT_BUDG:
-                return new GroupsK3Column(columnIndex, 
+                return new GroupsK3Column(columnIndex,
                         SourceOfFinancing.Budgetary, TypeOfGroupWork.Practice);
             case SUBGR_LABS_BUDG:
                 return new GroupsK3Column(columnIndex, 
