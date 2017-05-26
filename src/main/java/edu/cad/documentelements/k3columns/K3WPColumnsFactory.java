@@ -101,11 +101,7 @@ public class K3WPColumnsFactory {
                         SourceOfFinancing.Contract, SourceOfFinancing.Contract);
                 
             case STREAM:
-                /*
-                return new StreamColumn(columnIndex, mainSource);
-                */
-                System.out.println("BudgetStream");
-                break;
+                return new K3StreamColumn(columnIndex);
         }
         return null;        
     }
