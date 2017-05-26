@@ -36,14 +36,14 @@ public class FormK3Generator implements IDocumentGenerator{
                 K3SubjectListCreator.createList(educationForm, source, department, 1);
         // first semester
         Map<Class, List<AbstractColumn>> firstSemMap = getInitializedMap();
-        fillColumns(firstSemMap,
+        addColumnsToMap(firstSemMap,
                 K3SemesterStartRowFinder.findSemesterStartRow(sheet, 1));
         /*
         DOCUMENT FILL CODE 
         */
         // second semester
         Map<Class, List<AbstractColumn>> secondSemMap = getInitializedMap();    
-        fillColumns(secondSemMap, 
+        addColumnsToMap(secondSemMap, 
                 K3SemesterStartRowFinder.findSemesterStartRow(sheet, 2));
         /*
         DOCUMENT FILL CODE
@@ -58,7 +58,7 @@ public class FormK3Generator implements IDocumentGenerator{
         return map;
     }
 
-    private void fillColumns(Map<Class, List<AbstractColumn>> map, Row row) {
+    private void addColumnsToMap(Map<Class, List<AbstractColumn>> map, Row row) {
         for (int i = 0; i <= row.getLastCellNum(); i++) {
             Cell cell = row.getCell(i);
             AllK3ColumnsFactory.createAndAddColumn(map, cell, source);
