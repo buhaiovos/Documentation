@@ -15,80 +15,126 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public abstract class AbstractEntityController<T extends IDatabaseEntity> extends HttpServlet {
+public abstract class AbstractEntityController<T extends IDatabaseEntity> 
+        extends HttpServlet {
+    
     private static final long serialVersionUID = 1L;
+    
     private final Map<String, Object> JSONROOT = new HashMap<>();
+    
     protected final IDAO<T> dao;
+    
+    private Gson gson;
+    private List<T> list;
+    private String action;
+    private Map<String, Object> content;
+    
+    protected abstract T getInstance(HttpServletRequest request);
 
     public AbstractEntityController(Class<T> typeParameterClass) {
             dao = new HibernateDAO<>(typeParameterClass);
+            list = new ArrayList<>();
     }
 
     @Override
-    protected void doGet(HttpServletRequest request,
-                    HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException {
             doPost(request, response);
     }
 
     @Override
-    protected void doPost(HttpServletRequest request,
-                    HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException {
+        
+        createGson();
+        action = request.getParameter("action");
+        content = new HashMap<>();
+        setResponseSettings(response);
+        processAction(request, response);
+    }
 
-        String action = request.getParameter("action");
-        List<T> list = new ArrayList<>();
-
+    private void createGson() {
         GsonBuilder builder = new GsonBuilder();
         builder.registerTypeAdapterFactory(HibernateProxyTypeAdapter.FACTORY);
-        Gson gson = builder.excludeFieldsWithoutExposeAnnotation().create();
+        gson = builder.excludeFieldsWithoutExposeAnnotation().create();
+    }
 
+    private void setResponseSettings(HttpServletResponse response) {
         response.setContentType("application/json");
         response.setHeader("Content-type", "text/html;charset=UTF-8");
+    }
 
+    private void processAction(HttpServletRequest request,
+            HttpServletResponse response) throws IOException {
         if (action != null) {
             try {
-                if (action.equals("list")) {
-                    list = dao.getAll();
-
-                    JSONROOT.put("Result", "OK");
-                    JSONROOT.put("Records", list);
-
-                    String jsonArray = gson.toJson(JSONROOT);
-                    System.out.println(jsonArray);
-                    response.getWriter().print(jsonArray);
-                } else if (action.equals("create") || action.equals("update")) {
-                    T instance = getInstance(request);
-
-                    if (action.equals("create")) {
-                        dao.create(instance);
-                    } else if (action.equals("update")) {
-                        dao.update(instance);
-                    }
-
-                    JSONROOT.put("Result", "OK");
-                    JSONROOT.put("Record", instance);
-
-                    String jsonArray = gson.toJson(JSONROOT);
-                    response.getWriter().print(jsonArray);
-                } else if (action.equals("delete")) {
-                    if (request.getParameter("id") != null) {
-                        int id = Integer.parseInt(request.getParameter("id"));
-                        dao.delete(id);
-
-                        JSONROOT.put("Result", "OK");
-
-                        String jsonArray = gson.toJson(JSONROOT);
-                        System.out.println(jsonArray);
-                        response.getWriter().print(jsonArray);
-                    }
+                switch(action) {
+                    case "list":
+                        processListAction(response);
+                        break;
+                    case "create":
+                    case "update":
+                        processCreateUpdateAction(request, response);
+                        break;
+                    case "delete":
+                        processDeleteAction(request, response);
+                        break;
                 }
-            } catch (IOException | NumberFormatException ex) {
-                        JSONROOT.put("Result", "ERROR");
-                        JSONROOT.put("Message", ex.getMessage());
-                        String error = gson.toJson(JSONROOT);
-                        response.getWriter().print(error);
+            }
+            catch (IOException | NumberFormatException ex) {
+                content.put("Result", "ERROR");
+                content.put("Message", ex.getMessage());
+                writeResponse(response);
             }
         }
     }
+
+    private void processListAction(HttpServletResponse response) 
+            throws IOException {
+        list = dao.getAll();
+
+        putOk();
+        content.put("Records", list);
+        writeResponse(response);
+    }
+
+    private void processCreateUpdateAction(HttpServletRequest request, 
+            HttpServletResponse response) throws IOException {
+        
+        T instance = getInstance(request);
+
+        if (action.equals("create")) {
+            dao.create(instance);
+        } else if (action.equals("update")) {
+            dao.update(instance);
+        }
+
+        putOk();
+        content.put("Record", instance);
+        writeResponse(response);
+    }
+    private void processDeleteAction(HttpServletRequest request, 
+            HttpServletResponse response) throws IOException {
+        
+        if (request.getParameter("id") != null) {
+            int id = Integer.parseInt(request.getParameter("id"));
+            dao.delete(id);
+
+            putOk();
+            writeResponse(response);
+        }
+    }
     
-    protected abstract T getInstance(HttpServletRequest request);
+    private void writeResponse(HttpServletResponse response) throws IOException {
+        JSONROOT.putAll(content);
+        String jsonArray = gson.toJson(JSONROOT);
+        
+        System.out.println(jsonArray);
+        
+        response.getWriter().print(jsonArray);
+    }
+    
+    private void putOk() {
+        content.put("Result", "OK");
+    }
 }
