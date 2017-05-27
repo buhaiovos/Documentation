@@ -20,7 +20,7 @@ public abstract class AbstractEntityController<T extends IDatabaseEntity>
     
     private static final long serialVersionUID = 1L;
     
-    private final Map<String, Object> JSONROOT = new HashMap<>();
+    private Map<String, Object> JSONROOT;
     
     protected final IDAO<T> dao;
     
@@ -49,6 +49,7 @@ public abstract class AbstractEntityController<T extends IDatabaseEntity>
         createGson();
         action = request.getParameter("action");
         content = new HashMap<>();
+        JSONROOT = new HashMap<>();
         setResponseSettings(response);
         processAction(request, response);
     }
@@ -102,13 +103,13 @@ public abstract class AbstractEntityController<T extends IDatabaseEntity>
             HttpServletResponse response) throws IOException {
         
         T instance = getInstance(request);
-
+        /*
         if (action.equals("create")) {
             dao.create(instance);
         } else if (action.equals("update")) {
             dao.update(instance);
         }
-
+        */
         putOk();
         content.put("Record", instance);
         writeResponse(response);
