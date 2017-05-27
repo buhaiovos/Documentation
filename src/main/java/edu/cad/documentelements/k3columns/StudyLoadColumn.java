@@ -1,10 +1,8 @@
 package edu.cad.documentelements.k3columns;
 
-import edu.cad.documentelements.columns.AbstractColumn;
-import edu.cad.entities.CurriculumSubject;
-import org.apache.poi.ss.usermodel.Row;
+import edu.cad.generators.K3SubjectEntity;
 
-public class StudyLoadColumn extends AbstractColumn {
+public class StudyLoadColumn extends AbstractK3Column {
     
     private final StudyLoadType type;
     
@@ -16,10 +14,10 @@ public class StudyLoadColumn extends AbstractColumn {
     public StudyLoadType getColumnType() {
         return this.type;
     }
-    
+
     @Override
-    public void fill(Row row, CurriculumSubject record) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public String getValue(K3SubjectEntity subject) {
+        throw new UnsupportedOperationException("Not supported yet."); 
     }
     
 }
