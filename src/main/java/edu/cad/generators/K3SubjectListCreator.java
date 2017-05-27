@@ -52,6 +52,8 @@ public class K3SubjectListCreator {
             entities.addAll(K3SubgroupsCaculator.calculateList(subjectMap.get(dictionary), source));
         }
         
+        assignNumbersToSubjectEntities(entities);
+        
         return entities;
     }
     
@@ -134,5 +136,12 @@ public class K3SubjectListCreator {
         }
         
         return index;
+    }
+
+    private static void assignNumbersToSubjectEntities(List<K3SubjectEntity> entities) {
+        int orderNum = 1;
+        for (K3SubjectEntity entity : entities) {
+            entity.setNumber(orderNum++);
+        }
     }
 }

@@ -6,6 +6,7 @@ import java.util.Map;
 
 public class K3SubjectEntity {
     
+    private int number;
     private final Subject subject;
     private final Map<TypeOfGroupWork, Integer> subgroups;
     
@@ -16,6 +17,14 @@ public class K3SubjectEntity {
         for(TypeOfGroupWork type : TypeOfGroupWork.values()){
             subgroups.put(type, 0);
         }
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
     }
     
     public Subject getSubject(){
