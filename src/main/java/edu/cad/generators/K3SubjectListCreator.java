@@ -51,7 +51,7 @@ public class K3SubjectListCreator {
         for(SubjectDictionary dictionary : subjectMap.keySet()){
             entities.addAll(K3SubgroupsCaculator.calculateList(subjectMap.get(dictionary), source));
         }
-        
+
         return entities;
     }
     

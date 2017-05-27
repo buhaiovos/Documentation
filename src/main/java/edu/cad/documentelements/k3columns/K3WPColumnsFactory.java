@@ -29,8 +29,16 @@ public class K3WPColumnsFactory {
                     return createTitleColumn(cell);
                 } 
                 else {
-                    return createColumn(cell.getColumnIndex(), ctss.getType(),
-                            mainSource);
+                    AbstractK3Column column = createColumn(cell.getColumnIndex(), 
+                            ctss.getType(), mainSource);
+                    
+                    if(column == null){
+                        column = new FullTitleColumn(cell.getColumnIndex(), "");
+                        column.clear(cell.getRow());
+                        return null;
+                    }
+                    
+                    return column;
                 }
             }      
         }  
@@ -85,7 +93,7 @@ public class K3WPColumnsFactory {
                         TypeOfGroupWork.Lab);
             case AC_GROUPS_OTHER:
                 return new GroupsK3Column(columnIndex, getOtherSource(mainSource), 
-                        TypeOfGroupWork.Lab);
+                        TypeOfGroupWork.OtherSource);
                 
             case BUDG_GR_BUDG_STUD:
                 return new StudentsK3Column(columnIndex, 

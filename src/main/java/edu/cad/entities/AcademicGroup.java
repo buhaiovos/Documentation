@@ -1,5 +1,6 @@
 package edu.cad.entities;
 
+import com.google.gson.annotations.Expose;
 import edu.cad.entities.interfaces.IDatabaseEntity;
 import java.io.Serializable;
 import javax.persistence.*;
@@ -10,6 +11,7 @@ import org.hibernate.annotations.GenericGenerator;
 public class AcademicGroup implements IDatabaseEntity, Serializable, 
         Comparable<AcademicGroup> {
     
+    @Expose
     @Id
     @GenericGenerator(
         name = "assigned-identity", 
@@ -19,6 +21,7 @@ public class AcademicGroup implements IDatabaseEntity, Serializable,
     @Column(name = "id", unique = true, nullable = false)
     private int id;
     
+    @Expose
     @Column(name = "cipher")
     private String cipher;
     

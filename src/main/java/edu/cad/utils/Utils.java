@@ -4,7 +4,7 @@ public class Utils {
     
     public static boolean isParseable(String value){
         try{
-            Integer.parseInt(value);
+            Double.parseDouble(value);
         } catch(NumberFormatException ex) {
             return false;
         }

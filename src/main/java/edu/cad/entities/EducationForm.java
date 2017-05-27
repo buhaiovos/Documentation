@@ -84,4 +84,11 @@ public class EducationForm implements IDatabaseEntity, Serializable{
         }
         return true;
     }
+
+    @Override
+    public String toString() {
+        return denotation;
+    }
+    
+    
 }
