@@ -12,12 +12,11 @@
 <script src="js/jquery.jtable.min.js" type="text/javascript"></script>
 <script src="js/jquery.jtable.editinline.js" type="text/javascript"></script>
 <!-- User Defined Jtable js file -->
-<script src="js/test.js" type="text/javascript"></script>
+<script src="js/AcademicGroup.js" type="text/javascript" charset="UTF-8"></script>
 
 </head>
 <body>
 <div style="text-align: center;">
-        <h4>Test</h4>
         <div id="GroupTableContainer"></div>
 </div>
 </body>

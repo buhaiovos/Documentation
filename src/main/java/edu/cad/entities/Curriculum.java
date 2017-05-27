@@ -1,5 +1,6 @@
 package edu.cad.entities;
 
+import com.google.gson.annotations.Expose;
 import edu.cad.entities.interfaces.IDatabaseEntity;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -16,6 +17,7 @@ import org.hibernate.annotations.GenericGenerator;
 @DiscriminatorOptions(force=true)
 public class Curriculum implements IDatabaseEntity, Serializable{
     
+    @Expose
     @Id
     @GenericGenerator(
         name = "assigned-identity", 
