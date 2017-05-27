@@ -93,12 +93,10 @@ div.jtable-main-container div.jtable-title .jtable-close-button + div.jtable-too
 div.jtable-main-container table.jtable {
   width: 100%;
 }
-div.jtable-main-container table.jtable thead {
-  height: auto;
-}
 div.jtable-main-container table.jtable thead th {
   vertical-align: middle;
   text-align: center;
+  height: auto;
 }
 div.jtable-main-container table.jtable thead th.jtable-column-header div.jtable-column-header-container {
   position: relative;
