@@ -4,6 +4,7 @@ import edu.cad.entities.AcademicGroup;
 import edu.cad.entities.Subject;
 import edu.cad.generators.K3SubjectEntity;
 import java.util.Set;
+import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
 
 public class FullTitleColumn extends AbstractK3Column{
@@ -24,7 +25,11 @@ public class FullTitleColumn extends AbstractK3Column{
     }
     
     @Override
-    public  void fill(Row row, edu.cad.generators.K3SubjectEntity subject, String value){
+    public  void fill(Row row, K3SubjectEntity subject, String value){
+        CellStyle style = row.getSheet().getWorkbook().createCellStyle();
+        style.setWrapText(true);
+        row.getCell(columnNumber).setCellStyle(style);
+        row.setHeight((short)-1);
         value = getValue(subject);
         fill(row, value);
     }

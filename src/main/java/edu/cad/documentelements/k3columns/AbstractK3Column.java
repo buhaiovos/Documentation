@@ -22,13 +22,15 @@ public abstract class AbstractK3Column extends AbstractColumn{
     public void fill(Row row, K3SubjectEntity subject, String value){
         value = getValue(subject);
         
-        if(!Utils.isParseable(value))
+        if(!Utils.isParseable(value)){
+            System.err.println("No no no");
             return;
+        }
             
-        int intValue = Integer.parseInt(value);
+        double numericValue = Double.parseDouble(value);
         
-        if(intValue > 0) {
-            this.fill(row, intValue);
+        if(numericValue > 0) {
+            this.fill(row, numericValue);
         } else {
             this.clear(row);
         }
