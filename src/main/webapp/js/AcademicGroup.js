@@ -38,14 +38,9 @@ $(document).ready(function() {
                 },
                 specialization : {
                     title : 'Спеціалізація',
-                    display: function(data){
-                        if(typeof data.record.specialization === 'undefined')
-                            return null;
-                        
-                        return data.record.specialization.denotation;
-                    },
+                    options: 'SpecializationController?action=dropdownlist',
                     width : '20%',
-                    edit : true
+                    edit : true                                    
                 },
                 qualification : {
                     title : 'Освітньо-кваліфікаційний рівень',

@@ -18,24 +18,26 @@ import javax.servlet.http.HttpServletResponse;
 public abstract class AbstractEntityController<T extends IDatabaseEntity> 
         extends HttpServlet {
     
-    private static final long serialVersionUID = 1L;
-    
-    private Map<String, Object> JSONROOT;
+    //private static final long serialVersionUID = 1L;
+
+    //private final Map<String, Object> JSONROOT = new HashMap<>();
     
     protected final IDAO<T> dao;
+    protected Gson gson;   
+    protected Map<String, Object> content;
     
-    private Gson gson;
     private List<T> list;
     private String action;
-    private Map<String, Object> content;
-    
-    protected abstract T getInstance(HttpServletRequest request);
 
     public AbstractEntityController(Class<T> typeParameterClass) {
-            dao = new HibernateDAO<>(typeParameterClass);
-            list = new ArrayList<>();
+        dao = new HibernateDAO<>(typeParameterClass);
+        list = new ArrayList<>();
     }
 
+    protected abstract void getDropDownList(HttpServletResponse response) throws IOException;
+    
+    protected abstract T getInstance(HttpServletRequest request);
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
@@ -45,7 +47,6 @@ public abstract class AbstractEntityController<T extends IDatabaseEntity>
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
-        
         createGson();
         action = request.getParameter("action");
         content = new HashMap<>();
@@ -54,12 +55,25 @@ public abstract class AbstractEntityController<T extends IDatabaseEntity>
         processAction(request, response);
     }
 
-    private void createGson() {
+    protected void createGson() {
         GsonBuilder builder = new GsonBuilder();
         builder.registerTypeAdapterFactory(HibernateProxyTypeAdapter.FACTORY);
         gson = builder.excludeFieldsWithoutExposeAnnotation().create();
     }
 
+    protected void writeResponse(HttpServletResponse response) throws IOException {
+        //JSONROOT.putAll(content);
+        String jsonArray = gson.toJson(content);
+        
+        System.out.println(jsonArray);
+        
+        response.getWriter().print(jsonArray);
+    }
+    
+    protected void putOk() {
+        content.put("Result", "OK");
+    }
+    
     private void setResponseSettings(HttpServletResponse response) {
         response.setContentType("application/json");
         response.setHeader("Content-type", "text/html;charset=UTF-8");
@@ -79,6 +93,9 @@ public abstract class AbstractEntityController<T extends IDatabaseEntity>
                         break;
                     case "delete":
                         processDeleteAction(request, response);
+                        break;
+                    case "dropdownlist":
+                        getDropDownList(response);
                         break;
                 }
             }
@@ -124,18 +141,5 @@ public abstract class AbstractEntityController<T extends IDatabaseEntity>
             putOk();
             writeResponse(response);
         }
-    }
-    
-    private void writeResponse(HttpServletResponse response) throws IOException {
-        JSONROOT.putAll(content);
-        String jsonArray = gson.toJson(JSONROOT);
-        
-        System.out.println(jsonArray);
-        
-        response.getWriter().print(jsonArray);
-    }
-    
-    private void putOk() {
-        content.put("Result", "OK");
     }
 }

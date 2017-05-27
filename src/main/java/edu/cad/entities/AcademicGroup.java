@@ -37,22 +37,18 @@ public class AcademicGroup implements IDatabaseEntity, Serializable,
     @Column(name = "start_year")
     private int startYear;
     
-    @Expose
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_specialization")
     private Specialization specialization;
     
-    @Expose
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_qualification")
     private Qualification qualification;
     
-    @Expose
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_education_form")
     private EducationForm educationForm;
     
-    @Expose
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_workplan")
     private Workplan workplan;
