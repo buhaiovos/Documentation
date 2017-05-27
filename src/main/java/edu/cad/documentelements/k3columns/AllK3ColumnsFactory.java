@@ -1,6 +1,5 @@
 package edu.cad.documentelements.k3columns;
 
-import edu.cad.documentelements.columns.AbstractColumn;
 import edu.cad.generators.SourceOfFinancing;
 import edu.cad.utils.documentutils.CellWithTokenValidator;
 import edu.cad.utils.documentutils.ColumnTokenStringSplitter;
@@ -15,7 +14,7 @@ public class AllK3ColumnsFactory {
     private static final String K3_ST = 
             ColumnTokenStringSplitter.K3_ST_LOAD_TOKEN_BEGINNING;
     
-    public static void createAndAddColumn(Map<Class, List<AbstractColumn>> dest,
+    public static void createAndAddColumn(Map<Class, List<AbstractK3Column>> dest,
             Cell cell, SourceOfFinancing mainSource) {
         
         if (null != CellWithTokenValidator.getContentIfCellValid(cell, K3_WP)){
