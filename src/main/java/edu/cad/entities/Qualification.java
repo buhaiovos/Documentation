@@ -42,6 +42,7 @@ public class Qualification implements IDatabaseEntity, Serializable{
         return id;
     }
 
+    @Override
     public void setId(int id) {
         this.id = id;
     }

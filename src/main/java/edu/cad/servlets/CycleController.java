@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/CycleController")
 public class CycleController extends AbstractEntityController<Cycle>{
 
-    public CycleController(Class<Cycle> typeParameterClass) {
-        super(typeParameterClass);
+    public CycleController() {
+        super(Cycle.class);
     }
 
     @Override

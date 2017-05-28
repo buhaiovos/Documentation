@@ -36,6 +36,7 @@
                                     <li><a href="ControlDictionary.jsp">Словник контрольних заходів</a></li>
                                     <li><a href="#">Контрольні заходи</a></li>
                                     <li><a href="SubjectType.jsp">Типи предметів</a></li>
+                                    <li><a href="Cycle.jsp">Розділи предметів</a></li>
                                 </ul>
                             </li>
 
