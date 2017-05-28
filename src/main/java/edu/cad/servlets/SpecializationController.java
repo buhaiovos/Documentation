@@ -3,8 +3,6 @@ package edu.cad.servlets;
 import edu.cad.entities.Specialization;
 import edu.cad.utils.gson.Option;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,17 +17,7 @@ public class SpecializationController extends AbstractEntityController<Specializ
     @Override
     protected Specialization getInstance(HttpServletRequest request) {
         Specialization specialization = new Specialization();
-        
-        if (request.getParameter("id") != null) {
-            int id = Integer.parseInt(request.getParameter("id"));
-            
-            Specialization found = dao.get(id);
-            if(found != null) {
-                specialization = found;
-            } else {
-                specialization.setId(id);
-            }
-        }
+        specialization = initializeInstance(specialization, request);
 
         setStringProperty(request, "denotation", specialization::setDenotation);
         
@@ -38,18 +26,6 @@ public class SpecializationController extends AbstractEntityController<Specializ
 
     @Override
     protected void getDropDownList(HttpServletResponse response) throws IOException {
-        //Map<String, Object> content = new HashMap<>();
-        List<Option> list = new ArrayList();
-
-        for(Specialization specialization : dao.getAll()){
-            list.add(new Option(specialization.getDenotation(), specialization.getId()));
-        }
-        putOk();
-        //content.put("Result", "OK");
-        content.put("Options", list);
-        writeResponse(response);
-        /*String jsonArray = new Gson().toJson(content);
-        
-        response.getWriter().print(jsonArray);*/
+        super.getDropDownList(Specialization::getDenotation, response);
     }
 }

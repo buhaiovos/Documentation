@@ -26,6 +26,15 @@ public class AcademicGroupSerializer implements JsonSerializer<AcademicGroup>{
         
         if(instance.getSpecialization() != null)
             jsonElement.getAsJsonObject().addProperty("specialization", instance.getSpecialization().getId());
+        
+        if(instance.getQualification() != null)
+            jsonElement.getAsJsonObject().addProperty("qualification", instance.getQualification().getId());
+        
+        if(instance.getEducationForm() != null)
+            jsonElement.getAsJsonObject().addProperty("educationForm", instance.getEducationForm().getId());
+        
+        if(instance.getWorkplan() != null)
+            jsonElement.getAsJsonObject().addProperty("workplan", instance.getWorkplan().getId());
        
         return jsonElement.getAsJsonObject();
     }

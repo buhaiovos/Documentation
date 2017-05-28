@@ -30,8 +30,13 @@ public class CurriculumSubject implements IDatabaseEntity, Serializable,
     }
     
     @Override
-    public int getId(){
-        return 0;
+    public int getId(){ 
+        throw new UnsupportedOperationException("Not supported yet."); 
+    }
+    
+    @Override
+    public void setId(int id) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
     
     public CurriculumSubjectId getPk() {

@@ -63,7 +63,7 @@ public class AcademicGroupController extends AbstractEntityController<AcademicGr
 
     @Override
     protected void getDropDownList(HttpServletResponse response) throws IOException {
-        throw new UnsupportedOperationException("Not supported yet.");
+        super.getDropDownList(AcademicGroup::getCipher, response);
     }
 
     @Override

@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Академічні групи</title>
+    <title>Форми навчання</title>
     <!-- jTable Metro styles. -->
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link href="css/metro/blue/jtable.css" rel="stylesheet" type="text/css" />
@@ -13,7 +13,7 @@
     <script src="js/jquery.jtable.min.js" type="text/javascript"></script>
     <script src="js/jquery.jtable.editinline.js" type="text/javascript"></script>
     <!-- User Defined Jtable js file -->
-    <script src="js/AcademicGroup.js" type="text/javascript" charset="UTF-8"></script>
+    <script src="js/EducationForm.js" type="text/javascript" charset="UTF-8"></script>
     <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -45,7 +45,7 @@
                                     <li><a href="AcademicGroup.jsp">Групи</a></li>
                                     <li><a href="EducationForm.jsp">Форми навчання</a></li>
                                     <li><a href="Specialization.jsp">Спеціалізації</a></li>
-                                    <li><a href="Qualification.jsp">ОКР</a></li>    
+                                    <li><a href="Qualification.jsp">ОКР</a></li>       
                                     <li><a href="#">Практика</a></li>
                                     <li><a href="#">Державна атестація</a></li>
                                     <li><a href="#">Підготовка диплому</a></li>
@@ -85,7 +85,7 @@
         </div>
     </header>
     <div style="text-align: center;">
-        <div id="GroupTableContainer"></div>
+        <div id="EducationFormTableContainer"></div>
     </div>
 </body>
 </html>
