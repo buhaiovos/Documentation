@@ -1,31 +1,35 @@
 /* Menu General Styles */
 .menuBackground {
-	background: #08A3DB;
-	text-align: center; /* or change the value to left to align left*/
+    font-family: 'Segoe UI Semilight', 'Open Sans', Verdana, Arial, Helvetica, sans-serif;
+    font-weight: 300;
+    font-size: 18px;
+    color: #fff;
+    background: #08A3DB;
+    text-align: center; /* or change the value to left to align left*/
 }
 .dropDownMenu a {
-	color: #FFF;
+    color: #FFF;
 }
 .dropDownMenu,
 .dropDownMenu ul {
-	list-style: none;
-	margin: 0;
-	padding: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 .dropDownMenu li {
 	position: relative;
 }
 .dropDownMenu a {
-	padding: 10px 20px;
-	display: block;
-	text-decoration: none;
+    padding: 10px 20px;
+    display: block;
+    text-decoration: none;
 }
 .dropDownMenu a:hover {
-	background: #000;
+    background: #000;
 }
 .left {
-	float:left;
-	padding-left: 15px;
+    float:left;
+    padding-left: 15px;
 }
 
 
@@ -45,14 +49,15 @@
 
 /* Level 2 */
 .dropDownMenu > li > ul {
-	text-align: left;
-	width: auto; /* change auto value with 200px if you want a bigger menu */
-	display: none;
-	background: #5DBB04;
-	position: absolute;
-	top: 100%;
-	left: 0;
-	z-index: 9999999; /* if you have YouTube iframes, is good to have a bigger z-index so the video can appear above the video */
+    font-size: 15px;
+    text-align: left;
+    width: auto; /* change auto value with 200px if you want a bigger menu */
+    display: none;
+    background: #0680AC;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 9999999; /* if you have YouTube iframes, is good to have a bigger z-index so the video can appear above the video */
 }
 .dropDownMenu > li:hover > ul {
 	display: block;
@@ -66,7 +71,7 @@
 .dropDownMenu > li > ul > li > ul {
 	text-align: left;
 	display: none;
-	background: #E7B400;
+	background: #045B7B;
 	position: absolute;
 	left: 100%;
 	top: 0;
