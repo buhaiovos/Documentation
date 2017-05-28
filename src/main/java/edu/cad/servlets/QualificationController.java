@@ -17,10 +17,7 @@ public class QualificationController extends AbstractEntityController<Qualificat
     protected Qualification getInstance(HttpServletRequest request) {
         Qualification qualification = new Qualification();       
         qualification = initializeInstance(qualification, request);
-        
-        if (request.getParameter("denotation") != null) {
-            qualification.setDenotation(request.getParameter("denotation"));
-        }
+        setStringProperty(request, "denotation", qualification::setDenotation);
         
         return qualification;
     }

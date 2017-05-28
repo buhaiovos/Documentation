@@ -1,7 +1,6 @@
 package edu.cad.servlets;
 
 import edu.cad.entities.Specialization;
-import edu.cad.utils.gson.Option;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +17,6 @@ public class SpecializationController extends AbstractEntityController<Specializ
     protected Specialization getInstance(HttpServletRequest request) {
         Specialization specialization = new Specialization();
         specialization = initializeInstance(specialization, request);
-
         setStringProperty(request, "denotation", specialization::setDenotation);
         
         return specialization;
