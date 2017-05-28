@@ -24,8 +24,8 @@ public abstract class AbstractEntityController<T extends IDatabaseEntity>
     protected final IDAO<T> dao;
     protected Gson gson;   
     protected Map<String, Object> content;
-    
     protected List<T> list;
+    
     private String action;
 
     public AbstractEntityController(Class<T> typeParameterClass) {
@@ -103,14 +103,24 @@ public abstract class AbstractEntityController<T extends IDatabaseEntity>
         }
     }
     
+    protected void setFloatProperty(HttpServletRequest request,
+            String requestParamString, FloatPropertySetter propSetter) {
+        
+        String numString = request.getParameter(requestParamString);
+        if (numString != null) {
+            float value = Float.parseFloat(numString);
+            propSetter.setProperty(value);
+        }
+    }
+    
     protected <E extends IDatabaseEntity> 
-        void setObjectProperty(HttpServletRequest request,String requestParamString, 
-            ObjectPropertySetter<E> propSetter, Class<E> objClassType) {
+        void setObjectProperty(HttpServletRequest request, String requestParamString, 
+            ObjectPropertySetter<E> propSetter, Class<E> propertyObjClass) {
         
         String entityIdStr = request.getParameter(requestParamString);
         if (entityIdStr != null) {
             int id = Integer.parseInt(entityIdStr.trim());
-            propSetter.setProperty(new HibernateDAO<>(objClassType).get(id));
+            propSetter.setProperty(new HibernateDAO<>(propertyObjClass).get(id));
         }
     }
 
@@ -186,7 +196,6 @@ public abstract class AbstractEntityController<T extends IDatabaseEntity>
                 writeResponse(response);
             }
         }
-        
     }
 
     private void processListAction(HttpServletResponse response) 
@@ -212,6 +221,7 @@ public abstract class AbstractEntityController<T extends IDatabaseEntity>
         content.put("Record", instance);
         writeResponse(response);
     }
+    
     private void processDeleteAction(HttpServletRequest request, 
             HttpServletResponse response) throws IOException {
         
@@ -236,8 +246,12 @@ public abstract class AbstractEntityController<T extends IDatabaseEntity>
         void setProperty(T object);
     }
     
-    protected interface BooleanPropertySetter<T> {
+    protected interface BooleanPropertySetter {
         void setProperty(boolean value);
+    }
+    
+    protected interface FloatPropertySetter {
+        void setProperty(float value);
     }
     
 }

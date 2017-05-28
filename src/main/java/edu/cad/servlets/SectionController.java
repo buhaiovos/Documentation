@@ -23,7 +23,7 @@ public class SectionController extends AbstractEntityController<Section>{
         section = initializeInstance(section, request);
         
         setStringProperty(request, "denotation", section::setDenotation);
-        //setBooleanProperty(request, "optional", section::setOptional);
+        setBooleanProperty(request, "optional", section::setOptional);
         setObjectProperty(request, "cycle", section::setCycle, Cycle.class);
         
         return section;
