@@ -20,20 +20,9 @@ public class AcademicGroupController extends AbstractEntityController<AcademicGr
     }
 
     @Override
-    protected AcademicGroup getInstance(HttpServletRequest request) {
-        
+    protected AcademicGroup getInstance(HttpServletRequest request) {       
         AcademicGroup group = new AcademicGroup();
-        
-        if (request.getParameter("id") != null) {
-            int id = Integer.parseInt(request.getParameter("id"));
-            
-            AcademicGroup found = dao.get(id);
-            if(found != null) {
-                group = found;
-            } else {
-                group.setId(id);
-            }
-        }
+        group = initializeInstance(group, request);
         
         setStringProperty(request, "cipher", group::setCipher);    
         setIntProperty(request, "budgetaryStudents", group::setBudgetaryStudents);
@@ -56,9 +45,9 @@ public class AcademicGroupController extends AbstractEntityController<AcademicGr
     }
     
     @Override
-    protected void createGson() {
-        gson = new GsonBuilder().registerTypeAdapter(AcademicGroup.class, 
-                new AcademicGroupSerializer()).setPrettyPrinting().create();
+    protected GsonBuilder createGsonBuilder() {
+        return super.createGsonBuilder().registerTypeAdapter(AcademicGroup.class, 
+                new AcademicGroupSerializer());
     }
 
     @Override

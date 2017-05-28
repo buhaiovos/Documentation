@@ -25,7 +25,7 @@ public abstract class AbstractEntityController<T extends IDatabaseEntity>
     protected Gson gson;   
     protected Map<String, Object> content;
     
-    private List<T> list;
+    protected List<T> list;
     private String action;
 
     public AbstractEntityController(Class<T> typeParameterClass) {
@@ -53,11 +53,14 @@ public abstract class AbstractEntityController<T extends IDatabaseEntity>
         processAction(request, response);
     }
 
-    protected void createGson() {
+    protected GsonBuilder createGsonBuilder() {
         GsonBuilder builder = new GsonBuilder();
         builder.registerTypeAdapterFactory(HibernateProxyTypeAdapter.FACTORY);
-        gson = builder.excludeFieldsWithoutExposeAnnotation().create();
-    }
+        builder.excludeFieldsWithoutExposeAnnotation();
+        builder.setPrettyPrinting();
+        
+        return builder;
+    }  
 
     protected void writeResponse(HttpServletResponse response) throws IOException {
         String jsonArray = gson.toJson(content);
@@ -129,9 +132,18 @@ public abstract class AbstractEntityController<T extends IDatabaseEntity>
         writeResponse(response);
     }
     
+    protected void getDependencyList(HttpServletRequest request, 
+            HttpServletResponse response) throws IOException{
+        processListAction(response);
+    }
+    
     private void setResponseSettings(HttpServletResponse response) {
         response.setContentType("application/json");
         response.setHeader("Content-type", "text/html;charset=UTF-8");
+    }
+    
+    private void createGson() {       
+        gson = createGsonBuilder().create();
     }
 
     private void processAction(HttpServletRequest request,
@@ -148,6 +160,9 @@ public abstract class AbstractEntityController<T extends IDatabaseEntity>
                         break;
                     case "delete":
                         processDeleteAction(request, response);
+                        break;
+                    case "dependencylist":
+                        getDependencyList(request, response);
                         break;
                     case "dropdownlist":
                         getDropDownList(response);

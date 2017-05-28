@@ -1,7 +1,10 @@
 package edu.cad.entities;
 
+import com.google.gson.annotations.Expose;
 import edu.cad.entities.interfaces.IDatabaseEntity;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -9,6 +12,7 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name = "department")
 public class Department implements IDatabaseEntity, Serializable{
     
+    @Expose
     @Id
     @GenericGenerator(
         name = "assigned-identity", 
@@ -18,8 +22,12 @@ public class Department implements IDatabaseEntity, Serializable{
     @Column(name = "id", unique = true, nullable = false)
     private int id;
 
+    @Expose
     @Column(name = "denotation")
     private String denotation;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "department")
+    private Set<Specialization> specializations = new HashSet<>();
 
     public Department() {
     }
@@ -45,7 +53,16 @@ public class Department implements IDatabaseEntity, Serializable{
     public void setDenotation(String denotation) {
         this.denotation = denotation;
     }
-    
+
+    public Set<Specialization> getSpecializations() {
+        return specializations;
+    }
+
+    public void setSpecializations(Set<Specialization> specializations) {
+        this.specializations.clear();
+        this.specializations.addAll(specializations);
+    }
+ 
     @Override
     public int hashCode() {
         int hash = 3;
