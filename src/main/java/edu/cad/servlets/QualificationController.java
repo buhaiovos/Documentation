@@ -7,7 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/QualificationController")
-public class QualificationController extends AbstractEntityController<Qualification>{
+public class QualificationController 
+        extends AbstractEntityController<Qualification> {
 
     public QualificationController() {
         super(Qualification.class);

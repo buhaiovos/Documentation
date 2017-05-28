@@ -93,6 +93,16 @@ public abstract class AbstractEntityController<T extends IDatabaseEntity>
         }
     }
     
+    protected void setBooleanProperty(HttpServletRequest request,
+            String requestParamString, BooleanPropertySetter propSetter) {
+        
+        String booleanValueString = request.getParameter(requestParamString);
+        if (booleanValueString != null) {
+            boolean value = Boolean.parseBoolean(booleanValueString);
+            propSetter.setProperty(value);
+        }
+    }
+    
     protected <E extends IDatabaseEntity> 
         void setObjectProperty(HttpServletRequest request,String requestParamString, 
             ObjectPropertySetter<E> propSetter, Class<E> objClassType) {
@@ -148,6 +158,7 @@ public abstract class AbstractEntityController<T extends IDatabaseEntity>
 
     private void processAction(HttpServletRequest request,
             HttpServletResponse response) throws IOException {
+        
         if (action != null) {
             try {
                 switch(action) {
@@ -175,6 +186,7 @@ public abstract class AbstractEntityController<T extends IDatabaseEntity>
                 writeResponse(response);
             }
         }
+        
     }
 
     private void processListAction(HttpServletResponse response) 
@@ -213,15 +225,19 @@ public abstract class AbstractEntityController<T extends IDatabaseEntity>
     }
         
     protected interface StringPropertySetter {
-        void setProperty(String property);
+        void setProperty(String value);
     }
     
     protected interface IntPropertySetter {
-        void setProperty(int propertyValue);
+        void setProperty(int value);
     }
     
     protected interface ObjectPropertySetter<T> {
         void setProperty(T object);
+    }
+    
+    protected interface BooleanPropertySetter<T> {
+        void setProperty(boolean value);
     }
     
 }
