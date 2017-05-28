@@ -23,7 +23,7 @@ $(document).ready(function() {
                     create: false,
                     display: function (data) {
                         //Create an image that will be used to open child table
-                        var $img = $('<img src="/Content/images/Misc/note.png" title="Edit exam results" />');
+                        var $img = $('<img src="./css/metro/list.png" title="Sections" />');
                         //Open child table when user clicks the image
                         $img.click(function () {
                             $('#CycleTableContainer').jtable('openChildTable',

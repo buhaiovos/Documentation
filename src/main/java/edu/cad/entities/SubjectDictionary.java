@@ -70,6 +70,7 @@ public class SubjectDictionary implements IDatabaseEntity, Serializable {
         return id;
     }
 
+    @Override
     public void setId(int id) {
         this.id = id;
     }
