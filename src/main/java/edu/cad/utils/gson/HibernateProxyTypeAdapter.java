@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.cad.servlets;
+package edu.cad.utils.gson;
 
 import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;

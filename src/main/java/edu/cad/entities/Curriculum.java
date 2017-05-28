@@ -27,6 +27,10 @@ public class Curriculum implements IDatabaseEntity, Serializable{
     @Column(name = "id", unique = true, nullable = false)
     protected int id;
     
+    @Expose
+    @Column(name = "denotation")
+    protected String denotation;
+    
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.curriculum", cascade = CascadeType.ALL)
     private Set<CurriculumSubject> curriculumSubjects = new HashSet<>();
     
@@ -47,6 +51,14 @@ public class Curriculum implements IDatabaseEntity, Serializable{
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getDenotation() {
+        return denotation;
+    }
+
+    public void setDenotation(String denotation) {
+        this.denotation = denotation;
     }
 
     public Set<CurriculumSubject> getCurriculumSubjects() {

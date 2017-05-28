@@ -4,6 +4,7 @@ import com.google.gson.GsonBuilder;
 import edu.cad.daos.HibernateDAO;
 import edu.cad.entities.AcademicGroup;
 import edu.cad.entities.Specialization;
+import edu.cad.utils.gson.AcademicGroupSerializer;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -53,7 +54,7 @@ public class AcademicGroupController extends AbstractEntityController<AcademicGr
 
     @Override
     protected void getDropDownList(HttpServletResponse response) throws IOException {
-        throw new UnsupportedOperationException("Not supported yet.");
+        super.getDropDownList(AcademicGroup::getCipher, response);
     }
     
 }

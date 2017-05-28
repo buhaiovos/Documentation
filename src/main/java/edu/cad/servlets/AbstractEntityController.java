@@ -5,6 +5,9 @@ import com.google.gson.GsonBuilder;
 import edu.cad.daos.HibernateDAO;
 import edu.cad.daos.IDAO;
 import edu.cad.entities.interfaces.IDatabaseEntity;
+import edu.cad.servlets.interfaces.StringProperty;
+import edu.cad.utils.gson.HibernateProxyTypeAdapter;
+import edu.cad.utils.gson.Option;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,11 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public abstract class AbstractEntityController<T extends IDatabaseEntity> 
         extends HttpServlet {
-    
-    //private static final long serialVersionUID = 1L;
 
-    //private final Map<String, Object> JSONROOT = new HashMap<>();
-    
     protected final IDAO<T> dao;
     protected Gson gson;   
     protected Map<String, Object> content;
@@ -50,7 +49,7 @@ public abstract class AbstractEntityController<T extends IDatabaseEntity>
         createGson();
         action = request.getParameter("action");
         content = new HashMap<>();
-        JSONROOT = new HashMap<>();
+
         setResponseSettings(response);
         processAction(request, response);
     }
@@ -62,7 +61,6 @@ public abstract class AbstractEntityController<T extends IDatabaseEntity>
     }
 
     protected void writeResponse(HttpServletResponse response) throws IOException {
-        //JSONROOT.putAll(content);
         String jsonArray = gson.toJson(content);
         
         System.out.println(jsonArray);
@@ -72,6 +70,34 @@ public abstract class AbstractEntityController<T extends IDatabaseEntity>
     
     protected void putOk() {
         content.put("Result", "OK");
+    }
+    
+    protected T initializeInstance(T instance, HttpServletRequest request){
+        if (request.getParameter("id") != null) {
+            int id = Integer.parseInt(request.getParameter("id"));
+            
+            T found = dao.get(id);
+            
+            if(found != null) 
+                return found;
+                
+            instance.setId(id);      
+        }
+        
+        return  instance;
+    }
+
+    protected void getDropDownList(StringProperty<T> property, 
+            HttpServletResponse response) throws IOException {
+        List<Option> options = new ArrayList();
+
+        for(T instance : dao.getAll()){
+            options.add(new Option(property.getValue(instance), instance.getId()));
+        }
+        
+        putOk();
+        content.put("Options", options);
+        writeResponse(response);
     }
     
     private void setResponseSettings(HttpServletResponse response) {
@@ -120,13 +146,12 @@ public abstract class AbstractEntityController<T extends IDatabaseEntity>
             HttpServletResponse response) throws IOException {
         
         T instance = getInstance(request);
-        /*
         if (action.equals("create")) {
             dao.create(instance);
         } else if (action.equals("update")) {
             dao.update(instance);
         }
-        */
+
         putOk();
         content.put("Record", instance);
         writeResponse(response);

@@ -1,12 +1,12 @@
 $(document).ready(function() {
-        $('#SpecializationTableContainer').jtable({
-            title : 'Спеціалізації',
+        $('#QualificationTableContainer').jtable({
+            title : 'Освітньо-кваліфікаційні рівні',
             editinline: { enable : true },
             actions : {
-                listAction : 'SpecializationController?action=list',
-                createAction : 'SpecializationController?action=create',
-                updateAction : 'SpecializationController?action=update',
-                deleteAction : 'SpecializationController?action=delete'
+                listAction : 'QualificationController?action=list',
+                createAction : 'QualificationController?action=create',
+                updateAction : 'QualificationController?action=update',
+                deleteAction : 'QualificationController?action=delete'
             },
             fields : {
                 id : {
@@ -22,5 +22,5 @@ $(document).ready(function() {
                 }
             }
         });
-        $('#SpecializationTableContainer').jtable('load');
+        $('#QualificationTableContainer').jtable('load');
 });

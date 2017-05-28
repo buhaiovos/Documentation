@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.cad.servlets;
+package edu.cad.utils.gson;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -26,6 +26,15 @@ public class AcademicGroupSerializer implements JsonSerializer<AcademicGroup>{
         
         if(instance.getSpecialization() != null)
             jsonElement.getAsJsonObject().addProperty("specialization", instance.getSpecialization().getId());
+        
+        if(instance.getQualification() != null)
+            jsonElement.getAsJsonObject().addProperty("qualification", instance.getQualification().getId());
+        
+        if(instance.getEducationForm() != null)
+            jsonElement.getAsJsonObject().addProperty("educationForm", instance.getEducationForm().getId());
+        
+        if(instance.getWorkplan() != null)
+            jsonElement.getAsJsonObject().addProperty("workplan", instance.getWorkplan().getId());
        
         return jsonElement.getAsJsonObject();
     }

@@ -1,4 +1,4 @@
-package edu.cad.servlets;
+package edu.cad.utils.gson;
 
 import com.google.gson.annotations.Expose;
 
