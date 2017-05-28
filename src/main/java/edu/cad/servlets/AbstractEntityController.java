@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import edu.cad.daos.HibernateDAO;
 import edu.cad.daos.IDAO;
 import edu.cad.entities.interfaces.IDatabaseEntity;
+import edu.cad.utils.gson.HibernateProxyTypeAdapter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -37,7 +38,7 @@ public abstract class AbstractEntityController<T extends IDatabaseEntity>
     protected abstract void getDropDownList(HttpServletResponse response) throws IOException;
     
     protected abstract T getInstance(HttpServletRequest request);
-    
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
@@ -50,7 +51,7 @@ public abstract class AbstractEntityController<T extends IDatabaseEntity>
         createGson();
         action = request.getParameter("action");
         content = new HashMap<>();
-        JSONROOT = new HashMap<>();
+        //JSONROOT = new HashMap<>();
         setResponseSettings(response);
         processAction(request, response);
     }
@@ -72,6 +73,36 @@ public abstract class AbstractEntityController<T extends IDatabaseEntity>
     
     protected void putOk() {
         content.put("Result", "OK");
+    }
+    
+    protected void setStringProperty(HttpServletRequest request, 
+            String requestParamString, StringPropertySetter propSetter) {
+        
+        String param = request.getParameter(requestParamString);
+        if (param != null) {
+            propSetter.setProperty(param);
+        }
+    }
+    
+    protected void setIntProperty(HttpServletRequest request,
+            String requestParamString, IntPropertySetter propSetter) {
+        
+        String numString = request.getParameter(requestParamString);
+        if (numString != null) {
+            int value = Integer.parseInt(numString.trim());
+            propSetter.setProperty(value);
+        }
+    }
+    
+    protected <E extends IDatabaseEntity> 
+        void setObjectProperty(HttpServletRequest request,String requestParamString, 
+            ObjectPropertySetter<E> propSetter, Class<E> objClassType) {
+        
+        String entityIdStr = request.getParameter(requestParamString);
+        if (entityIdStr != null) {
+            int id = Integer.parseInt(entityIdStr.trim());
+            propSetter.setProperty(new HibernateDAO<>(objClassType).get(id));
+        }
     }
     
     private void setResponseSettings(HttpServletResponse response) {
@@ -142,4 +173,17 @@ public abstract class AbstractEntityController<T extends IDatabaseEntity>
             writeResponse(response);
         }
     }
+        
+    protected interface StringPropertySetter {
+        void setProperty(String property);
+    }
+    
+    protected interface IntPropertySetter {
+        void setProperty(int propertyValue);
+    }
+    
+    protected interface ObjectPropertySetter<T> {
+        void setProperty(T object);
+    }
+    
 }

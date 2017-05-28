@@ -1,6 +1,7 @@
 package edu.cad.servlets;
 
 import edu.cad.entities.Specialization;
+import edu.cad.utils.gson.Option;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,9 +31,7 @@ public class SpecializationController extends AbstractEntityController<Specializ
             }
         }
 
-        if (request.getParameter("denotation") != null) {
-            specialization.setDenotation(request.getParameter("denotation"));
-        }
+        setStringProperty(request, "denotation", specialization::setDenotation);
         
         return specialization;
     }

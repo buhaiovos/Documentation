@@ -1,9 +1,12 @@
 package edu.cad.servlets;
 
 import com.google.gson.GsonBuilder;
-import edu.cad.daos.HibernateDAO;
 import edu.cad.entities.AcademicGroup;
+import edu.cad.entities.EducationForm;
+import edu.cad.entities.Qualification;
 import edu.cad.entities.Specialization;
+import edu.cad.entities.Workplan;
+import edu.cad.utils.gson.AcademicGroupSerializer;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +21,7 @@ public class AcademicGroupController extends AbstractEntityController<AcademicGr
 
     @Override
     protected AcademicGroup getInstance(HttpServletRequest request) {
+        
         AcademicGroup group = new AcademicGroup();
         
         if (request.getParameter("id") != null) {
@@ -30,17 +34,23 @@ public class AcademicGroupController extends AbstractEntityController<AcademicGr
                 group.setId(id);
             }
         }
-
-        if (request.getParameter("cipher") != null) {
-            group.setCipher(request.getParameter("cipher").trim());
-        }
-        /*
-        students, year
-        */
-        if (request.getParameter("specialization") != null) {
-            int id = Integer.parseInt(request.getParameter("specialization"));
-            group.setSpecialization(new HibernateDAO<>(Specialization.class).get(id));
-        }
+        
+        setStringProperty(request, "cipher", group::setCipher);    
+        setIntProperty(request, "budgetaryStudents", group::setBudgetaryStudents);
+        setIntProperty(request, "contractStudents", group::setContractStudents);
+        setIntProperty(request, "startYear", group::setStartYear);
+        
+        setObjectProperty(request, "specialization", group::setSpecialization, 
+                Specialization.class);
+        
+        setObjectProperty(request, "qualification", group::setQualification, 
+                Qualification.class);
+        
+        setObjectProperty(request, "educationForm", group::setEducationForm, 
+                EducationForm.class);
+        
+        setObjectProperty(request, "workplan", group::setWorkplan, 
+                Workplan.class);
         
         return group;
     }
@@ -54,6 +64,11 @@ public class AcademicGroupController extends AbstractEntityController<AcademicGr
     @Override
     protected void getDropDownList(HttpServletResponse response) throws IOException {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone(); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
