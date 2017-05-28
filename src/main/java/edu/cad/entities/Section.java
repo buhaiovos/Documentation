@@ -1,5 +1,6 @@
 package edu.cad.entities;
 
+import com.google.gson.annotations.Expose;
 import edu.cad.entities.interfaces.IDatabaseEntity;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -12,6 +13,7 @@ import org.hibernate.annotations.Type;
 @Table(name = "section")
 public class Section implements IDatabaseEntity, Serializable{
     
+    @Expose
     @Id
     @GenericGenerator(
         name = "assigned-identity", 
@@ -21,9 +23,11 @@ public class Section implements IDatabaseEntity, Serializable{
     @Column(name = "id", unique = true, nullable = false)
     private int id;
     
+    @Expose
     @Column(name = "denotation")
     private String denotation;
     
+    @Expose
     @Column(name = "is_optional", columnDefinition = "TINYINT")
     @Type(type = "org.hibernate.type.NumericBooleanType")
     private boolean optional;
@@ -33,11 +37,9 @@ public class Section implements IDatabaseEntity, Serializable{
     private Cycle cycle;
     
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "curriculumSection")
-    //@JoinColumn(name = "id_section_curriculum", referencedColumnName = "id")
     private Set<SubjectDictionary> curriculumSubjects = new HashSet<>();
     
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "workplanSection")
-    //@JoinColumn(name = "id_section_workplan", referencedColumnName = "id")
     private Set<SubjectDictionary> workplanSubjects = new HashSet<>();
 
     public Section() {

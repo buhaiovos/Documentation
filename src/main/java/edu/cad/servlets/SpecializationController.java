@@ -21,6 +21,7 @@ public class SpecializationController extends AbstractEntityController<Specializ
     protected Specialization getInstance(HttpServletRequest request) {
         Specialization specialization = new Specialization();
         specialization = initializeInstance(specialization, request);
+        
         setStringProperty(request, "denotation", specialization::setDenotation);
         setObjectProperty(request, "department", specialization::setDepartment, Department.class);
         

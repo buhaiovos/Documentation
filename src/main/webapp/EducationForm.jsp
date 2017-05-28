@@ -33,23 +33,22 @@
                                 <ul>
                                     <li><a href="#">Словник предметів</a></li>
                                     <li><a href="#">Академічні предмети</a></li>
-                                    <li><a href="#">Словник контрольних заходів</a></li>
+                                    <li><a href="ControlDictionary.jsp">Словник контрольних заходів</a></li>
                                     <li><a href="#">Контрольні заходи</a></li>
-                                    <li><a href="#">Типи предметів</a></li>
+                                    <li><a href="SubjectType.jsp">Типи предметів</a></li>
                                 </ul>
                             </li>
 
                             <li><a href="#">Факультет</a>
                                 <ul>
-                                    <li><a href="#">Кафедри</a></li>
+                                    <li><a href="Department.jsp">Кафедри</a></li>
                                     <li><a href="AcademicGroup.jsp">Групи</a></li>
                                     <li><a href="EducationForm.jsp">Форми навчання</a></li>
-                                    <li><a href="Specialization.jsp">Спеціалізації</a></li>
-                                    <li><a href="Qualification.jsp">ОКР</a></li>       
+                                    <li><a href="Qualification.jsp">Освітньо-кваліфікаційні рівні</a></li>    
                                     <li><a href="#">Практика</a></li>
                                     <li><a href="#">Державна атестація</a></li>
                                     <li><a href="#">Підготовка диплому</a></li>
-                                    <li><a href="#">Види робіт з підготовки диплому</a></li>
+                                    <li><a href="WorkType.jsp">Види робіт з підготовки диплому</a></li>
                                 </ul>
                             </li>
 

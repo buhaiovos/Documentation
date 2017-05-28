@@ -17,6 +17,7 @@ public class QualificationController extends AbstractEntityController<Qualificat
     protected Qualification getInstance(HttpServletRequest request) {
         Qualification qualification = new Qualification();       
         qualification = initializeInstance(qualification, request);
+        
         setStringProperty(request, "denotation", qualification::setDenotation);
         
         return qualification;
@@ -26,7 +27,4 @@ public class QualificationController extends AbstractEntityController<Qualificat
     protected void getDropDownList(HttpServletResponse response) throws IOException {
         super.getDropDownList(Qualification::getDenotation, response);
     }
-
-    
-    
 }

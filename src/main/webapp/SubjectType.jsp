@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Кафедри</title>
+    <title>Типи предметів</title>
     <!-- jTable Metro styles. -->
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link href="css/metro/blue/jtable.css" rel="stylesheet" type="text/css" />
@@ -13,7 +13,7 @@
     <script src="js/jquery.jtable.min.js" type="text/javascript"></script>
     <script src="js/jquery.jtable.editinline.js" type="text/javascript"></script>
     <!-- User Defined Jtable js file -->
-    <script src="js/Department.js" type="text/javascript" charset="UTF-8"></script>
+    <script src="js/SubjectType.js" type="text/javascript" charset="UTF-8"></script>
     <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -84,7 +84,7 @@
         </div>
     </header>
     <div style="text-align: center;">
-        <div id="DepartmentTableContainer"></div>
+        <div id="SubjectTypeTableContainer"></div>
     </div>
 </body>
 </html>

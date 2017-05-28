@@ -17,6 +17,7 @@ public class EducationFormController extends AbstractEntityController<EducationF
     protected EducationForm getInstance(HttpServletRequest request) {
         EducationForm educationForm = new EducationForm();       
         educationForm = initializeInstance(educationForm, request);
+        
         setStringProperty(request, "denotation", educationForm::setDenotation);
         
         return educationForm;

@@ -1,5 +1,6 @@
 package edu.cad.entities;
 
+import com.google.gson.annotations.Expose;
 import edu.cad.entities.interfaces.IDatabaseEntity;
 import java.io.Serializable;
 import javax.persistence.*;
@@ -9,6 +10,7 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name = "type_of_work")
 public class WorkType implements IDatabaseEntity, Serializable {
     
+    @Expose
     @Id
     @GenericGenerator(
         name = "assigned-identity", 
@@ -18,6 +20,7 @@ public class WorkType implements IDatabaseEntity, Serializable {
     @Column(name = "id", unique = true, nullable = false)
     private int id;
     
+    @Expose
     @Column(name = "denotation")
     private String denotation;
 
