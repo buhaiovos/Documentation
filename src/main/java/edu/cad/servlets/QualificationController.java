@@ -18,6 +18,7 @@ public class QualificationController
     protected Qualification getInstance(HttpServletRequest request) {
         Qualification qualification = new Qualification();       
         qualification = initializeInstance(qualification, request);
+        
         setStringProperty(request, "denotation", qualification::setDenotation);
         
         return qualification;
@@ -27,7 +28,4 @@ public class QualificationController
     protected void getDropDownList(HttpServletResponse response) throws IOException {
         super.getDropDownList(Qualification::getDenotation, response);
     }
-
-    
-    
 }

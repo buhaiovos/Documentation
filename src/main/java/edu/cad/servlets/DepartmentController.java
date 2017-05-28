@@ -17,8 +17,9 @@ public class DepartmentController extends AbstractEntityController<Department>{
     protected Department getInstance(HttpServletRequest request) {
         Department department = new Department();       
         department = initializeInstance(department, request);
+        
         setStringProperty(request, "denotation", department::setDenotation);
-        //specializations
+
         return department;
     }
     

@@ -22,6 +22,7 @@ public class WorkplanController extends AbstractEntityController<Workplan>{
     protected Workplan getInstance(HttpServletRequest request) {
         Workplan workplan = new Workplan();
         workplan = initializeInstance(workplan, request);
+        
         setStringProperty(request, "denotation", workplan::setDenotation);
         
         return workplan;
