@@ -9,7 +9,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "dict_subjects")
-public class SubjectDictionary implements IDatabaseEntity, Serializable {
+public class SubjectDictionary implements IDatabaseEntity, Serializable, Comparable<SubjectDictionary> {
     
     @Id
     @GenericGenerator(
@@ -179,5 +179,10 @@ public class SubjectDictionary implements IDatabaseEntity, Serializable {
         }
         return true;
     } 
+    
+    @Override
+    public int compareTo(SubjectDictionary other) {
+        return this.denotation.compareTo(other.getDenotation());
+    }
 }
 
