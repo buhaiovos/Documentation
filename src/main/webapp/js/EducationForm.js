@@ -1,6 +1,6 @@
 $(document).ready(function() {
         $('#EducationFormTableContainer').jtable({
-            title : 'Освітньо-кваліфікаційні рівні',
+            title : 'Форми навчання',
             editinline: { enable : true },
             actions : {
                 listAction : 'EducationFormController?action=list',

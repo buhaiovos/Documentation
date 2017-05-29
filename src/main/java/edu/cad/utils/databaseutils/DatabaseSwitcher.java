@@ -41,6 +41,23 @@ public class DatabaseSwitcher {
         }
     }
     
+    public static int getDatabaseYear(){
+        Configuration configuration = HibernateSession.getConfiguration();
+        
+        if(configuration == null)
+            return -1; 
+        
+        String url = configuration.getProperty("hibernate.connection.url");
+        int yearPosition = url.lastIndexOf("_");
+        
+        String yearString = url.substring(yearPosition + 1, url.length());
+        if(Utils.isParseable(yearString)){
+            return Integer.parseInt(yearString);
+        }
+        
+        return -1;
+    }
+    
     private static boolean exist(int year){
         Set<Integer> years = DatabaseYears.getAllYears();
         

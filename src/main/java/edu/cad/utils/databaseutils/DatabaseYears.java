@@ -12,7 +12,11 @@ import java.util.Set;
 import java.util.TreeSet;
 
 public class DatabaseYears {
-    private static final String FILE = "src/main/resources/DatabaseYears.txt";
+    private static String FILE = "WEB-INF/classes/DatabaseYears.txt";
+    
+    public static void setYearsFilePath(String path) {
+        FILE = path;
+    }
     
     public static Set<Integer> getAllYears(){
         Set<Integer> years = new TreeSet<>();
