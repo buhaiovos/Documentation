@@ -53,11 +53,5 @@ public class AcademicGroupController extends AbstractEntityController<AcademicGr
     @Override
     protected void getDropDownList(HttpServletResponse response) throws IOException {
         super.getDropDownList(AcademicGroup::getCipher, response);
-    }
-
-    @Override
-    protected Object clone() throws CloneNotSupportedException {
-        return super.clone(); //To change body of generated methods, choose Tools | Templates.
-    }
-    
+    }    
 }

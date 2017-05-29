@@ -173,6 +173,10 @@ public abstract class AbstractEntityController<T extends IDatabaseEntity>
         processListAction(response);
     }
     
+    protected List<T> getList(){
+        return dao.getAll();
+    }
+    
     private void setResponseSettings(HttpServletResponse response) {
         response.setContentType("application/json");
         response.setHeader("Content-type", "text/html;charset=UTF-8");
@@ -216,7 +220,7 @@ public abstract class AbstractEntityController<T extends IDatabaseEntity>
 
     private void processListAction(HttpServletResponse response) 
             throws IOException {
-        list = dao.getAll();
+        list = getList();
 
         putOk();
         content.put("Records", list);
