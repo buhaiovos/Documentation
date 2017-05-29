@@ -1,12 +1,12 @@
 $(document).ready(function() {
-        $('#DepartmentTableContainer').jtable({
-            title : 'Кафедри',
+        $('#CurriculumTableContainer').jtable({
+            title : 'Навчальні плани',
             editinline: { enable : true },
             actions : {
-                listAction : 'DepartmentController?action=list',
-                createAction : 'DepartmentController?action=create',
-                updateAction : 'DepartmentController?action=update',
-                deleteAction : 'DepartmentController?action=delete'
+                listAction : 'CurriculumController?action=list',
+                createAction : 'CurriculumController?action=create',
+                updateAction : 'CurriculumController?action=update',
+                deleteAction : 'CurriculumController?action=delete'
             },
             fields : {
                 id : {
@@ -16,25 +16,25 @@ $(document).ready(function() {
                     create : false,
                     edit : false        
                 },
-                specializations: {
+                curriculumSubjects: {
                     title: '',
                     sorting: false,
                     edit: false,
                     create: false,
                     display: function (data) {
                         //Create an image that will be used to open child table
-                        var $img = $('<img src="./css/metro/list.png" title="Specializations" />');
+                        var $img = $('<img src="./css/metro/list.png" title="Subjects" />');
                         //Open child table when user clicks the image
                         $img.click(function () {
-                            $('#DepartmentTableContainer').jtable('openChildTable',
+                            $('#CurriculumTableContainer').jtable('openChildTable',
                                     $img.closest('tr'), //Parent row
                                     {
-                                    title: data.record.denotation + ' - спеціалізації',
+                                    title: data.record.denotation + ' - предмети',
                                     actions: {
-                                        listAction: 'SpecializationController?action=dependencylist&id=' + data.record.id,
-                                        deleteAction: 'SpecializationController?action=delete',
-                                        updateAction: 'SpecializationController?action=update',
-                                        createAction: 'SpecializationController?action=create'
+                                        listAction: 'CurriculumSubjectController?action=dependencylist&id=' + data.record.id,
+                                        deleteAction: 'CurriculumSubjectController?action=delete',
+                                        updateAction: 'CurriculumSubjectController?action=update',
+                                        createAction: 'CurriculumSubjectController?action=create'
                                     },
                                     fields: {
                                         id : {
@@ -44,12 +44,17 @@ $(document).ready(function() {
                                             create : false,
                                             edit : false        
                                         },
-                                        department: {
+                                        curriculum: {
                                             type: 'hidden',
                                             defaultValue: data.record.id
                                         },
-                                        denotation : {
-                                            title : 'Назва',
+                                        cipher : {
+                                            title : 'Шифр',
+                                            edit : true
+                                        },
+                                        subject : {
+                                            title : 'Предмет',
+                                            options: 'SubjectController?action=dropdownlist',
                                             edit : true
                                         }
                                     }
@@ -67,5 +72,5 @@ $(document).ready(function() {
                 }
             }
         });
-        $('#DepartmentTableContainer').jtable('load');
+        $('#CurriculumTableContainer').jtable('load');
 });

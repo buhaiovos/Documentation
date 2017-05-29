@@ -490,3 +490,6 @@ div.jtable-busy-message {
   background-color: #0b67cd;
   background-position: 8px;
 }
+.jtable-child-table-container {
+  padding-left: 50px;
+}

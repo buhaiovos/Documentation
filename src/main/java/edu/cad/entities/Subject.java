@@ -1,5 +1,6 @@
 package edu.cad.entities;
 
+import com.google.gson.annotations.Expose;
 import edu.cad.daos.HibernateDAO;
 import edu.cad.entities.interfaces.IDatabaseEntity;
 import edu.cad.entities.interfaces.SubjectProperty;
@@ -17,6 +18,7 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name = "academic_subject")
 public class Subject implements IDatabaseEntity, Serializable{
     
+    @Expose
     @Id
     @GenericGenerator(
         name = "assigned-identity", 
@@ -26,21 +28,27 @@ public class Subject implements IDatabaseEntity, Serializable{
     @Column(name = "id", unique = true, nullable = false)
     private int id;
 
+    @Expose
     @Column(name = "semester")
     private int semester; 
     
+    @Expose
     @Column(name = "semesters_duration")
     private int semestersDuration;
     
+    @Expose
     @Column(name = "lections")
     private int lections;
     
+    @Expose
     @Column(name = "labs")
     private int labs;
     
+    @Expose
     @Column(name = "practices")
     private int practices;
     
+    @Expose
     @Column(name = "ECTS")
     private float ects;
     
@@ -278,5 +286,13 @@ public class Subject implements IDatabaseEntity, Serializable{
         }
         return true;
     }
+
+    @Override
+    public String toString() {
+        return subject.getDenotation() + " [ECTS : " + ects + " лекції : " +
+                + lections + " лабораторні : " + labs + " практичні : " + practices + "]";
+    }
+    
+    
     
 }

@@ -26,6 +26,6 @@ public class QualificationController
     
     @Override
     protected void getDropDownList(HttpServletResponse response) throws IOException {
-        super.getDropDownList(Qualification::getDenotation, response);
+        super.getDropDownList(Qualification::getDenotation, false, response);
     }
 }

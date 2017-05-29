@@ -25,7 +25,7 @@ public class CycleController extends AbstractEntityController<Cycle>{
     
     @Override
     protected void getDropDownList(HttpServletResponse response) throws IOException {
-        super.getDropDownList(Cycle::getDenotation, response);
+        super.getDropDownList(Cycle::getDenotation, false, response);
     }
     
 }

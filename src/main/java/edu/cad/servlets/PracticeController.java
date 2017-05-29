@@ -1,12 +1,13 @@
 package edu.cad.servlets;
 
+import com.google.gson.GsonBuilder;
 import edu.cad.entities.Practice;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("PracticeController")
+@WebServlet("/PracticeController")
 public class PracticeController extends AbstractEntityController<Practice> {
 
     public PracticeController() {
@@ -15,7 +16,7 @@ public class PracticeController extends AbstractEntityController<Practice> {
 
     @Override
     protected void getDropDownList(HttpServletResponse response) throws IOException {
-        super.getDropDownList(Practice::toString, response);
+        super.getDropDownList(Practice::toString, true, response);
     }
 
     @Override
@@ -28,6 +29,11 @@ public class PracticeController extends AbstractEntityController<Practice> {
         setDateProperty(request, "finish", instance::setFinish);
         
         return instance;
+    }
+    
+    @Override
+    protected GsonBuilder createGsonBuilder() {
+        return super.createGsonBuilder().setDateFormat("dd.MM.yyyy");
     }
     
 }

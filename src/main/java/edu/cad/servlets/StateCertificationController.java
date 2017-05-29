@@ -7,7 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("StateCertificationController")
+@WebServlet("/StateCertificationController")
 public class StateCertificationController extends 
         AbstractEntityController<StateCertification> {
 
@@ -34,7 +34,7 @@ public class StateCertificationController extends
     
     @Override
     protected void getDropDownList(HttpServletResponse response) throws IOException {
-        super.getDropDownList(StateCertification::toString, response);
+        super.getDropDownList(StateCertification::toString, true, response);
     }    
     
 }

@@ -31,7 +31,7 @@ public class SectionController extends AbstractEntityController<Section>{
     
     @Override
     protected void getDropDownList(HttpServletResponse response) throws IOException {
-        super.getDropDownList(Section::getDenotation, response);
+        super.getDropDownList(Section::getDenotation, true, response);
     }
     
     @Override

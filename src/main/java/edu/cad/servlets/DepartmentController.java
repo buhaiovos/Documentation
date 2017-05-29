@@ -25,6 +25,6 @@ public class DepartmentController extends AbstractEntityController<Department>{
     
     @Override
     protected void getDropDownList(HttpServletResponse response) throws IOException {
-        super.getDropDownList(Department::getDenotation, response);
+        super.getDropDownList(Department::getDenotation, true, response);
     }  
 }
