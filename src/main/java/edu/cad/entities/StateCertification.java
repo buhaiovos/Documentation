@@ -22,9 +22,6 @@ public class StateCertification implements IDatabaseEntity, Serializable{
     @Column(name = "semester")
     private int semester;
     
-    @Column(name = "denotation")
-    private String denotation;
-    
     @Column(name = "form")
     private String form;
     
@@ -37,10 +34,9 @@ public class StateCertification implements IDatabaseEntity, Serializable{
     public StateCertification() {
     }
 
-    public StateCertification(int id, int semester, String denotation, String form, Date start, Date finish) {
+    public StateCertification(int id, int semester, String form, Date start, Date finish) {
         this.id = id;
         this.semester = semester;
-        this.denotation = denotation;
         this.form = form;
         this.start = start;
         this.finish = finish;
@@ -62,14 +58,6 @@ public class StateCertification implements IDatabaseEntity, Serializable{
 
     public void setSemester(int semester) {
         this.semester = semester;
-    }
-
-    public String getDenotation() {
-        return denotation;
-    }
-
-    public void setDenotation(String denotation) {
-        this.denotation = denotation;
     }
 
     public String getForm() {
