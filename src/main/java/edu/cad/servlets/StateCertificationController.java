@@ -7,7 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("StateCertificationController")
+@WebServlet("/StateCertificationController")
 public class StateCertificationController extends 
         AbstractEntityController<StateCertification> {
 
