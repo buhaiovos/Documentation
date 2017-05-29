@@ -25,7 +25,7 @@ public class EducationFormController extends AbstractEntityController<EducationF
     
     @Override
     protected void getDropDownList(HttpServletResponse response) throws IOException {
-        super.getDropDownList(EducationForm::getDenotation, response);
+        super.getDropDownList(EducationForm::getDenotation, false, response);
     }
     
 }

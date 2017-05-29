@@ -52,6 +52,6 @@ public class AcademicGroupController extends AbstractEntityController<AcademicGr
 
     @Override
     protected void getDropDownList(HttpServletResponse response) throws IOException {
-        super.getDropDownList(AcademicGroup::getCipher, response);
+        super.getDropDownList(AcademicGroup::getCipher, false, response);
     }    
 }

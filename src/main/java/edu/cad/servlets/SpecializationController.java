@@ -30,7 +30,7 @@ public class SpecializationController extends AbstractEntityController<Specializ
 
     @Override
     protected void getDropDownList(HttpServletResponse response) throws IOException {
-        super.getDropDownList(Specialization::getDenotation, response);
+        super.getDropDownList(Specialization::getDenotation, false, response);
     }
     
     @Override

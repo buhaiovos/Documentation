@@ -1,5 +1,6 @@
 package edu.cad.entities;
 
+import com.google.gson.annotations.Expose;
 import edu.cad.entities.interfaces.IDatabaseEntity;
 import java.io.Serializable;
 import javax.persistence.*;
@@ -10,6 +11,7 @@ import org.hibernate.annotations.GenericGenerator;
 public class Control implements IDatabaseEntity, Serializable, 
         Comparable<Control>{
     
+    @Expose
     @Id
     @GenericGenerator(
         name = "assigned-identity", 
@@ -19,6 +21,7 @@ public class Control implements IDatabaseEntity, Serializable,
     @Column(name = "id", unique = true, nullable = false)
     private int id;
     
+    @Expose
     @Column(name = "semester")
     private int semester;
     

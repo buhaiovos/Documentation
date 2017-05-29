@@ -34,7 +34,7 @@ public class StateCertificationController extends
     
     @Override
     protected void getDropDownList(HttpServletResponse response) throws IOException {
-        super.getDropDownList(StateCertification::toString, response);
+        super.getDropDownList(StateCertification::toString, true, response);
     }    
     
 }

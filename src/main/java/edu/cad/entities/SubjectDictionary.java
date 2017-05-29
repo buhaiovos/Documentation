@@ -1,5 +1,6 @@
 package edu.cad.entities;
 
+import com.google.gson.annotations.Expose;
 import edu.cad.entities.interfaces.IDatabaseEntity;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -11,6 +12,7 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name = "dict_subjects")
 public class SubjectDictionary implements IDatabaseEntity, Serializable, Comparable<SubjectDictionary> {
     
+    @Expose
     @Id
     @GenericGenerator(
         name = "assigned-identity", 
@@ -20,6 +22,7 @@ public class SubjectDictionary implements IDatabaseEntity, Serializable, Compara
     @Column(name = "id", unique = true, nullable = false)
     private int id;
     
+    @Expose
     @Column(name = "denotation")
     private String denotation;
     
@@ -182,7 +185,19 @@ public class SubjectDictionary implements IDatabaseEntity, Serializable, Compara
     
     @Override
     public int compareTo(SubjectDictionary other) {
-        return this.denotation.compareTo(other.getDenotation());
+        if(this.department == null && other.getDepartment() == null)
+            return 0;
+        
+        if(this.department == null)
+            return 1;
+        
+        if(other.department == null)
+            return -1;
+        
+        if(this.department.equals(other.getDepartment()))
+            return this.denotation.compareTo(other.getDenotation());
+        
+        return this.department.getId() - other.getDepartment().getId();
     }
 }
 

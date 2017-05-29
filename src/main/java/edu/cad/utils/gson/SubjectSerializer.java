@@ -4,17 +4,17 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonSerializationContext;
-import edu.cad.entities.Section;
+import edu.cad.entities.Subject;
 import java.lang.reflect.Type;
 
-public class SectionSerializer extends AbstractEntitySerializer<Section>{
+public class SubjectSerializer extends AbstractEntitySerializer<Subject>{
 
     @Override
-    public JsonElement serialize(Section instance, Type type, JsonSerializationContext jsc) {
+    public JsonElement serialize(Subject instance, Type type, JsonSerializationContext jsc) {
         Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
         JsonElement jsonElement = gson.toJsonTree(instance);
         
-        addProperty(jsonElement, "cycle", instance.getCycle(), false);
+        addProperty(jsonElement, "subject", instance.getSubject(), false);
        
         return jsonElement.getAsJsonObject();
     }

@@ -9,9 +9,11 @@ import edu.cad.utils.gson.SubjectDictionarySerializer;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+@WebServlet("/SubjectDictionaryController")
 public class SubjectDictionaryController extends AbstractEntityController<SubjectDictionary>{
 
     public SubjectDictionaryController() {
@@ -44,7 +46,7 @@ public class SubjectDictionaryController extends AbstractEntityController<Subjec
     
     @Override
     protected void getDropDownList(HttpServletResponse response) throws IOException {
-        super.getDropDownList(SubjectDictionary::getDenotation, response);
+        super.getDropDownList(SubjectDictionary::getDenotation, true, response);
     }
     
     @Override

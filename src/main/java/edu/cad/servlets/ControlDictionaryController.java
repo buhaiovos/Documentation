@@ -25,7 +25,7 @@ public class ControlDictionaryController
 
     @Override
     protected void getDropDownList(HttpServletResponse response) throws IOException {
-        super.getDropDownList(ControlDictionary::getDenotation, response);
+        super.getDropDownList(ControlDictionary::getDenotation, false, response);
     }
     
 }

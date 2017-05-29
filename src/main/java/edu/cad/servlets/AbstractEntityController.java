@@ -155,14 +155,18 @@ public abstract class AbstractEntityController<T extends IDatabaseEntity>
         return  instance;
     }
 
-    protected void getDropDownList(StringProperty<T> property, 
+    protected void getDropDownList(StringProperty<T> property, boolean addNull,
             HttpServletResponse response) throws IOException {
         List<Option> options = new ArrayList();
 
-        for(T instance : dao.getAll()){
-            options.add(new Option(property.getValue(instance), instance.getId()));
+        if(addNull){
+            options.add(new Option("-", 0));
         }
         
+        for(T instance : getList()){
+            options.add(new Option(property.getValue(instance), instance.getId()));
+        }
+ 
         putOk();
         content.put("Options", options);
         writeResponse(response);
