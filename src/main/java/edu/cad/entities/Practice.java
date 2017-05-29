@@ -1,5 +1,6 @@
 package edu.cad.entities;
 
+import com.google.gson.annotations.Expose;
 import edu.cad.entities.interfaces.IDatabaseEntity;
 import java.io.Serializable;
 import java.util.Date;
@@ -10,6 +11,7 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name = "practice")
 public class Practice implements IDatabaseEntity, Serializable{
     
+    @Expose
     @Id
     @GenericGenerator(
         name = "assigned-identity", 
@@ -19,18 +21,23 @@ public class Practice implements IDatabaseEntity, Serializable{
     @Column(name = "id", unique = true, nullable = false)
     private int id;
     
+    @Expose
     @Column(name = "semester")
     private int semester;
     
+    @Expose
     @Column(name = "weeks")
     private int weeks;
     
+    @Expose
     @Column(name = "denotation")
     private String denotation;
     
+    @Expose
     @Column(name = "start")
     private Date start;
     
+    @Expose
     @Column(name = "finish")
     private Date finish;
 
@@ -121,4 +128,12 @@ public class Practice implements IDatabaseEntity, Serializable{
         }
         return true;
     }
+
+    @Override
+    public String toString() {
+        return denotation + " (" + semester + " семестр/" + weeks + " тижні(в))";
+    }
+    
+    
+    
 }

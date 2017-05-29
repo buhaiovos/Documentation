@@ -1,5 +1,6 @@
 package edu.cad.entities;
 
+import com.google.gson.annotations.Expose;
 import edu.cad.entities.interfaces.IDatabaseEntity;
 import java.io.Serializable;
 import java.util.Date;
@@ -10,6 +11,7 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name = "state_certification")
 public class StateCertification implements IDatabaseEntity, Serializable{
     
+    @Expose
     @Id
     @GenericGenerator(
         name = "assigned-identity", 
@@ -19,15 +21,19 @@ public class StateCertification implements IDatabaseEntity, Serializable{
     @Column(name = "id", unique = true, nullable = false)
     private int id;
     
+    @Expose
     @Column(name = "semester")
     private int semester;
     
+    @Expose
     @Column(name = "form")
     private String form;
     
+    @Expose
     @Column(name = "start")
     private Date start;
     
+    @Expose
     @Column(name = "finish")
     private Date finish;
 
@@ -107,6 +113,11 @@ public class StateCertification implements IDatabaseEntity, Serializable{
             return false;
         }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return form + " (" + semester + " семестр)";
     }
     
     

@@ -10,6 +10,7 @@ import edu.cad.utils.gson.HibernateProxyTypeAdapter;
 import edu.cad.utils.gson.Option;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -110,6 +111,21 @@ public abstract class AbstractEntityController<T extends IDatabaseEntity>
         if (numString != null) {
             float value = Float.parseFloat(numString);
             propSetter.setProperty(value);
+        }
+    }
+    
+    protected void setDateProperty(HttpServletRequest request,
+            String requestParamString, DatePropertySetter propSetter) {
+        
+        String dateString = request.getParameter(requestParamString);
+        if (dateString != null) {
+            Date date = gson.fromJson(dateString, Date.class);
+            if (date == null) {
+                System.out.println("!!!!!!!!!!!!!!!!!!!!SHIT FUCK");
+            }
+            else {
+                propSetter.setProperty(date);
+            }
         }
     }
     
@@ -252,6 +268,10 @@ public abstract class AbstractEntityController<T extends IDatabaseEntity>
     
     protected interface FloatPropertySetter {
         void setProperty(float value);
+    }
+    
+    protected interface DatePropertySetter {
+        void setProperty(Date date);
     }
     
 }
