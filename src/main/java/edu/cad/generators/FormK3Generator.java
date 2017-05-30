@@ -1,10 +1,12 @@
 package edu.cad.generators;
 
+import edu.cad.daos.HibernateDAO;
 import edu.cad.documentelements.k3columns.AbstractK3Column;
 import edu.cad.documentelements.k3columns.AllK3ColumnsFactory;
 import edu.cad.documentelements.k3columns.StudyLoadColumn;
 import edu.cad.entities.Department;
 import edu.cad.entities.EducationForm;
+import edu.cad.utils.Utils;
 import edu.cad.utils.documentutils.K3SemesterStartRowFinder;
 import edu.cad.utils.documentutils.RowInserter;
 import edu.cad.utils.k3.K3SubjectEntity;
@@ -17,26 +19,32 @@ import java.util.List;
 import java.util.Map;
 import org.apache.poi.hssf.usermodel.HSSFFormulaEvaluator;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 
 public class FormK3Generator implements IDocumentGenerator{
     private final Department department;
-    private final Sheet sheet;
-    private final EducationForm educationForm;
-    private final SourceOfFinancing source;
+    private final Workbook workbook;
+    private EducationForm educationForm;
+    private SourceOfFinancing source;
     
-    public FormK3Generator(Sheet sheet, Department department, 
-            EducationForm educationForm, SourceOfFinancing source){
-        this.department = department;
-        this.sheet = sheet;
-        this.educationForm = educationForm;
-        this.source = source;
+    public FormK3Generator(Workbook workbook){
+        this.department = new HibernateDAO<>(Department.class).get(1);
+        this.workbook = workbook;
     }
     
     @Override
     public void generate() throws IOException {
+        for (int i = 0; i < workbook.getNumberOfSheets(); i++) {
+            generateSheet(workbook.getSheetAt(i));
+        }
+    }
+    
+    private void generateSheet(Sheet sheet) {
+        setEdFormAndSource(sheet, "#edform", "#source");
+        
         List<K3SubjectEntity> firstSemSubjects = 
                 K3SubjectListCreator.createList(educationForm, source, department, 1);
         Map<Class, List<AbstractK3Column>> columnsMap = getInitializedMap();
@@ -44,13 +52,14 @@ public class FormK3Generator implements IDocumentGenerator{
         Row firstSemRow = K3SemesterStartRowFinder.findSemesterStartRow(sheet, 1);
         
         addColumnsToMap(columnsMap, firstSemRow);
-        fill(firstSemSubjects, columnsMap.get(AbstractK3Column.class), firstSemRow.getRowNum());
+        fill(sheet, firstSemSubjects, columnsMap.get(AbstractK3Column.class),
+                firstSemRow.getRowNum());
 
         List<K3SubjectEntity> secondSemSubjects = 
                 K3SubjectListCreator.createList(educationForm, source, department, 2); 
         Row secondSemRow = K3SemesterStartRowFinder.findSemesterStartRow(sheet, 2);
-        fill(secondSemSubjects, columnsMap.get(AbstractK3Column.class), secondSemRow.getRowNum());
-
+        fill(sheet, secondSemSubjects, columnsMap.get(AbstractK3Column.class), 
+                secondSemRow.getRowNum());
     }
     
     @Override
@@ -72,8 +81,9 @@ public class FormK3Generator implements IDocumentGenerator{
         }
     }
     
-    private void fill(List<K3SubjectEntity> subjects, List<AbstractK3Column> columns,
-            int rowNumber){
+    private void fill(Sheet sheet, List<K3SubjectEntity> subjects, 
+            List<AbstractK3Column> columns, int rowNumber){
+        
         boolean first = true;
 
         for(K3SubjectEntity subject : subjects){    
@@ -90,6 +100,35 @@ public class FormK3Generator implements IDocumentGenerator{
             HSSFFormulaEvaluator.evaluateAllFormulaCells(sheet.getWorkbook());
             rowNumber++;
         }
+    }
+    
+    private void setEdFormAndSource(Sheet sheet, String edFormToken, 
+            String sourceToken){
+        
+        int id = getId(sheet, 0, 0, edFormToken);
+        educationForm = new HibernateDAO<>(EducationForm.class).get(id);
+        
+        id = getId(sheet, 0, 1, sourceToken);
+        source = SourceOfFinancing.values()[id];
+    }
+    
+    private int getId(Sheet sheet, int row, int col, String token) {
+        String value;
+        Cell cell = sheet.getRow(row).getCell(col);
+        
+        if(cell == null || !cell.getCellTypeEnum().equals(CellType.STRING))
+            return 0;
+        
+        value = sheet.getRow(row).getCell(col).getStringCellValue();
+        cell.setCellType(CellType.BLANK);
+        if(!value.contains(token))
+            return 0;
+        
+        value = value.substring(token.length() + 1);
+        if(!Utils.isParseable(value))
+            return 0;
+        
+        return Integer.parseInt(value);
     }
     
 }
