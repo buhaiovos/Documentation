@@ -2,7 +2,7 @@ package edu.cad.documentelements.k3columns;
 
 import edu.cad.documentelements.columns.AbstractColumn;
 import edu.cad.entities.CurriculumSubject;
-import edu.cad.generators.K3SubjectEntity;
+import edu.cad.utils.k3.K3SubjectEntity;
 import edu.cad.utils.Utils;
 import org.apache.poi.ss.usermodel.Row;
 

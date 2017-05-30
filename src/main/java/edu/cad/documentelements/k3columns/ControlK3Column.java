@@ -2,7 +2,7 @@ package edu.cad.documentelements.k3columns;
 
 import edu.cad.daos.HibernateDAO;
 import edu.cad.entities.ControlDictionary;
-import edu.cad.generators.K3SubjectEntity;
+import edu.cad.utils.k3.K3SubjectEntity;
 
 public class ControlK3Column extends AbstractK3Column{
     private final ControlDictionary control;

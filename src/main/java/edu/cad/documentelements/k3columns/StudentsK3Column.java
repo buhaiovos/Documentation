@@ -1,8 +1,8 @@
 package edu.cad.documentelements.k3columns;
 
 import edu.cad.entities.AcademicGroup;
-import edu.cad.generators.K3SubjectEntity;
-import edu.cad.generators.SourceOfFinancing;
+import edu.cad.utils.k3.K3SubjectEntity;
+import edu.cad.utils.k3.SourceOfFinancing;
 
 public class StudentsK3Column extends AbstractK3Column{
     private final SourceOfFinancing groupSource;

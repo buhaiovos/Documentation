@@ -1,8 +1,8 @@
 package edu.cad.documentelements.k3columns;
 
-import edu.cad.generators.K3SubjectEntity;
-import edu.cad.generators.SourceOfFinancing;
-import edu.cad.generators.TypeOfGroupWork;
+import edu.cad.utils.k3.K3SubjectEntity;
+import edu.cad.utils.k3.SourceOfFinancing;
+import edu.cad.utils.k3.TypeOfGroupWork;
 
 public class GroupsK3Column extends AbstractK3Column{
     private final SourceOfFinancing source;

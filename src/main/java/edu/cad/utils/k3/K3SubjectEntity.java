@@ -1,4 +1,4 @@
-package edu.cad.generators;
+package edu.cad.utils.k3;
 
 import edu.cad.entities.Subject;
 import java.util.HashMap;

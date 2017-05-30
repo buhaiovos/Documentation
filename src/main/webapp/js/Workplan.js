@@ -12,18 +12,18 @@ $(document).ready(function() {
                 id : {
                     title : 'Ідентифікатор',
                     key : true,
-                    list : false,
+                    //list : false,
                     create : false,
                     edit : false        
                 },
                 curriculumSubjects: {
-                    title: '',
+                    title: 'Предмети',
                     sorting: false,
                     edit: false,
                     create: false,
                     display: function (data) {
                         //Create an image that will be used to open child table
-                        var $img = $('<img src="./css/metro/list.png" title="Subjects" />');
+                        var $img = $('<img src="./css/metro/list.png" title="Предмети" />');
                         //Open child table when user clicks the image
                         $img.click(function () {
                             $('#WorkplanTableContainer').jtable('openChildTable',
@@ -55,6 +55,61 @@ $(document).ready(function() {
                                         subject : {
                                             title : 'Предмет',
                                             options: 'SubjectController?action=dropdownlist',
+                                            edit : true
+                                        }
+                                    }
+                                }, function (data) { //opened handler
+                                    data.childTable.jtable('load');
+                                });
+                        });
+                        //Return image to show on the person row
+                        return $img;
+                    }
+                },
+                diplomaPreparation: {
+                    title: 'Підготовка дипломного проекту',
+                    sorting: false,
+                    edit: false,
+                    create: false,
+                    display: function (data) {
+                        //Create an image that will be used to open child table
+                        var $img = $('<img src="./css/metro/list.png" title="Підготовка дипломного проекту" />');
+                        //Open child table when user clicks the image
+                        $img.click(function () {
+                            $('#WorkplanTableContainer').jtable('openChildTable',
+                                    $img.closest('tr'), //Parent row
+                                    {
+                                    title: data.record.denotation + ' - підготовка дипломного проекту',
+                                    actions: {
+                                        listAction: 'DiplomaPreparationController?action=dependencylist&id=' + data.record.id,
+                                        deleteAction: 'DiplomaPreparationController?action=delete',
+                                        updateAction: 'DiplomaPreparationController?action=update',
+                                        createAction: 'DiplomaPreparationController?action=create'
+                                    },
+                                    fields: {
+                                        id : {
+                                            title : 'Ідентифікатор',
+                                            key : true,
+                                            list : false,
+                                            create : false,
+                                            edit : false        
+                                        },
+                                        workplan: {
+                                            type: 'hidden',
+                                            defaultValue: data.record.id
+                                        },
+                                        workType : {
+                                            title : 'Вид роботи',
+                                            options: 'WorkTypeController?action=dropdownlist',
+                                            edit : true
+                                        },
+                                        norm : {
+                                            title : 'Норма в годинах на 1 студента',                                            
+                                            edit : true
+                                        },
+                                        department : {
+                                            title : 'Кафедра',
+                                            options: 'DepartmentController?action=dropdownlist',
                                             edit : true
                                         }
                                     }

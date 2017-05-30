@@ -1,6 +1,6 @@
 package edu.cad.documentelements.k3columns;
 
-import edu.cad.generators.SourceOfFinancing;
+import edu.cad.utils.k3.SourceOfFinancing;
 import edu.cad.utils.documentutils.CellWithTokenValidator;
 import edu.cad.utils.documentutils.ColumnTokenStringSplitter;
 import java.util.List;

@@ -17,13 +17,13 @@ $(document).ready(function() {
                     edit : false        
                 },
                 sections: {
-                    title: '',
+                    title: 'Підрозділи',
                     sorting: false,
                     edit: false,
                     create: false,
                     display: function (data) {
                         //Create an image that will be used to open child table
-                        var $img = $('<img src="./css/metro/list.png" title="Sections" />');
+                        var $img = $('<img src="./css/metro/list.png" title="Підрозділи" />');
                         //Open child table when user clicks the image
                         $img.click(function () {
                             $('#CycleTableContainer').jtable('openChildTable',
@@ -40,7 +40,7 @@ $(document).ready(function() {
                                         id : {
                                             title : 'Ідентифікатор',
                                             key : true,
-                                            list : false,
+                                            //list : false,
                                             create : false,
                                             edit : false        
                                         },

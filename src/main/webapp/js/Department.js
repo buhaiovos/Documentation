@@ -17,13 +17,13 @@ $(document).ready(function() {
                     edit : false        
                 },
                 specializations: {
-                    title: '',
+                    title: 'Спеціалізації',
                     sorting: false,
                     edit: false,
                     create: false,
                     display: function (data) {
                         //Create an image that will be used to open child table
-                        var $img = $('<img src="./css/metro/list.png" title="Specializations" />');
+                        var $img = $('<img src="./css/metro/list.png" title="Спеціалізації" />');
                         //Open child table when user clicks the image
                         $img.click(function () {
                             $('#DepartmentTableContainer').jtable('openChildTable',

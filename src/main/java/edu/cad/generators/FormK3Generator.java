@@ -7,6 +7,9 @@ import edu.cad.entities.Department;
 import edu.cad.entities.EducationForm;
 import edu.cad.utils.documentutils.K3SemesterStartRowFinder;
 import edu.cad.utils.documentutils.RowInserter;
+import edu.cad.utils.k3.K3SubjectEntity;
+import edu.cad.utils.k3.K3SubjectListCreator;
+import edu.cad.utils.k3.SourceOfFinancing;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,6 +19,7 @@ import org.apache.poi.hssf.usermodel.HSSFFormulaEvaluator;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 
 public class FormK3Generator implements IDocumentGenerator{
     private final Department department;
@@ -47,6 +51,11 @@ public class FormK3Generator implements IDocumentGenerator{
         Row secondSemRow = K3SemesterStartRowFinder.findSemesterStartRow(sheet, 2);
         fill(secondSemSubjects, columnsMap.get(AbstractK3Column.class), secondSemRow.getRowNum());
 
+    }
+    
+    @Override
+    public Workbook getWorkbook(){
+        return null;
     }
     
     private Map<Class, List<AbstractK3Column>> getInitializedMap() {

@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/AcademicGroupController")
 public class AcademicGroupController extends AbstractEntityController<AcademicGroup>{
-    
+
     public AcademicGroupController() {
         super(AcademicGroup.class);
     }
@@ -40,7 +40,6 @@ public class AcademicGroupController extends AbstractEntityController<AcademicGr
         
         setObjectProperty(request, "workplan", group::setWorkplan, 
                 Workplan.class);
-        
         return group;
     }
     

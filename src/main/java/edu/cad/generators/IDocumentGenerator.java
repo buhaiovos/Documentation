@@ -1,9 +1,11 @@
 package edu.cad.generators;
 
 import java.io.IOException;
+import org.apache.poi.ss.usermodel.Workbook;
 
 public interface IDocumentGenerator {
     
-    void generate() throws IOException;
+    public void generate() throws IOException;    
+    public Workbook getWorkbook();
     
 }

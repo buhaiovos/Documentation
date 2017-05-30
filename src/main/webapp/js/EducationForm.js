@@ -12,7 +12,7 @@ $(document).ready(function() {
                 id : {
                     title : 'Ідентифікатор',
                     key : true,
-                    list : false,
+                    //list : false,
                     create : false,
                     edit : false        
                 },

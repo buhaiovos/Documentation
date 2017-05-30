@@ -1,7 +1,7 @@
 package edu.cad.documentelements.k3columns;
 
-import edu.cad.generators.K3SubjectEntity;
-import edu.cad.generators.TypeOfGroupWork;
+import edu.cad.utils.k3.K3SubjectEntity;
+import edu.cad.utils.k3.TypeOfGroupWork;
 
 public class K3StreamColumn extends AbstractK3Column{
     

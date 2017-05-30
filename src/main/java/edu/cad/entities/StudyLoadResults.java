@@ -1,7 +1,7 @@
 package edu.cad.entities;
 
 import edu.cad.entities.interfaces.IDatabaseEntity;
-import edu.cad.generators.SourceOfFinancing;
+import edu.cad.utils.k3.SourceOfFinancing;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;

@@ -1,4 +1,4 @@
-package edu.cad.generators;
+package edu.cad.utils.k3;
 
 public enum TypeOfGroupWork {
     Academic, Practice, Lab, OtherSource;

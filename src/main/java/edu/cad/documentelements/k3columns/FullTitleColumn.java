@@ -2,7 +2,7 @@ package edu.cad.documentelements.k3columns;
 
 import edu.cad.entities.AcademicGroup;
 import edu.cad.entities.Subject;
-import edu.cad.generators.K3SubjectEntity;
+import edu.cad.utils.k3.K3SubjectEntity;
 import java.util.Set;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;

@@ -1,6 +1,6 @@
 $(document).ready(function() {
         $('#WorkTypeTableContainer').jtable({
-            title : 'Види робіт з підготовки диплому',
+            title : 'Види робіт з підготовки дипломного проекту',
             editinline: { enable : true },
             actions : {
                 listAction : 'WorkTypeController?action=list',

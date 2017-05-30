@@ -1,6 +1,6 @@
 package edu.cad.documentelements.k3columns;
 
-import edu.cad.generators.K3SubjectEntity;
+import edu.cad.utils.k3.K3SubjectEntity;
 
 public class StudyLoadColumn extends AbstractK3Column {
     

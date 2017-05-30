@@ -17,13 +17,13 @@ $(document).ready(function() {
                     edit : false        
                 },
                 academicSubjects: {
-                    title: '',
+                    title: 'Предмети',
                     sorting: false,
                     edit: false,
                     create: false,
                     display: function (data) {
                         //Create an image that will be used to open child table
-                        var $img = $('<img src="./css/metro/list.png" title="Academic subjects" />');
+                        var $img = $('<img src="./css/metro/list.png" title="Предмети" />');
                         //Open child table when user clicks the image
                         $img.click(function () {
                             $('#SubjectTableContainer').jtable('openChildTable',
@@ -45,13 +45,13 @@ $(document).ready(function() {
                                             edit : false        
                                         },
                                         controls: {
-                                            title: '',
+                                            title: 'Контрольні заходи',
                                             sorting: false,
                                             edit: false,
                                             create: false,
                                             display: function (childData) {
                                                 //Create an image that will be used to open child table
-                                                var $childImg = $('<img src="./css/metro/list.png" title="Controls" />');
+                                                var $childImg = $('<img src="./css/metro/list.png" title="Контрольні заходи" />');
                                                 //Open child table when user clicks the image
                                                 $childImg.click(function () {
                                                     $('#SubjectTableContainer').jtable('openChildTable',

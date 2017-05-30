@@ -120,10 +120,7 @@ public abstract class AbstractEntityController<T extends IDatabaseEntity>
         String dateString = request.getParameter(requestParamString);
         if (dateString != null) {
             Date date = gson.fromJson(dateString, Date.class);
-            if (date == null) {
-                System.out.println("!!!!!!!!!!!!!!!!!!!!SHIT FUCK");
-            }
-            else {
+            if (date != null) {
                 propSetter.setProperty(date);
             }
         }
