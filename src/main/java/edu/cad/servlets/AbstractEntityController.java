@@ -34,7 +34,7 @@ public abstract class AbstractEntityController<T extends IDatabaseEntity>
     protected List<T> list;
     
     private String action;
-    private Class<T> typeParameterClass;
+    private final Class<T> typeParameterClass;
 
     public AbstractEntityController(Class<T> typeParameterClass) {
         this.typeParameterClass = typeParameterClass;
