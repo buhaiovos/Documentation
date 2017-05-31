@@ -83,3 +83,23 @@
 .dropDownMenu ul ul li {}
 .dropDownMenu ul ul li a {}
 .dropDownMenu ul ul li a:hover {}
+#fileForm {
+    display: none;
+}
+#templateWrapper {
+    width: 75%;
+    margin: auto;
+}
+#templateWrapper form {
+    width: 100%;
+    margin: 20px;
+}
+#templateWrapper form span {
+    width: 25%;
+    display: inline-block;
+}
+#templateWrapper #fileForm form span {
+    width: 100%;
+    margin: 10px;
+    margin-left: 30px; 
+}

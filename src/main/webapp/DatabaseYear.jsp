@@ -23,7 +23,6 @@
         <script src="js/jquery.jtable.min.js" type="text/javascript"></script>
         <script src="js/jquery.jtable.editinline.js" type="text/javascript"></script>
         <!-- User Defined Jtable js file -->
-        <script src="js/SubjectType.js" type="text/javascript" charset="UTF-8"></script>
         <link rel="stylesheet" href="styles.css" />
     </head>
     <body>
@@ -36,19 +35,9 @@
         </script>
         <!-- MENU END -->
         <%
-            Set<Integer> availableYears = new TreeSet<>();
             String filePathOnServer = getServletContext().getRealPath("WEB-INF/classes/DatabaseYears.txt");
             DatabaseYears.setYearsFilePath(filePathOnServer);
-            try (BufferedReader in = new BufferedReader(new FileReader(filePathOnServer))) {
-                String line;
-                while ((line = in.readLine()) != null) {
-                    if(Utils.isParseable(line)){
-                        availableYears.add(Integer.parseInt(line));
-                    }
-                }
-            } catch (IOException e) {
-                System.out.println(e);
-            }
+            Set<Integer> availableYears = DatabaseYears.getAllYears();
         %>
         <div id="existingYearsForm">
             Оберіть існуюючий:
