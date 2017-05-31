@@ -5,7 +5,13 @@ import com.google.gson.GsonBuilder;
 import edu.cad.daos.HibernateDAO;
 import edu.cad.daos.IDAO;
 import edu.cad.entities.interfaces.IDatabaseEntity;
+import edu.cad.servlets.interfaces.BooleanPropertySetter;
+import edu.cad.servlets.interfaces.DatePropertySetter;
+import edu.cad.servlets.interfaces.FloatPropertySetter;
+import edu.cad.servlets.interfaces.IntPropertySetter;
+import edu.cad.servlets.interfaces.ObjectPropertySetter;
 import edu.cad.servlets.interfaces.StringProperty;
+import edu.cad.servlets.interfaces.StringPropertySetter;
 import edu.cad.utils.gson.HibernateProxyTypeAdapter;
 import edu.cad.utils.gson.Option;
 import java.io.IOException;
@@ -22,14 +28,16 @@ import javax.servlet.http.HttpServletResponse;
 public abstract class AbstractEntityController<T extends IDatabaseEntity> 
         extends HttpServlet {
 
-    protected final IDAO<T> dao;
+    protected IDAO<T> dao;
     protected Gson gson;   
     protected Map<String, Object> content;
     protected List<T> list;
     
     private String action;
+    private Class<T> typeParameterClass;
 
     public AbstractEntityController(Class<T> typeParameterClass) {
+        this.typeParameterClass = typeParameterClass;
         dao = new HibernateDAO<>(typeParameterClass);
         list = new ArrayList<>();
     }
@@ -48,6 +56,7 @@ public abstract class AbstractEntityController<T extends IDatabaseEntity>
     protected void doPost(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
         createGson();
+        dao = new HibernateDAO<>(typeParameterClass);
         action = request.getParameter("action");
         content = new HashMap<>();
         setResponseSettings(response);
@@ -255,28 +264,4 @@ public abstract class AbstractEntityController<T extends IDatabaseEntity>
         }
     }
         
-    protected interface StringPropertySetter {
-        void setProperty(String value);
-    }
-    
-    protected interface IntPropertySetter {
-        void setProperty(int value);
-    }
-    
-    protected interface ObjectPropertySetter<T> {
-        void setProperty(T object);
-    }
-    
-    protected interface BooleanPropertySetter {
-        void setProperty(boolean value);
-    }
-    
-    protected interface FloatPropertySetter {
-        void setProperty(float value);
-    }
-    
-    protected interface DatePropertySetter {
-        void setProperty(Date date);
-    }
-    
 }

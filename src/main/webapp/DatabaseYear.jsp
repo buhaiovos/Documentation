@@ -35,58 +35,28 @@
         });
         </script>
         <!-- MENU END -->
-        <%
-            Set<Integer> availableYears = new TreeSet<>();
-            String filePathOnServer = getServletContext().getRealPath("WEB-INF/classes/DatabaseYears.txt");
-            DatabaseYears.setYearsFilePath(filePathOnServer);
-            try (BufferedReader in = new BufferedReader(new FileReader(filePathOnServer))) {
-                String line;
-                while ((line = in.readLine()) != null) {
-                    if(Utils.isParseable(line)){
-                        availableYears.add(Integer.parseInt(line));
-                    }
-                }
-            } catch (IOException e) {
-                System.out.println(e);
-            }
-        %>
-        <div id="existingYearsForm">
-            Оберіть існуюючий:
-            <form action="DatabaseYear.jsp">
-                <select name="year">
-                    <%
-                    for (Integer year : availableYears) {
-                    %>
-                        <option value="<%=year.toString()%>"> <%=year.toString()%> </option>
-                    <%
-                    }
-                    %>
-                </select>
-                <input type="submit" value="Обрати">
+        <div id="dbSwitch">
+            <form action="YearChangeController" id="form" method="get">
+                <input type="hidden" name="action" value="switch">
+                <select name="years" id="years"></select>
+                <input type="submit" value="Вибрати">
             </form>
+
+            <script type="text/javascript">
+            $(document).ready( function() {                      // When HTML DOM "click" event is invoked on element with ID "somebutton", execute the following function...
+                $.get("YearChangeController?action=list", function(responseJson) {                 // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response JSON...
+                    var $select = $("#years");                           // Locate HTML DOM element with ID "someselect".
+                    $select.find("option").remove();                          // Find all child elements with tag name "option" and remove them (just to prevent duplicate options when button is pressed again).
+                    $.each(responseJson, function(index, element){         // Iterate over the JSON object.
+                        $("<option>").val(element).text(element).appendTo($select); // Create HTML <option> element, set its value with currently iterated key and its text content with currently iterated item and finally append it to the <select>.
+                    });
+                });
+            });
+            </script>
+
+            <%int currentYear = DatabaseSwitcher.getDatabaseYear();%>
+            <p>Поточний рік БД: <b><%=currentYear%></b></p>
         </div>
-        <div id='createNewField'>
-            Або створити новий рік
-            <form action="DatabaseYear.jsp">
-                <input type="text" name="year">
-                <input type="submit" value="Створити">
-            </form>
-        </div>
-                
-        <%String yearSelected = request.getParameter("year");
-        if (yearSelected == null) {
-            yearSelected = "0";
-        }
-        %>
-        <p>Ви обрали: <b><%=yearSelected%></b></p>
-        <%
-            if (Utils.isParseable(yearSelected)) {
-                int year = Integer.parseInt(yearSelected);
-                DatabaseSwitcher.switchDatabase(year);
-            }
-        %>
-        <%int currentYear = DatabaseSwitcher.getDatabaseYear();%>
-        <p>БД: <b><%=currentYear%></b></p>
         
     </body>
 </html>

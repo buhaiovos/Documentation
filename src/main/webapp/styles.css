@@ -83,3 +83,11 @@
 .dropDownMenu ul ul li {}
 .dropDownMenu ul ul li a {}
 .dropDownMenu ul ul li a:hover {}
+
+#dbSwitch {
+    text-align: center;
+    margin-top: 20px;
+}
+#dbSwitch select {
+    width: 100px;
+}

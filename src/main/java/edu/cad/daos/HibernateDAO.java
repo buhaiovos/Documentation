@@ -26,8 +26,7 @@ public class HibernateDAO<T extends IDatabaseEntity> implements IDAO<T>{
     
     @Override
     public List<T> getAll() {
-	//Session session = factory.openSession(); 
-	
+	//Session session = factory.openSession();
         List<T> list = session.createCriteria(typeParameterClass).list();
         
         
