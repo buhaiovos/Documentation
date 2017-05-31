@@ -83,11 +83,30 @@
 .dropDownMenu ul ul li {}
 .dropDownMenu ul ul li a {}
 .dropDownMenu ul ul li a:hover {}
-
 #dbSwitch {
     text-align: center;
     margin-top: 20px;
 }
 #dbSwitch select {
     width: 100px;
+}
+#fileForm {
+    display: none;
+}
+#templateWrapper {
+    width: 75%;
+    margin: auto;
+}
+#templateWrapper form {
+    width: 100%;
+    margin: 20px;
+}
+#templateWrapper form span {
+    width: 25%;
+    display: inline-block;
+}
+#templateWrapper #fileForm form span {
+    width: 100%;
+    margin: 10px;
+    margin-left: 30px; 
 }

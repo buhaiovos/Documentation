@@ -23,7 +23,6 @@
         <script src="js/jquery.jtable.min.js" type="text/javascript"></script>
         <script src="js/jquery.jtable.editinline.js" type="text/javascript"></script>
         <!-- User Defined Jtable js file -->
-        <script src="js/SubjectType.js" type="text/javascript" charset="UTF-8"></script>
         <link rel="stylesheet" href="styles.css" />
     </head>
     <body>
@@ -40,6 +39,24 @@
                 <input type="hidden" name="action" value="switch">
                 <select name="years" id="years"></select>
                 <input type="submit" value="Вибрати">
+        <%
+            String filePathOnServer = getServletContext().getRealPath("WEB-INF/classes/DatabaseYears.txt");
+            DatabaseYears.setYearsFilePath(filePathOnServer);
+            Set<Integer> availableYears = DatabaseYears.getAllYears();
+        %>
+        <div id="existingYearsForm">
+            Оберіть існуюючий:
+            <form action="DatabaseYear.jsp">
+                <select name="year">
+                    <%
+                    for (Integer year : availableYears) {
+                    %>
+                        <option value="<%=year.toString()%>"> <%=year.toString()%> </option>
+                    <%
+                    }
+                    %>
+                </select>
+                <input type="submit" value="Обрати">
             </form>
 
             <script type="text/javascript">
