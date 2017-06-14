@@ -20,7 +20,7 @@ public class Workplan extends Curriculum implements Comparable<Workplan>{
     @JoinColumn(name = "id_curriculum")
     private Curriculum curriculum;
     
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.curriculum", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.curriculum", cascade = CascadeType.MERGE)
     private Set<CurriculumSubject> workplanSubjects = new HashSet<>();
     
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "workplan")

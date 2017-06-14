@@ -31,7 +31,7 @@ public class Curriculum implements IDatabaseEntity, Serializable{
     @Column(name = "denotation")
     protected String denotation;
     
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.curriculum", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.curriculum", cascade = CascadeType.MERGE)
     private Set<CurriculumSubject> curriculumSubjects = new HashSet<>();
     
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "curriculum")

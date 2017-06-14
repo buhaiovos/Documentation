@@ -59,7 +59,7 @@ public class Subject implements IDatabaseEntity, Serializable{
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "subject")
     private Set<Control> controls = new HashSet<>();
     
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.subject")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.subject", cascade = CascadeType.MERGE)
     private Set<CurriculumSubject> curriculumSubjects = new HashSet<>();
     
     @Transient
