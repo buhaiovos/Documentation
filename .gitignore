@@ -26,3 +26,7 @@ Test.java
 *.xls
 *.xlsx
 
+*.iml
+.idea
+.idea/
+*.swp
