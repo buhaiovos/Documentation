@@ -3,6 +3,9 @@ package edu.cad.entities;
 import com.google.gson.annotations.Expose;
 import edu.cad.entities.interfaces.IDatabaseEntity;
 import edu.cad.utils.Utils;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.*;
@@ -14,6 +17,8 @@ import javax.persistence.*;
 	joinColumns = @JoinColumn(name = "id_curriculum")),
     @AssociationOverride(name = "pk.subject",
 	joinColumns = @JoinColumn(name = "id_subject")) })
+@Getter
+@Setter
 public class CurriculumSubject implements IDatabaseEntity, Serializable,
         Comparable<CurriculumSubject> {
     
@@ -41,14 +46,6 @@ public class CurriculumSubject implements IDatabaseEntity, Serializable,
         throw new UnsupportedOperationException("Not supported yet.");
     }
     
-    public CurriculumSubjectId getPk() {
-        return pk;
-    }
-
-    public void setPk(CurriculumSubjectId pk) {
-        this.pk = pk;
-    }
-    
     @Transient
     public Curriculum getCurriculum() {
         return pk.getCurriculum();
@@ -66,14 +63,6 @@ public class CurriculumSubject implements IDatabaseEntity, Serializable,
     public void setSubject(Subject subject) {
         pk.setSubject(subject);
     }
-    
-    public String getCipher() {
-        return cipher;
-    }
-
-    public void setCipher(String cipher) {
-        this.cipher = cipher;
-    }
 
     @Override
     public int hashCode() {
@@ -90,9 +79,9 @@ public class CurriculumSubject implements IDatabaseEntity, Serializable,
         if (obj == null) {
             return false;
         }
-        /*if (getClass() != obj.getClass()) {
+        if ( !(obj instanceof CurriculumSubject)) {
             return false;
-        }*/
+        }
         final CurriculumSubject other = (CurriculumSubject) obj;
         if (this.pk != other.getPk()) {
             return false;

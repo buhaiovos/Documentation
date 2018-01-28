@@ -6,12 +6,16 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
+
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "specialization")
-public class Specialization implements IDatabaseEntity, Serializable{
-    
+@Getter
+@Setter
+public class Specialization implements IDatabaseEntity, Serializable {
     @Expose
     @Id
     @GenericGenerator(
@@ -40,36 +44,6 @@ public class Specialization implements IDatabaseEntity, Serializable{
         this.id = id;
         this.denotation = denotation;
     }
-    
-    @Override
-    public int getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getDenotation() {
-        return denotation;
-    }
-
-    public void setDenotation(String denotation) {
-        this.denotation = denotation;
-    }
-
-    public Department getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(Department department) {
-        this.department = department;
-    }
-    
-    public Set<AcademicGroup> getAcademicGroups() {
-        return academicGroups;
-    }
 
     public void setAcademicGroups(Set<AcademicGroup> academicGroups) {
         this.academicGroups.clear();
@@ -91,9 +65,9 @@ public class Specialization implements IDatabaseEntity, Serializable{
         if (obj == null) {
             return false;
         }
-        /*if (getClass() != obj.getClass()) {
+        if ( !(obj instanceof Specialization)) {
             return false;
-        }*/
+        }
         final Specialization other = (Specialization) obj;
         if (this.id != other.getId()) {
             return false;

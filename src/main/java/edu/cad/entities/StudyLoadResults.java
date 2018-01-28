@@ -13,12 +13,16 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name="study_load_results")
-public class StudyLoadResults implements IDatabaseEntity, Serializable{
-    
+@Getter
+@Setter
+public class StudyLoadResults implements IDatabaseEntity, Serializable {
     @Id
     @GenericGenerator(
         name = "assigned-identity", 
@@ -80,144 +84,6 @@ public class StudyLoadResults implements IDatabaseEntity, Serializable{
     private double consultations;
 
     @Override
-    public int getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public EducationForm getEducationForm() {
-        return educationForm;
-    }
-
-    public void setEducationForm(EducationForm educationForm) {
-        this.educationForm = educationForm;
-    }
-
-    public SourceOfFinancing getSourceOfFinancing() {
-        return sourceOfFinancing;
-    }
-
-    public void setSourceOfFinancing(SourceOfFinancing sourceOfFinancing) {
-        this.sourceOfFinancing = sourceOfFinancing;
-    }
-
-    public Subject getSubject() {
-        return subject;
-    }
-
-    public void setSubject(Subject subject) {
-        this.subject = subject;
-    }
-
-    public double getLections() {
-        return lections;
-    }
-
-    public void setLections(double lections) {
-        this.lections = lections;
-    }
-
-    public double getPractices() {
-        return practices;
-    }
-
-    public void setPractices(double practices) {
-        this.practices = practices;
-    }
-
-    public double getLabs() {
-        return labs;
-    }
-
-    public void setLabs(double labs) {
-        this.labs = labs;
-    }
-
-    public double getIndividuals() {
-        return individuals;
-    }
-
-    public void setIndividuals(double individuals) {
-        this.individuals = individuals;
-    }
-
-    public double getExams() {
-        return exams;
-    }
-
-    public void setExams(double exams) {
-        this.exams = exams;
-    }
-
-    public double getCredits() {
-        return credits;
-    }
-
-    public void setCredits(double credits) {
-        this.credits = credits;
-    }
-
-    public double getControlWorks() {
-        return controlWorks;
-    }
-
-    public void setControlWorks(double controlWorks) {
-        this.controlWorks = controlWorks;
-    }
-
-    public double getCourseProjects() {
-        return courseProjects;
-    }
-
-    public void setCourseProjects(double courseProjects) {
-        this.courseProjects = courseProjects;
-    }
-
-    public double getCourseWorks() {
-        return courseWorks;
-    }
-
-    public void setCourseWorks(double courseWorks) {
-        this.courseWorks = courseWorks;
-    }
-
-    public double getRGRs() {
-        return RGRs;
-    }
-
-    public void setRGRs(double RGRs) {
-        this.RGRs = RGRs;
-    }
-
-    public double getDKRs() {
-        return DKRs;
-    }
-
-    public void setDKRs(double DKRs) {
-        this.DKRs = DKRs;
-    }
-
-    public double getReferats() {
-        return referats;
-    }
-
-    public void setReferats(double referats) {
-        this.referats = referats;
-    }
-
-    public double getConsultations() {
-        return consultations;
-    }
-
-    public void setConsultations(double consultations) {
-        this.consultations = consultations;
-    }
-
-    @Override
     public int hashCode() {
         int hash = 5;
         hash = 71 * hash + this.id;
@@ -232,11 +98,9 @@ public class StudyLoadResults implements IDatabaseEntity, Serializable{
         if (obj == null) {
             return false;
         }
-        /*
-        if (getClass() != obj.getClass()) {
+        if ( !(obj instanceof StudyLoadResults)) {
             return false;
         }
-        */
         final StudyLoadResults other = (StudyLoadResults) obj;
         if (this.id != other.getId()) {
             return false;

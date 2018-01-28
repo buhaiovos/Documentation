@@ -5,12 +5,16 @@ import edu.cad.entities.interfaces.IDatabaseEntity;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
+
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "state_certification")
-public class StateCertification implements IDatabaseEntity, Serializable{
-    
+@Getter
+@Setter
+public class StateCertification implements IDatabaseEntity, Serializable {
     @Expose
     @Id
     @GenericGenerator(
@@ -49,48 +53,6 @@ public class StateCertification implements IDatabaseEntity, Serializable{
     }
     
     @Override
-    public int getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getSemester() {
-        return semester;
-    }
-
-    public void setSemester(int semester) {
-        this.semester = semester;
-    }
-
-    public String getForm() {
-        return form;
-    }
-
-    public void setForm(String form) {
-        this.form = form;
-    }
-
-    public Date getStart() {
-        return start;
-    }
-
-    public void setStart(Date start) {
-        this.start = start;
-    }
-
-    public Date getFinish() {
-        return finish;
-    }
-
-    public void setFinish(Date finish) {
-        this.finish = finish;
-    }
-    
-    @Override
     public int hashCode() {
         int hash = 5;
         hash = 17 * hash + this.id;
@@ -105,9 +67,9 @@ public class StateCertification implements IDatabaseEntity, Serializable{
         if (obj == null) {
             return false;
         }
-        /*if (getClass() != obj.getClass()) {
+        if ( !(obj instanceof StateCertification)) {
             return false;
-        }*/
+        }
         final StateCertification other = (StateCertification) obj;
         if (this.id != other.getId()) {
             return false;

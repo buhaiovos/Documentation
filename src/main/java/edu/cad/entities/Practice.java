@@ -5,12 +5,16 @@ import edu.cad.entities.interfaces.IDatabaseEntity;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
+
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "practice")
-public class Practice implements IDatabaseEntity, Serializable{
-    
+@Getter
+@Setter
+public class Practice implements IDatabaseEntity, Serializable {
     @Expose
     @Id
     @GenericGenerator(
@@ -18,7 +22,9 @@ public class Practice implements IDatabaseEntity, Serializable{
         strategy = "edu.cad.utils.hibernateutils.AssignedIdentityGenerator"
     )
     @GeneratedValue(generator = "assigned-identity")
-    @Column(name = "id", unique = true, nullable = false)
+    @Column(name = "id",
+            unique = true,
+            nullable = false)
     private int id;
     
     @Expose
@@ -55,56 +61,6 @@ public class Practice implements IDatabaseEntity, Serializable{
     }
 
     @Override
-    public int getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getSemester() {
-        return semester;
-    }
-
-    public void setSemester(int semester) {
-        this.semester = semester;
-    }
-
-    public int getWeeks() {
-        return weeks;
-    }
-
-    public void setWeeks(int weeks) {
-        this.weeks = weeks;
-    }
-
-    public String getDenotation() {
-        return denotation;
-    }
-
-    public void setDenotation(String denotation) {
-        this.denotation = denotation;
-    }
-
-    public Date getStart() {
-        return start;
-    }
-
-    public void setStart(Date start) {
-        this.start = start;
-    }
-
-    public Date getFinish() {
-        return finish;
-    }
-
-    public void setFinish(Date finish) {
-        this.finish = finish;
-    }
-
-    @Override
     public int hashCode() {
         int hash = 3;
         hash = 17 * hash + this.id;
@@ -119,9 +75,9 @@ public class Practice implements IDatabaseEntity, Serializable{
         if (obj == null) {
             return false;
         }
-        /*if (getClass() != obj.getClass()) {
+        if ( !(obj instanceof Practice)) {
             return false;
-        }*/
+        }
         final Practice other = (Practice) obj;
         if (this.id != other.getId()) {
             return false;
@@ -133,7 +89,5 @@ public class Practice implements IDatabaseEntity, Serializable{
     public String toString() {
         return denotation + " (" + semester + " семестр/" + weeks + " тижні(в))";
     }
-    
-    
-    
+
 }

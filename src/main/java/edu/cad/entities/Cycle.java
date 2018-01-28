@@ -6,10 +6,15 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
+
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "cycle")
+@Getter
+@Setter
 public class Cycle implements IDatabaseEntity, Serializable{
     
     @Expose
@@ -37,28 +42,6 @@ public class Cycle implements IDatabaseEntity, Serializable{
         this.denotation = denotation;
     }
 
-    @Override
-    public int getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getDenotation() {
-        return denotation;
-    }
-
-    public void setDenotation(String denotation) {
-        this.denotation = denotation;
-    }
-
-    public Set<Section> getSections() {
-        return sections;
-    }
-
     public void setSections(Set<Section> sections) {
         this.sections.clear();
         this.sections.addAll(sections);
@@ -79,9 +62,9 @@ public class Cycle implements IDatabaseEntity, Serializable{
         if (obj == null) {
             return false;
         }
-        /*if (getClass() != obj.getClass()) {
+        if ( !(obj instanceof Cycle)) {
             return false;
-        }*/
+        }
         final Cycle other = (Cycle) obj;
         if (this.id != other.getId()) {
             return false;

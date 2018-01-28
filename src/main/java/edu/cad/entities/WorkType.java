@@ -4,10 +4,15 @@ import com.google.gson.annotations.Expose;
 import edu.cad.entities.interfaces.IDatabaseEntity;
 import java.io.Serializable;
 import javax.persistence.*;
+
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "type_of_work")
+@Getter
+@Setter
 public class WorkType implements IDatabaseEntity, Serializable {
     
     @Expose
@@ -24,29 +29,10 @@ public class WorkType implements IDatabaseEntity, Serializable {
     @Column(name = "denotation")
     private String denotation;
 
-    public WorkType() {
-    }
+    public WorkType() {}
 
     public WorkType(int id, String denotation) {
         this.id = id;
-        this.denotation = denotation;
-    }
-
-    @Override
-    public int getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getDenotation() {
-        return denotation;
-    }
-
-    public void setDenotation(String denotation) {
         this.denotation = denotation;
     }
 
@@ -65,13 +51,14 @@ public class WorkType implements IDatabaseEntity, Serializable {
         if (obj == null) {
             return false;
         }
-        /*if (getClass() != obj.getClass()) {
+        if ( !(obj instanceof WorkType)) {
             return false;
-        }*/
+        }
         final WorkType other = (WorkType) obj;
         if (this.id != other.getId()) {
             return false;
         }
         return true;
     }
+
 }

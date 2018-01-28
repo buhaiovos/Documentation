@@ -12,12 +12,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "subject_type")
-public class SubjectType implements IDatabaseEntity, Serializable{
-    
+@Getter
+@Setter
+public class SubjectType implements IDatabaseEntity, Serializable {
     @Expose
     @Id
     @GenericGenerator(
@@ -43,28 +47,6 @@ public class SubjectType implements IDatabaseEntity, Serializable{
         this.denotation = denotation;
     }
 
-    @Override
-    public int getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getDenotation() {
-        return denotation;
-    }
-
-    public void setDenotation(String denotation) {
-        this.denotation = denotation;
-    }
-
-    public Set<SubjectDictionary> getSubjects() {
-        return subjects;
-    }
-
     public void setSubjects(Set<SubjectDictionary> subjects) {
         this.subjects.clear();
         this.subjects.addAll(subjects);
@@ -85,13 +67,14 @@ public class SubjectType implements IDatabaseEntity, Serializable{
         if (obj == null) {
             return false;
         }
-        /*if (getClass() != obj.getClass()) {
+        if ( !(obj instanceof SubjectType)) {
             return false;
-        }*/
+        }
         final SubjectType other = (SubjectType) obj;
         if (this.id != other.getId()) {
             return false;
         }
         return true;
-    }  
+    }
+
 }

@@ -1,10 +1,15 @@
 package edu.cad.entities;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.*;
 
 @Embeddable
+@Getter
+@Setter
 public class CurriculumSubjectId implements Serializable{
     
     @ManyToOne
@@ -18,22 +23,6 @@ public class CurriculumSubjectId implements Serializable{
 
     public CurriculumSubjectId(Curriculum curriculum, Subject subject) {
         this.curriculum = curriculum;
-        this.subject = subject;
-    }
-
-    public Curriculum getCurriculum() {
-        return curriculum;
-    }
-
-    public void setCurriculum(Curriculum curriculum) {
-        this.curriculum = curriculum;
-    }
-
-    public Subject getSubject() {
-        return subject;
-    }
-
-    public void setSubject(Subject subject) {
         this.subject = subject;
     }
 
@@ -53,9 +42,9 @@ public class CurriculumSubjectId implements Serializable{
         if (obj == null) {
             return false;
         }
-        /*if (getClass() != obj.getClass()) {
+        if ( !(obj instanceof CurriculumSubjectId)) {
             return false;
-        }*/
+        }
         final CurriculumSubjectId other = (CurriculumSubjectId) obj;
         if (!this.curriculum.equals(other.getCurriculum())) {
             return false;

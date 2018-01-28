@@ -4,13 +4,17 @@ import com.google.gson.annotations.Expose;
 import edu.cad.entities.interfaces.IDatabaseEntity;
 import java.io.Serializable;
 import javax.persistence.*;
+
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "control")
-public class Control implements IDatabaseEntity, Serializable, 
-        Comparable<Control>{
-    
+@Getter
+@Setter
+public class Control implements IDatabaseEntity, Serializable, Comparable<Control> {
     @Expose
     @Id
     @GenericGenerator(
@@ -45,40 +49,6 @@ public class Control implements IDatabaseEntity, Serializable,
     }
     
     @Override
-    public int getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getSemester() {
-        return semester;
-    }
-
-    public void setSemester(int semester) {
-        this.semester = semester;
-    }
-
-    public ControlDictionary getType() {
-        return type;
-    }
-
-    public void setType(ControlDictionary type) {
-        this.type = type;
-    }
-
-    public Subject getSubject() {
-        return subject;
-    }
-
-    public void setSubject(Subject subject) {
-        this.subject = subject;
-    }
-    
-    @Override
     public int hashCode() {
         int hash = 7;
         hash = 29 * hash + this.id;
@@ -93,9 +63,9 @@ public class Control implements IDatabaseEntity, Serializable,
         if (obj == null) {
             return false;
         }
-        /*if (getClass() != obj.getClass()) {
+        if ( !(obj instanceof Control)) {
             return false;
-        }*/
+        }
         final Control other = (Control) obj;
         if (this.id != other.id) {
             return false;
@@ -115,6 +85,4 @@ public class Control implements IDatabaseEntity, Serializable,
         
         return Integer.toString(semester);
     }
-    
-    
 }

@@ -6,13 +6,17 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
+
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
 @Entity
 @Table(name = "section")
-public class Section implements IDatabaseEntity, Serializable{
-    
+@Getter
+@Setter
+public class Section implements IDatabaseEntity, Serializable {
     @Expose
     @Id
     @GenericGenerator(
@@ -52,51 +56,9 @@ public class Section implements IDatabaseEntity, Serializable{
         this.cycle = cycle;
     }
 
-    @Override
-    public int getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getDenotation() {
-        return denotation;
-    }
-
-    public void setDenotation(String denotation) {
-        this.denotation = denotation;
-    }
-
-    public boolean isOptional() {
-        return optional;
-    }
-
-    public void setOptional(boolean optional) {
-        this.optional = optional;
-    }
-
-    public Cycle getCycle() {
-        return cycle;
-    }
-
-    public void setCycle(Cycle cycle) {
-        this.cycle = cycle;
-    }
-
-    public Set<SubjectDictionary> getCurriculumSubjects() {
-        return curriculumSubjects;
-    }
-
     public void setCurriculumSubjects(Set<SubjectDictionary> curriculumSubjects) {
         this.curriculumSubjects.clear();
         this.curriculumSubjects.addAll(curriculumSubjects);
-    }
-
-    public Set<SubjectDictionary> getWorkplanSubjects() {
-        return workplanSubjects;
     }
 
     public void setWorkplanSubjects(Set<SubjectDictionary> workplanSubjects) {
@@ -119,13 +81,14 @@ public class Section implements IDatabaseEntity, Serializable{
         if (obj == null) {
             return false;
         }
-        /*if (getClass() != obj.getClass()) {
+        if ( !(obj instanceof Section)) {
             return false;
-        }*/
+        }
         final Section other = (Section) obj;
         if (this.id != other.getId()) {
             return false;
         }
         return true;
     }
+
 }

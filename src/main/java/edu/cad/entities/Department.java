@@ -79,9 +79,9 @@ public class Department implements IDatabaseEntity, Serializable{
         if (obj == null) {
             return false;
         }
-        /*if (getClass() != obj.getClass()) {
+        if ( !(obj instanceof Department)) {
             return false;
-        }*/
+        }
         final Department other = (Department) obj;
         if (this.id != other.getId()) {
             return false;

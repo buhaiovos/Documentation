@@ -11,13 +11,17 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import javax.persistence.*;
+
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @EntityListeners(SubjectListener.class)
 @Table(name = "academic_subject")
-public class Subject implements IDatabaseEntity, Serializable{
-    
+@Getter
+@Setter
+public class Subject implements IDatabaseEntity, Serializable {
     @Expose
     @Id
     @GenericGenerator(
@@ -81,76 +85,6 @@ public class Subject implements IDatabaseEntity, Serializable{
         this.practices = practices;
         this.ects = ects;
         this.subject = subject;
-    }
-    
-    @Override
-    public int getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getSemester() {
-        return semester;
-    }
-
-    public void setSemester(int semester) {
-        this.semester = semester;
-    }
-
-    public int getSemestersDuration() {
-        return semestersDuration;
-    }
-
-    public void setSemestersDuration(int semestersDuration) {
-        this.semestersDuration = semestersDuration;
-    }
-
-    public int getLections() {
-        return lections;
-    }
-
-    public void setLections(int lections) {
-        this.lections = lections;
-    }
-
-    public int getLabs() {
-        return labs;
-    }
-
-    public void setLabs(int labs) {
-        this.labs = labs;
-    }
-
-    public int getPractices() {
-        return practices;
-    }
-
-    public void setPractices(int practices) {
-        this.practices = practices;
-    }
-
-    public float getEcts() {
-        return ects;
-    }
-
-    public void setEcts(float ects) {
-        this.ects = ects;
-    }
-
-    public SubjectDictionary getSubject() {
-        return subject;
-    }
-
-    public void setSubject(SubjectDictionary subject) {
-        this.subject = subject;
-    }
-
-    public Set<Control> getControls() {
-        return controls;
     }
 
     public void setControls(Set<Control> controls) {
@@ -277,9 +211,9 @@ public class Subject implements IDatabaseEntity, Serializable{
         if (obj == null) {
             return false;
         }
-        /*if (getClass() != obj.getClass()) {
+        if ( !(obj instanceof Subject)) {
             return false;
-        }*/
+        }
         final Subject other = (Subject) obj;
         if (this.id != other.getId()) {
             return false;
@@ -292,7 +226,5 @@ public class Subject implements IDatabaseEntity, Serializable{
         return subject.getDenotation() + " [ECTS : " + ects + " лекції : " +
                 + lections + " лабораторні : " + labs + " практичні : " + practices + "]";
     }
-    
-    
     
 }

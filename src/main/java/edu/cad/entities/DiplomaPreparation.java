@@ -4,10 +4,15 @@ import com.google.gson.annotations.Expose;
 import edu.cad.entities.interfaces.IDatabaseEntity;
 import java.io.Serializable;
 import javax.persistence.*;
+
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "diploma_preparation")
+@Getter
+@Setter
 public class DiplomaPreparation implements IDatabaseEntity, Serializable{
     
     @Expose
@@ -47,48 +52,6 @@ public class DiplomaPreparation implements IDatabaseEntity, Serializable{
         this.department = department;
         this.workplan = workplan;
     }
-
-    @Override
-    public int getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public float getNorm() {
-        return norm;
-    }
-
-    public void setNorm(float norm) {
-        this.norm = norm;
-    }
-
-    public WorkType getWorkType() {
-        return workType;
-    }
-
-    public void setWorkType(WorkType workType) {
-        this.workType = workType;
-    }
-    
-    public Department getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(Department department) {
-        this.department = department;
-    }
-
-    public Workplan getWorkplan() {
-        return workplan;
-    }
-
-    public void setWorkplan(Workplan workplan) {
-        this.workplan = workplan;
-    }
     
     @Override
     public int hashCode() {
@@ -105,9 +68,9 @@ public class DiplomaPreparation implements IDatabaseEntity, Serializable{
         if (obj == null) {
             return false;
         }
-        /*if (getClass() != obj.getClass()) {
+        if ( !(obj instanceof DiplomaPreparation)) {
             return false;
-        }*/
+        }
         final DiplomaPreparation other = (DiplomaPreparation) obj;
         if (this.id != other.getId()) {
             return false;

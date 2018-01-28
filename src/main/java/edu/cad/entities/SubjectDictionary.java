@@ -6,12 +6,16 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
+
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "dict_subjects")
+@Getter
+@Setter
 public class SubjectDictionary implements IDatabaseEntity, Serializable, Comparable<SubjectDictionary> {
-    
     @Expose
     @Id
     @GenericGenerator(
@@ -67,76 +71,10 @@ public class SubjectDictionary implements IDatabaseEntity, Serializable, Compara
         this.type = type;
         this.department = department;
     }
-    
-    @Override
-    public int getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getDenotation() {
-        return denotation;
-    }
-
-    public void setDenotation(String denotation) {
-        this.denotation = denotation;
-    }
-
-    public SubjectDictionary getSuperSubject() {
-        return superSubject;
-    }
-
-    public void setSuperSubject(SubjectDictionary superSubject) {
-        this.superSubject = superSubject;
-    }
-
-    public Set<SubjectDictionary> getSubSubjects() {
-        return subSubjects;
-    }
 
     public void setSubSubjects(Set<SubjectDictionary> subSubjects) {
         this.subSubjects.clear();
         this.subSubjects.addAll(subSubjects);
-    }
-
-    public Section getCurriculumSection() {
-        return curriculumSection;
-    }
-
-    public void setCurriculumSection(Section curriculumSection) {
-        this.curriculumSection = curriculumSection;
-    }
-
-    public Section getWorkplanSection() {
-        return workplanSection;
-    }
-
-    public void setWorkplanSection(Section workplanSection) {
-        this.workplanSection = workplanSection;
-    }
-
-    public SubjectType getType() {
-        return type;
-    }
-
-    public void setType(SubjectType type) {
-        this.type = type;
-    }
-
-    public Department getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(Department department) {
-        this.department = department;
-    }
-
-    public Set<Subject> getAcademicSubjects() {
-        return academicSubjects;
     }
 
     public void setAcademicSubjects(Set<Subject> academicSubjects) {
@@ -173,9 +111,9 @@ public class SubjectDictionary implements IDatabaseEntity, Serializable, Compara
         if (obj == null) {
             return false;
         }
-        /*if (getClass() != obj.getClass()) {
+        if ( !(obj instanceof SubjectDictionary)) {
             return false;
-        }*/
+        }
         final SubjectDictionary other = (SubjectDictionary) obj;
         if (this.id != other.getId()) {
             return false;
@@ -199,5 +137,6 @@ public class SubjectDictionary implements IDatabaseEntity, Serializable, Compara
         
         return this.department.getId() - other.getDepartment().getId();
     }
+
 }
 
