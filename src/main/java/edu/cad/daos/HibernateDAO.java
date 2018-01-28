@@ -26,10 +26,8 @@ public class HibernateDAO<T extends IDatabaseEntity> implements IDAO<T>{
     
     @Override
     public List<T> getAll() {
-	//Session session = factory.openSession();
         List<T> list = session.createCriteria(typeParameterClass).list();
-        
-        
+
         if(typeParameterClass.equals(Curriculum.class)){
             Iterator<T> iterator = list.iterator();
             while(iterator.hasNext()){
@@ -39,25 +37,18 @@ public class HibernateDAO<T extends IDatabaseEntity> implements IDAO<T>{
                 }
             }
         }
-        
-        //session.close();
-        
-        
+
         return list;
     }
 
     @Override
     public T get(int id) {
-        //Session session = factory.openSession(); 
-	T instance = (T) session.get(typeParameterClass, id);
-	//session.close();
-		
-	return instance;
+	    T instance = (T) session.get(typeParameterClass, id);
+	    return instance;
     }
 
     @Override
     public T update(T instance) {
-        //Session session = factory.openSession();  
         Transaction transaction = session.beginTransaction();  
         
         try {
@@ -67,7 +58,6 @@ public class HibernateDAO<T extends IDatabaseEntity> implements IDAO<T>{
             transaction.rollback();
         } finally {
             session.flush();
-            //session.close();
         }
         
         return instance;
@@ -75,15 +65,12 @@ public class HibernateDAO<T extends IDatabaseEntity> implements IDAO<T>{
 
     @Override
     public boolean create(T instance) {
-	//Session session = factory.openSession();  
         Transaction transaction = session.beginTransaction();  
         try {
             session.save(instance); 
             session.flush();
             transaction.commit();
-            //session.flush();
             session.clear();
-            //session.flush();
         } catch(RuntimeException e) {
             System.out.println(e);
             transaction.rollback();
