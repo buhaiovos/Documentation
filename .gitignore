@@ -30,3 +30,8 @@ Test.java
 .idea
 .idea/
 *.swp
+
+*.gradle
+gradle/
+build/
+
