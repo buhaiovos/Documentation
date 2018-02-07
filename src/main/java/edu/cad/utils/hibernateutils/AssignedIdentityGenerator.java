@@ -3,12 +3,13 @@ package edu.cad.utils.hibernateutils;
 import edu.cad.entities.interfaces.IDatabaseEntity;
 import java.io.Serializable;
 import org.hibernate.engine.spi.SessionImplementor;
+import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.hibernate.id.IncrementGenerator;
 
 public class AssignedIdentityGenerator extends IncrementGenerator {
  
     @Override
-    public Serializable generate(SessionImplementor session, Object obj) {
+    public Serializable generate(SharedSessionContractImplementor session, Object obj) {
         if(obj instanceof IDatabaseEntity) {
             IDatabaseEntity entity = (IDatabaseEntity) obj;
             int id = entity.getId();
