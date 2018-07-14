@@ -31,7 +31,5 @@ Test.java
 .idea/
 *.swp
 
-*.gradle
-gradle/
 build/
-
+.gradle/

@@ -1,0 +1,36 @@
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'maven'
+
+group = 'edu.cad'
+version = '1.0-SNAPSHOT'
+
+description = 'Documentation'
+
+sourceCompatibility = 9
+targetCompatibility = 9
+tasks.withType(JavaCompile) {
+	options.encoding = 'UTF-8'
+}
+
+repositories {
+     maven { url "http://repo.maven.apache.org/maven2" }
+}
+dependencies {
+    // https://mvnrepository.com/artifact/com.google.code.gson/gson
+    compile group: 'com.google.code.gson', name: 'gson', version: '2.8.2'
+    compile group: 'org.reflections', name: 'reflections', version: '0.9.11'
+
+    compile group: 'org.apache.poi', name: 'poi', version: '3.17'
+    compile group: 'org.apache.poi', name: 'poi-ooxml', version:'3.17'
+
+    compile group: 'mysql', name: 'mysql-connector-java', version:'5.1.6'
+    compile group: 'org.hibernate', name: 'hibernate-core', version: '5.2.12.Final'
+
+    compile group: 'org.springframework', name: 'spring-web', version:'5.0.3.RELEASE'
+    compile group: 'org.springframework', name: 'spring-core', version:'5.0.3.RELEASE'
+    testCompile group: 'org.springframework', name: 'spring-test', version:'5.0.3.RELEASE'
+
+    providedCompile group: 'javax', name: 'javaee-web-api', version:'7.0'
+    providedCompile group: 'org.projectlombok', name: 'lombok', version:'1.16.20'
+}
