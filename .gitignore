@@ -10,7 +10,6 @@ hs_err_pid*
 .netbeans_automatic_built
 pom.properties
 *.lst
-*.txt
 
 target/
 pom.xml.tag

@@ -4,41 +4,36 @@ import edu.cad.daos.HibernateDAO;
 import edu.cad.entities.AcademicGroup;
 import edu.cad.entities.interfaces.IDatabaseEntity;
 import edu.cad.utils.hibernateutils.HibernateSession;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 import org.hibernate.Session;
 import org.reflections.Reflections;
+
+import java.util.*;
 
 public class DatabaseCloner {
     private static final String FK_CHECKS_0_QUERY = "SET FOREIGN_KEY_CHECKS=0";
     private static final String FK_CHECKS_1_QUERY = "SET FOREIGN_KEY_CHECKS=1";
-    
-    private static Map<Class<? extends IDatabaseEntity>, 
-                List<? extends IDatabaseEntity>> entityMap = new HashMap<>();
+
+    private static Map<Class<? extends IDatabaseEntity>, List<? extends IDatabaseEntity>> entityMap = new HashMap<>();
     private static List<AcademicGroup> oldGroups = null;
     private static List<AcademicGroup> newGroups = null;
     private static List<Class<? extends IDatabaseEntity>> entityClasses = null;
     private static int newYear;
-    
-    public static void cloneDatabase(Session oldSession){
+
+    public static void cloneDatabase(Session oldSession) {
         //get Class objects of all @Entity classes
-        entityClasses = getEntityClasses();   
+        entityClasses = getEntityClasses();
         // saveOldData();
-        for(Class<? extends IDatabaseEntity> classObj : entityClasses){
+        for (Class<? extends IDatabaseEntity> classObj : entityClasses) {
             entityMap.put(classObj, fill(classObj, oldSession));
         }
         oldGroups = (List<AcademicGroup>) entityMap.get(AcademicGroup.class);
         // remove academic group
         entityMap.remove(AcademicGroup.class);
         oldSession.close();
-        
+
         // copy all except groups
         executeQuery(FK_CHECKS_0_QUERY);
-        for(Class<? extends IDatabaseEntity> classObj : entityMap.keySet()){
+        for (Class<? extends IDatabaseEntity> classObj : entityMap.keySet()) {
             cloneAllEntriesOfEntity(classObj, entityMap.get(classObj));
         }
 
@@ -46,7 +41,7 @@ public class DatabaseCloner {
         rewriteGroups();
         executeQuery(FK_CHECKS_1_QUERY);
     }
-    
+
     private static void executeQuery(String query) {
         HibernateSession.getInstance()
                 .createSQLQuery(query).executeUpdate();
@@ -64,31 +59,25 @@ public class DatabaseCloner {
         }
 
         return classes;*/
-        Set<Class<? extends IDatabaseEntity>> set = 
+        Set<Class<? extends IDatabaseEntity>> set =
                 new Reflections("edu.cad.entities")
                         .getSubTypesOf(IDatabaseEntity.class);
         List<Class<? extends IDatabaseEntity>> list = new ArrayList<>();
         list.addAll(set);
         return list;
     }
-    
-    private static List<IDatabaseEntity> fill(
-            Class<? extends IDatabaseEntity> classObj, Session oldSession) 
-    {
-        HibernateDAO<IDatabaseEntity> sourceDAO = 
-                new HibernateDAO(classObj, oldSession);
+
+    private static List<IDatabaseEntity> fill(Class<? extends IDatabaseEntity> classObj, Session oldSession) {
+        HibernateDAO<IDatabaseEntity> sourceDAO =new HibernateDAO(classObj, oldSession);
         List<IDatabaseEntity> allEntries = sourceDAO.getAll();
-        
+
         return allEntries;
     }
 
-    private static void cloneAllEntriesOfEntity(
-            Class<? extends IDatabaseEntity> classObj, 
-            List<? extends IDatabaseEntity> list) 
-    {
+    private static void cloneAllEntriesOfEntity(Class<? extends IDatabaseEntity> classObj,
+                                                List<? extends IDatabaseEntity> list) {
         Session currentSession = HibernateSession.getInstance();
-        HibernateDAO<IDatabaseEntity> destDAO = new HibernateDAO(classObj, 
-                currentSession);
+        HibernateDAO<IDatabaseEntity> destDAO = new HibernateDAO(classObj, currentSession);
 
         for (IDatabaseEntity entry : list) {
             destDAO.create(entry);
@@ -97,10 +86,9 @@ public class DatabaseCloner {
 
     private static void rewriteGroups() {
         findNewYear();
-        List<AcademicGroup> oldFirstYearGroups = 
-                findGroupsByStartYear(newYear - 1);
-        newGroups = createNewGroups(newYear, oldFirstYearGroups);
-        
+        List<AcademicGroup> oldFirstYearGroups = findGroupsByStartYear(newYear - 1);
+        newGroups = createNewGroups(oldFirstYearGroups);
+
         reassignWorkplans();
         removeOldestGroups();
         saveAllGroups();
@@ -113,10 +101,10 @@ public class DatabaseCloner {
                 highestStartYear = group.getStartYear();
             }
         }
-        
+
         newYear = highestStartYear + 1;
     }
-    
+
     private static List<AcademicGroup> findGroupsByStartYear(int startYear) {
         List<AcademicGroup> groups = new ArrayList<>();
         for (AcademicGroup group : oldGroups) {
@@ -127,20 +115,17 @@ public class DatabaseCloner {
         return groups;
     }
 
-    private static List<AcademicGroup> createNewGroups(int newYear,
-            List<AcademicGroup> oldGroups) 
-    {
+    private static List<AcademicGroup> createNewGroups(List<AcademicGroup> oldGroups) {
         List<AcademicGroup> newGroups = new ArrayList<>();
         String baseCipher = "ДА-" + Integer.toString(newYear).charAt(3);
-        
+
         createNewGroupsFromExistingOld(oldGroups, newGroups, newYear, baseCipher);
-        
+
         return newGroups;
     }
-    
-    private static void createNewGroupsFromExistingOld(List<AcademicGroup> oldGroups, 
-            List<AcademicGroup> newGroups, int newYear, String baseCipher) 
-    {
+
+    private static void createNewGroupsFromExistingOld(List<AcademicGroup> oldGroups,
+                                                       List<AcademicGroup> newGroups, int newYear, String baseCipher) {
         for (AcademicGroup oldGroup : oldGroups) {
             AcademicGroup newGroup = new AcademicGroup();
             setCipher(newGroup, oldGroup, baseCipher);
@@ -151,17 +136,17 @@ public class DatabaseCloner {
             newGroup.setEducationForm(oldGroup.getEducationForm());
             newGroup.setStartYear(newYear);
             newGroup.setWorkplan(oldGroup.getWorkplan());
-            
+
             newGroups.add(newGroup);
         }
     }
-    private static void setCipher(AcademicGroup newGroup, 
-            AcademicGroup oldGroup, String baseCipher) {
+
+    private static void setCipher(AcademicGroup newGroup,
+                                  AcademicGroup oldGroup, String baseCipher) {
         if (oldGroup.getEducationForm().getId() != 2) {
             newGroup.setCipher(baseCipher + oldGroup.getCipher().substring(4));
-        }
-        else { // ДА-з32м
-            char yearPart =  baseCipher.charAt(3);
+        } else { // ДА-з32м
+            char yearPart = baseCipher.charAt(3);
             baseCipher = baseCipher.substring(0, 3) + "з" + yearPart;
             newGroup.setCipher(baseCipher + oldGroup.getCipher().substring(5));
         }
@@ -171,7 +156,7 @@ public class DatabaseCloner {
         //
         int oldestBachelorGroupsStartYear = newYear - 4;
         int oldestMagGroupStartYear = newYear - 2;
-        
+
         for (AcademicGroup group : oldGroups) {
             if (group.getQualification().getId() == 1) { // bachelors
                 if (group.getStartYear() > oldestBachelorGroupsStartYear) {
@@ -179,8 +164,7 @@ public class DatabaseCloner {
                     if (olderGroup != null)
                         group.setWorkplan(olderGroup.getWorkplan());
                 }
-            } 
-            else {
+            } else {
                 if (group.getStartYear() > oldestMagGroupStartYear) {
                     AcademicGroup olderGroup = findSameOneYearOlderGroup(group);
                     if (olderGroup != null)
@@ -196,12 +180,12 @@ public class DatabaseCloner {
         int neededSpecId = youngerGroup.getSpecialization().getId();
         int neededQualId = youngerGroup.getQualification().getId();
         int neededEFId = youngerGroup.getEducationForm().getId();
-        
+
         for (AcademicGroup group : oldGroups) {
-            if ( (group.getStartYear() == neededStartYear) 
+            if ((group.getStartYear() == neededStartYear)
                     && (group.getSpecialization().getId() == neededSpecId)
                     && (group.getQualification().getId() == neededQualId)
-                    && (group.getEducationForm().getId() == neededEFId) ) {
+                    && (group.getEducationForm().getId() == neededEFId)) {
                 return group;
             }
         }
@@ -212,7 +196,7 @@ public class DatabaseCloner {
         //simple part
         List<AcademicGroup> oldestBachGroups = findGroupsByStartYear(newYear - 4);
         oldGroups.removeAll(oldestBachGroups);
-        
+
         //bit more complex
         int oldestMagStartYear = newYear - 2;
         Iterator<AcademicGroup> iterator = oldGroups.iterator();
@@ -221,14 +205,14 @@ public class DatabaseCloner {
             if ((group.getQualification().getId() != 1) //not bachelor
                     && (group.getStartYear() == oldestMagStartYear)) {
                 iterator.remove();
-            } 
+            }
         }
     }
 
     private static void saveAllGroups() {
-        HibernateDAO<AcademicGroup> groupsDAO = 
+        HibernateDAO<AcademicGroup> groupsDAO =
                 new HibernateDAO<>(AcademicGroup.class);
-        
+
         for (AcademicGroup oldGroup : oldGroups) {
             groupsDAO.update(oldGroup);
         }
